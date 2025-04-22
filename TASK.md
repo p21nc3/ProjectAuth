@@ -6,9 +6,10 @@
 
 ## 1. Prerequisites
 
-1. **Checkout code**:
+1. **Checkout code**: ## skip this step
+   - Checkout the main branch and create new branch naming NewAuth
    ```bash
-   git checkout -b feature/auth-detection
+   git checkout -b 
    ```
 2. **Install dependencies** (Python/Node/Docker as per project).
 3. **Editor setup**: Open key files:
@@ -168,7 +169,7 @@ def manage_idp_rules():
 ## 7. Validation
 
    - Confirm `recognized_idps` includes new entries.
-   
+
 ---
 
 ## 8. Build & Deploy
