@@ -75,11 +75,11 @@ class PasswordDetector:
                     self.result["auth_methods"]["password"]["validity"] = "HIGH"
                     
                     # Add to recognized IDPs
-                    if not any(idp.get("idp_name") == "USERNAME_PASSWORD" for idp in self.recognized_idps):
+                    if not any(idp.get("idp_name") == "PASSWORD_BASED" for idp in self.recognized_idps):
                         self.recognized_idps.append({
-                            "idp_name": "USERNAME_PASSWORD",
+                            "idp_name": "PASSWORD_BASED",
                             "idp_integration": "PASSWORD",
-                            "detection_method": "USERNAME_PASSWORD",
+                            "detection_method": "PASSWORD_BASED",
                             "login_page_candidate": url,
                             "validity": "HIGH"
                         })

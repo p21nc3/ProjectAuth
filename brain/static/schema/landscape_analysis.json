@@ -721,7 +721,7 @@
                                 "METADATA",
                                 "PASSKEY_BUTTON",
                                 "MFA",
-                                "USERNAME_PASSWORD"
+                                "PASSWORD_BASED"
                             ],
                             "items": {
                                 "type": "string",
@@ -737,7 +737,7 @@
                                     "METADATA",
                                     "PASSKEY_BUTTON",
                                     "MFA",
-                                    "USERNAME_PASSWORD"
+                                    "PASSWORD_BASED"
                                 ]
                             }
                         },

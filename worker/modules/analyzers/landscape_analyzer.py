@@ -110,7 +110,7 @@ class LandscapeAnalyzer:
             self.result["timings"]["mfa_detection_duration_seconds"] = time.time() - t
             
         # Password detection
-        if self.result["resolved"]["reachable"] and "USERNAME_PASSWORD" in self.recognition_strategy_scope:
+        if self.result["resolved"]["reachable"] and "PASSWORD_BASED" in self.recognition_strategy_scope:
             t = time.time()
             PasswordDetector(self.config, self.result).start()
             self.result["timings"]["password_detection_duration_seconds"] = time.time() - t

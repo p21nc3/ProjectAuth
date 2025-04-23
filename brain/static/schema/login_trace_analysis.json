@@ -117,7 +117,7 @@
                                     "LINKEDIN",
                                     "GITHUB",
                                     "PASSKEY",
-                                    "USERNAME_PASSWORD",
+                                    "PASSWORD_BASED",
                                     "MFA_GENERIC"
                                 ]
                             },
