@@ -152,6 +152,7 @@ services:
     volumes:
       - type: tmpfs
         target: /tmpfs
+      - ./worker/config/idp_patterns:/app/config/idp_patterns
     deploy:
       mode: replicated
       replicas: 2
