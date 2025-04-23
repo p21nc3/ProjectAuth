@@ -19,6 +19,9 @@ from modules.detectors.request import RequestDetector
 from modules.detectors.lastpass_icon import LastpassIconDetector
 from modules.detectors.metadata import MetadataDetector
 from modules.detectors.navigator_credentials import NavigatorCredentialsDetector
+from modules.detectors.passkey_detector import PasskeyDetector
+from modules.detectors.mfa_detector import MFADetector
+from modules.detectors.password_detector import PasswordDetector
 
 
 logger = logging.getLogger(__name__)
@@ -46,6 +49,8 @@ class LandscapeAnalyzer:
         self.result["recognized_idps_passive"] = []
         self.result["recognized_navcreds"] = []
         self.result["recognized_lastpass_icons"] = []
+        # Initialize auth_methods dict for new authentication methods
+        self.result["auth_methods"] = {}
 
 
     def start(self) -> dict:
@@ -91,6 +96,24 @@ class LandscapeAnalyzer:
             t = time.time()
             MetadataDetector(self.config, self.result).start()
             self.result["timings"]["metadata_detection_duration_seconds"] = time.time() - t
+            
+        # passkey detection
+        if self.result["resolved"]["reachable"] and "PASSKEY_BUTTON" in self.recognition_strategy_scope:
+            t = time.time()
+            PasskeyDetector(self.config, self.result).start()
+            self.result["timings"]["passkey_detection_duration_seconds"] = time.time() - t
+            
+        # MFA detection
+        if self.result["resolved"]["reachable"] and "MFA" in self.recognition_strategy_scope:
+            t = time.time()
+            MFADetector(self.config, self.result).start()
+            self.result["timings"]["mfa_detection_duration_seconds"] = time.time() - t
+            
+        # Password detection
+        if self.result["resolved"]["reachable"] and "USERNAME_PASSWORD" in self.recognition_strategy_scope:
+            t = time.time()
+            PasswordDetector(self.config, self.result).start()
+            self.result["timings"]["password_detection_duration_seconds"] = time.time() - t
 
         self.result["timings"]["total_duration_seconds"] = time.time() - ttotal
 

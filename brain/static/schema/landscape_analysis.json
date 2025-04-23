@@ -708,15 +708,21 @@
                         "recognition_strategy_scope": {
                             "type": "array",
                             "required": true,
+                            "uniqueItems": true,
+                            "title": "Recognition Strategy",
                             "default": [
                                 "KEYWORD-CSS",
+                                "KEYWORD-XPATH",
+                                "KEYWORD-ACCESSIBILITY",
                                 "LOGO",
                                 "REQUEST",
-                                "NAVIGATOR_CREDENTIALS",
                                 "LASTPASS_ICON",
-                                "METADATA"
+                                "NAVIGATOR_CREDENTIALS",
+                                "METADATA",
+                                "PASSKEY_BUTTON",
+                                "MFA",
+                                "USERNAME_PASSWORD"
                             ],
-                            "title": "In-Scope Recognition Strategies",
                             "items": {
                                 "type": "string",
                                 "enum": [
@@ -726,9 +732,12 @@
                                     "KEYWORD-ACCESSIBILITYSAAT",
                                     "LOGO",
                                     "REQUEST",
-                                    "NAVIGATOR_CREDENTIALS",
                                     "LASTPASS_ICON",
-                                    "METADATA"
+                                    "NAVIGATOR_CREDENTIALS",
+                                    "METADATA",
+                                    "PASSKEY_BUTTON",
+                                    "MFA",
+                                    "USERNAME_PASSWORD"
                                 ]
                             }
                         },
@@ -973,6 +982,102 @@
                             "required": true,
                             "default": false,
                             "title": "Store robots.txt"
+                        }
+                    }
+                },
+                "auth_methods": {
+                    "type": "object",
+                    "title": "Authentication Methods",
+                    "properties": {
+                        "passkey": {
+                            "type": "object",
+                            "title": "Passkey Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "totp": {
+                            "type": "object",
+                            "title": "TOTP Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "sms": {
+                            "type": "object",
+                            "title": "SMS Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "email": {
+                            "type": "object",
+                            "title": "Email Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "app": {
+                            "type": "object",
+                            "title": "App Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "password": {
+                            "type": "object",
+                            "title": "Password Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
                         }
                     }
                 }

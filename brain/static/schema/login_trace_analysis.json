@@ -109,7 +109,16 @@
                                 "required": true,
                                 "title": "IdP Name",
                                 "enum": [
-                                    "GOOGLE"
+                                    "GOOGLE",
+                                    "FACEBOOK",
+                                    "APPLE",
+                                    "MICROSOFT",
+                                    "TWITTER_1.0",
+                                    "LINKEDIN",
+                                    "GITHUB",
+                                    "PASSKEY",
+                                    "USERNAME_PASSWORD",
+                                    "MFA_GENERIC"
                                 ]
                             },
                             "idp_username": {
@@ -127,6 +136,102 @@
                                 "required": true,
                                 "title": "IdP Cookie Store",
                                 "default": "[]"
+                            }
+                        }
+                    }
+                },
+                "auth_methods": {
+                    "type": "object",
+                    "title": "Authentication Methods",
+                    "properties": {
+                        "passkey": {
+                            "type": "object",
+                            "title": "Passkey Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "totp": {
+                            "type": "object",
+                            "title": "TOTP Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "sms": {
+                            "type": "object",
+                            "title": "SMS Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "email": {
+                            "type": "object",
+                            "title": "Email Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "app": {
+                            "type": "object",
+                            "title": "App Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
+                            }
+                        },
+                        "password": {
+                            "type": "object",
+                            "title": "Password Authentication",
+                            "properties": {
+                                "detected": {
+                                    "type": "boolean",
+                                    "title": "Detected"
+                                },
+                                "validity": {
+                                    "type": "string",
+                                    "title": "Validity",
+                                    "enum": ["LOW", "HIGH"]
+                                }
                             }
                         }
                     }

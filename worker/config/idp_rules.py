@@ -378,5 +378,69 @@ IdpRules = {
                 }
             }
         }
+    },
+    "PASSKEY": {
+        "keywords": ["passkey", "webauthn", "passwordless", "sign in with a passkey", "use passkey"],
+        "logos": "passkey/",
+        "login_request_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "passive_login_request_rule": {},
+        "sdks": {
+            "WEBAUTHN": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            },
+            "CUSTOM": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            }
+        }
+    },
+    "MFA_GENERIC": {
+        "keywords": ["two-factor", "2fa", "mfa", "multi-factor", "verification code", "one-time code", "authenticator", "totp"],
+        "logos": "mfa/",
+        "login_request_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "passive_login_request_rule": {},
+        "sdks": {
+            "CUSTOM": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            }
+        }
+    },
+    "USERNAME_PASSWORD": {
+        "keywords": ["login", "sign in", "username", "password", "email", "account"],
+        "logos": "password/",
+        "login_request_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "passive_login_request_rule": {},
+        "sdks": {
+            "CUSTOM": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            }
+        }
     }
 }
