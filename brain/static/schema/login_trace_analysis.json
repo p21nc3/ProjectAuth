@@ -109,7 +109,21 @@
                                 "required": true,
                                 "title": "IdP Name",
                                 "enum": [
-                                    "GOOGLE"
+                                    "GOOGLE",
+                                    "APPLE",
+                                    "FACEBOOK",
+                                    "TWITTER_1.0",
+                                    "LINKEDIN",
+                                    "MICROSOFT",
+                                    "BAIDU",
+                                    "GITHUB",
+                                    "QQ",
+                                    "SINA_WEIBO",
+                                    "WECHAT",
+                                    "PASSKEY",
+                                    "MFA_GENERIC", 
+                                    "USERNAME_PASSWORD",
+                                    "NAVIGATOR_CREDENTIALS"
                                 ]
                             },
                             "idp_username": {
@@ -128,6 +142,54 @@
                                 "title": "IdP Cookie Store",
                                 "default": "[]"
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "analysis_results": {
+            "type": "object",
+            "title": "Authentication Detection Results",
+            "properties": {
+                "detected_methods": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "SSO",
+                            "USERNAME_PASSWORD", 
+                            "MFA",
+                            "NAVIGATOR_CREDENTIALS"
+                        ]
+                    }
+                },
+                "username_password_forms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "form_location": {"type": "string"},
+                            "input_count": {"type": "number"}
+                        }
+                    }
+                },
+                "mfa_implementations": {
+                    "type": "array", 
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "mfa_type": {"type": "string"},
+                            "implementation": {"type": "string"}
+                        }
+                    }
+                },
+                "stored_credentials": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "credential_type": {"type": "string"},
+                            "source": {"type": "string"}
                         }
                     }
                 }

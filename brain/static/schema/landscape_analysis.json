@@ -679,7 +679,10 @@
                                 "GITHUB",
                                 "QQ",
                                 "SINA_WEIBO",
-                                "WECHAT"
+                                "WECHAT",
+                                "PASSKEY",
+                                "MFA_GENERIC",
+                                "USERNAME_PASSWORD"
                             ],
                             "items": {
                                 "type": "string",
@@ -694,7 +697,10 @@
                                     "GITHUB",
                                     "QQ",
                                     "SINA_WEIBO",
-                                    "WECHAT"
+                                    "WECHAT",
+                                    "PASSKEY",
+                                    "MFA_GENERIC",
+                                    "USERNAME_PASSWORD"
                                 ]
                             }
                         }
@@ -728,7 +734,10 @@
                                     "REQUEST",
                                     "NAVIGATOR_CREDENTIALS",
                                     "LASTPASS_ICON",
-                                    "METADATA"
+                                    "METADATA",
+                                    "USERNAME_PASSWORD",
+                                    "MFA",
+                                    "PASSKEY_BUTTON"
                                 ]
                             }
                         },
@@ -973,6 +982,18 @@
                             "required": true,
                             "default": false,
                             "title": "Store robots.txt"
+                        },
+                        "store_username_password_screenshot": {
+                            "type": "boolean",
+                            "required": true,
+                            "default": true,
+                            "title": "Store screenshot of username/password form detection"
+                        },
+                        "store_mfa_screenshot": {
+                            "type": "boolean",
+                            "required": true,
+                            "default": true,
+                            "title": "Store screenshot of MFA detection"
                         }
                     }
                 }
