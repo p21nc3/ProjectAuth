@@ -1,5 +1,5 @@
 import logging
-from playwright.sync_api import sync_playwright, TimeoutError, Error
+from playwright.sync_api import sync_playwright, TimeoutError, Error, Page
 from modules.browser.browser import PlaywrightBrowser, PlaywrightHelper
 from modules.helper.tmp import TmpHelper
 from modules.helper.auto_consent import AutoConsentHelper

@@ -135,9 +135,11 @@ class MFADetector:
             
             # Check for relevant text content
             pattern = "|".join(keywords)
+            # Escape any special regex characters in pattern
+            escaped_pattern = pattern.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
             has_totp_text = page.evaluate(f"""
                 () => {{
-                    const pattern = new RegExp("({pattern})", "i");
+                    const pattern = new RegExp("{escaped_pattern}", "i");
                     const textElements = Array.from(document.querySelectorAll('label, span, p, h1, h2, h3, h4, h5, h6, div'));
                     
                     for (const elem of textElements) {{
@@ -189,7 +191,7 @@ class MFADetector:
                 }
             """)
             
-            if has_totp_text || has_totp_fields:
+            if has_totp_text or has_totp_fields:
                 logger.info("TOTP authentication detected")
                 return True
                 
@@ -207,9 +209,11 @@ class MFADetector:
             
             # Check for relevant text content
             pattern = "|".join(keywords)
+            # Escape any special regex characters in pattern
+            escaped_pattern = pattern.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
             has_sms_text = page.evaluate(f"""
                 () => {{
-                    const pattern = new RegExp("({pattern})", "i");
+                    const pattern = new RegExp("{escaped_pattern}", "i");
                     const textElements = Array.from(document.querySelectorAll('label, span, p, h1, h2, h3, h4, h5, h6, div'));
                     
                     for (const elem of textElements) {{
@@ -240,7 +244,7 @@ class MFADetector:
                 }
             """)
             
-            if has_sms_text || has_phone_verification:
+            if has_sms_text or has_phone_verification:
                 logger.info("SMS verification detected")
                 return True
                 
@@ -258,9 +262,11 @@ class MFADetector:
             
             # Check for relevant text content
             pattern = "|".join(keywords)
+            # Escape any special regex characters in pattern
+            escaped_pattern = pattern.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
             has_email_text = page.evaluate(f"""
                 () => {{
-                    const pattern = new RegExp("({pattern})", "i");
+                    const pattern = new RegExp("{escaped_pattern}", "i");
                     const textElements = Array.from(document.querySelectorAll('label, span, p, h1, h2, h3, h4, h5, h6, div'));
                     
                     for (const elem of textElements) {{
@@ -291,7 +297,7 @@ class MFADetector:
                 }
             """)
             
-            if has_email_text || has_email_verification:
+            if has_email_text or has_email_verification:
                 logger.info("Email verification detected")
                 return True
                 
@@ -309,9 +315,11 @@ class MFADetector:
             
             # Check for relevant text content
             pattern = "|".join(keywords)
+            # Escape any special regex characters in pattern
+            escaped_pattern = pattern.replace("\\", "\\\\").replace("'", "\\'").replace('"', '\\"')
             has_app_text = page.evaluate(f"""
                 () => {{
-                    const pattern = new RegExp("({pattern})", "i");
+                    const pattern = new RegExp("{escaped_pattern}", "i");
                     const textElements = Array.from(document.querySelectorAll('label, span, p, h1, h2, h3, h4, h5, h6, div'));
                     
                     for (const elem of textElements) {{
@@ -345,7 +353,7 @@ class MFADetector:
                 }
             """)
             
-            if has_app_text || has_qr_code:
+            if has_app_text or has_qr_code:
                 logger.info("App-based authentication detected")
                 return True
                 
