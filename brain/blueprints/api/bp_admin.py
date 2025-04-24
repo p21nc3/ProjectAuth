@@ -108,6 +108,19 @@ def create_database_index():
         ("landscape_analysis_result.recognized_idps.idp_integration", 1),
         ("landscape_analysis_result.recognized_idps.login_page_url", 1)
     ])
+    
+    # Add indexes for new auth methods and metadata
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.auth_methods.passkey.detected", 1)])
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.auth_methods.totp.detected", 1)])
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.auth_methods.sms.detected", 1)])
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.auth_methods.email.detected", 1)])
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.auth_methods.app.detected", 1)])
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.auth_methods.password.detected", 1)])
+    
+    # Metadata indexes
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.metadata_available.webauthn_api", 1)])
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.metadata_available.lastpass", 1)])
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.metadata_available.idps", 1)])
 
     return {"success": True, "error": None, "data": None}
 

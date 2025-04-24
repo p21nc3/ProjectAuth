@@ -380,7 +380,7 @@ IdpRules = {
         }
     },
     "PASSKEY": {
-        "keywords": ["passkey", "webauthn", "passwordless", "sign in with a passkey", "use passkey"],
+        "keywords": ["passkey", "webauthn", "security key"],
         "logos": "passkey/",
         "login_request_rule": {
             "domain": ".*",
@@ -401,8 +401,7 @@ IdpRules = {
             "WEBAUTHN": {
                 "login_request_rule": {
                     "domain": "^webauthn\\..*",
-                    "path": "^/authenticate",
-                    "params": []
+                    "path": "^/authenticate"
                 }
             },
             "CUSTOM": {
@@ -415,25 +414,14 @@ IdpRules = {
         }
     },
     "MFA_GENERIC": {
-        "keywords": ["two-factor", "2fa", "mfa", "multi-factor", "verification code", "one-time code", "authenticator", "totp"],
-        "logos": "mfa/",
-        "login_request_rule": {
-            "domain": ".*",
-            "path": ".*(2fa|mfa|totp|authenticate|verification|verify).*",
-            "params": [
-                {
-                    "name": "^(code|otp|token)$",
-                    "value": ".*"
-                }
-            ]
-        },
+        "keywords": ["2fa", "mfa", "one-time code", "verification code", "qr code", "sms", "email code"],
+        "logos": None,
         "passive_login_request_rule": {
             "domain": ".*",
-            "path": ".*",
-            "params": []
+            "path": ".*"
         },
         "mfa_step": {
-            "selectors": [".otp-input", "#verificationCode", "input[name='code']", "input[name='otp']", "input[name='token']"]
+            "selectors": [".otp-input", "#verificationCode", "input[name='code']"]
         },
         "sdks": {
             "CUSTOM": {
@@ -446,27 +434,12 @@ IdpRules = {
         }
     },
     "PASSWORD_BASED": {
-        "keywords": ["login", "sign in", "username", "password", "email", "account"],
-        "logos": "password/",
-        "login_request_rule": {
-            "domain": ".*",
-            "path": ".*(login|signin|auth).*",
-            "params": [
-                {
-                    "name": "^(username|email|password)$",
-                    "value": ".*"
-                }
-            ]
-        },
-        "passive_login_request_rule": {
-            "domain": ".*",
-            "path": ".*",
-            "params": []
-        },
+        "keywords": ["sign in", "log in", "username", "password"],
+        "logos": "basic-auth/",
         "form_rule": {
             "fields": {
-                "username": ["email", "user", "login", "username"],
-                "password": ["pass", "pwd", "password"]
+                "username": ["email", "user", "login"],
+                "password": ["pass", "pwd"]
             }
         },
         "sdks": {

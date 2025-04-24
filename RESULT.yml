@@ -1,0 +1,1396 @@
+{
+    _id: ObjectId('68098c93d6e4ca0fe2b7b757'),
+    scan_config: {
+        scan_id: 'fc8abea7-6251-4596-9cd4-79c1351dd8ae',
+        scan_type: 'single',
+        domain: 'meta.discourse.org'
+    },
+    landscape_analysis_config: {
+        browser_config: {
+            name: 'CHROMIUM',
+            width: 1920,
+            height: 1080,
+            user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+            extensions: [
+                'chromium/isdcac-v1.1.1'
+            ],
+            scripts: [],
+            headless: false,
+            locale: 'en-US',
+            wait_for_networkidle: true,
+            timeout_default: 30,
+            timeout_navigation: 30,
+            timeout_networkidle: 5,
+            sleep_after_onload: 0,
+            sleep_after_networkidle: 2
+        },
+        login_page_config: {
+            login_page_strategy_scope: [
+                'PATHS',
+                'CRAWLING',
+                'METASEARCH',
+                'SITEMAP',
+                'HOMEPAGE'
+            ],
+            login_page_url_regexes: [
+                {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                {
+                    regex: '/(sso|oauth|openid|identity)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(accounts?|profiles?|users?)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(register|registration)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(manage|managing|anmelden|portal|dashboard)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 97
+                },
+                {
+                    regex: '/connect(ing|ion|ed)?(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 97
+                },
+                {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)',
+                    priority: 89
+                },
+                {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)',
+                    priority: 89
+                },
+                {
+                    regex: '/(sso|oauth|openid|identity)',
+                    priority: 88
+                },
+                {
+                    regex: '/(accounts?|profiles?|users?)',
+                    priority: 88
+                },
+                {
+                    regex: '/(register|registration)',
+                    priority: 88
+                },
+                {
+                    regex: '/(manage|managing|anmelden|portal|dashboard)',
+                    priority: 87
+                },
+                {
+                    regex: '/connect(ing|ion|ed)?',
+                    priority: 87
+                },
+                {
+                    regex: '[^a-z](show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)[^a-z]',
+                    priority: 79
+                },
+                {
+                    regex: '[^a-z](auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)[^a-z]',
+                    priority: 79
+                },
+                {
+                    regex: '[^a-z](sso|oauth|openid|identity)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](accounts?|profiles?|users?)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](register|registration)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](manage|managing|anmelden|portal|dashboard)[^a-z]',
+                    priority: 77
+                },
+                {
+                    regex: '[^a-z]connect(ing|ion|ed)?[^a-z]',
+                    priority: 77
+                }
+            ],
+            login_page_element_keywords: [
+                'login',
+                'log in',
+                'log-in',
+                'log_in',
+                'logon',
+                'log on',
+                'log-on',
+                'log_on',
+                'signin',
+                'sign in',
+                'sign-in',
+                'sign_in',
+                'signup',
+                'sign up',
+                'sign-up',
+                'sign_up',
+                'signon',
+                'sign on',
+                'sign-on',
+                'sign_on',
+                'register',
+                'registration',
+                'anmelden',
+                'registrieren'
+            ],
+            manual_strategy_config: {
+                login_page_candidates: []
+            },
+            paths_strategy_config: {
+                paths: [
+                    '/login',
+                    '/log-in',
+                    '/log_in',
+                    '/signin',
+                    '/sign-in',
+                    '/sign_in',
+                    '/account',
+                    '/account/login',
+                    '/account/log-in',
+                    '/account/log_in',
+                    '/account/signin',
+                    '/account/sign-in',
+                    '/account/sign_in',
+                    '/accounts',
+                    '/accounts/login',
+                    '/accounts/signin',
+                    '/profile',
+                    '/profile/login',
+                    '/profile/signin',
+                    '/user/login',
+                    '/user/signin',
+                    '/users/login',
+                    '/users/signin',
+                    '/users/connect',
+                    '/auth',
+                    '/auth/login',
+                    '/auth/signin',
+                    '/m/login',
+                    '/m/signin',
+                    '/registration',
+                    '/registration/login',
+                    '/registration/signin',
+                    '/.well-known/change-password'
+                ],
+                subdomains: [
+                    'login',
+                    'signin',
+                    'account',
+                    'profile',
+                    'auth'
+                ]
+            },
+            crawling_strategy_config: {
+                max_anchor_candidates: 1,
+                max_element_candidates: 1,
+                max_elements_to_click: 10
+            },
+            sitemap_strategy_config: {
+                max_candidates: 1,
+                max_recursion_level: 0,
+                max_sitemap_size: 50000000,
+                timeout_fetch_sitemap: 10
+            },
+            robots_strategy_config: {
+                max_candidates: 1,
+                timeout_fetch_robots: 10
+            },
+            metasearch_strategy_config: {
+                search_term: '%s login',
+                search_engines: [
+                    'BING',
+                    'BRAVE',
+                    'DUCKDUCKGO',
+                    'GOOGLE',
+                    'MOJEEK',
+                    'QWANT',
+                    'STARTPAGE',
+                    'WIBY',
+                    'YAHOO',
+                    'SEZNAM',
+                    'GOO',
+                    'NAVER',
+                    'PETALSEARCH',
+                    'YEP'
+                ],
+                search_results_number: 3
+            }
+        },
+        idp_config: {
+            idp_scope: [
+                'APPLE',
+                'FACEBOOK',
+                'GOOGLE',
+                'TWITTER_1.0',
+                'LINKEDIN',
+                'MICROSOFT',
+                'BAIDU',
+                'GITHUB',
+                'QQ',
+                'SINA_WEIBO',
+                'WECHAT'
+            ]
+        },
+        recognition_strategy_config: {
+            recognition_strategy_scope: [
+                'KEYWORD-CSS',
+                'KEYWORD-XPATH',
+                'KEYWORD-ACCESSIBILITY',
+                'LOGO',
+                'REQUEST',
+                'LASTPASS_ICON',
+                'NAVIGATOR_CREDENTIALS',
+                'METADATA',
+                'PASSKEY_BUTTON',
+                'MFA',
+                'PASSWORD_BASED'
+            ],
+            recognition_mode: 'FAST'
+        },
+        keyword_recognition_config: {
+            keywords: [
+                'login with %s',
+                'log in with %s',
+                'logon with %s',
+                'log on with %s',
+                'signin with %s',
+                'sign in with %s',
+                'signup with %s',
+                'sign up with %s',
+                'signon with %s',
+                'sign on with %s',
+                'continue with %s',
+                'connect with %s',
+                'login using %s',
+                'log in using %s',
+                'logon using %s',
+                'log on using %s',
+                'signin using %s',
+                'sign in using %s',
+                'signup using %s',
+                'sign up using %s',
+                'signon using %s',
+                'sign on using %s',
+                'continue using %s',
+                'connect using %s',
+                'use %s',
+                'mit %s anmelden',
+                'mit %s einloggen',
+                'mit %s registrieren',
+                'mit %s fortfahren',
+                'mit %s fortsetzen',
+                'mit %s verbinden',
+                '%s verwenden zum anmelden',
+                '%s verwenden zum einloggen',
+                '%s verwenden zum registrieren',
+                '%s verwenden zum fortfahren',
+                '%s verwenden zum verbinden',
+                '%s verwenden',
+                'weiter mit %s',
+                'anmelden mit %s',
+                'über %s fortfahren',
+                'masuk dengan %s',
+                'entrar com %s',
+                'continuar com o %s',
+                'daftar/masuk lewat %s',
+                '使用 %s 登录'
+            ],
+            xpath: [
+                '//*'
+            ],
+            max_elements_to_click: 3
+        },
+        logo_recognition_config: {
+            logo_size: '100x100',
+            max_matching: 0.9,
+            upper_bound: 0.8,
+            lower_bound: 0.7,
+            scale_upper_bound: 0.5,
+            scale_lower_bound: 0.12,
+            scale_method: 'scale_template',
+            scale_space: 'linspace',
+            scale_order: 'descending',
+            match_intensity: 10,
+            match_algorithm: 5,
+            max_elements_to_click: 3
+        },
+        artifacts_config: {
+            store_login_page_candidate_screenshot: true,
+            store_sso_button_detection_screenshot: true,
+            store_idp_screenshot: true,
+            store_idp_har: true,
+            store_login_page_analysis_har: false,
+            store_sitemap: false,
+            store_robots: false
+        },
+        auth_methods: {
+            passkey: {
+                detected: false,
+                validity: 'LOW'
+            },
+            totp: {
+                detected: false,
+                validity: 'LOW'
+            },
+            sms: {
+                detected: false,
+                validity: 'LOW'
+            },
+            email: {
+                detected: false,
+                validity: 'LOW'
+            },
+            app: {
+                detected: false,
+                validity: 'LOW'
+            },
+            password: {
+                detected: false,
+                validity: 'LOW'
+            }
+        }
+    },
+    task_config: {
+        task_id: '6dc106e7-0cb4-4971-9bf5-3e679fa4da53',
+        task_state: 'RESPONSE_RECEIVED',
+        task_timestamp_request_sent: 1745454662.7686589,
+        task_timestamp_request_received: 1745454663.209555,
+        task_timestamp_response_sent: 1745456269.4722774,
+        task_timestamp_response_received: 1745456271.3449466
+    },
+    domain: 'meta.discourse.org',
+    landscape_analysis_result: {
+        resolved: {
+            reachable: true,
+            domain: 'meta.discourse.org',
+            url: 'https://meta.discourse.org/'
+        },
+        timings: {
+            resolve_duration_seconds: 36.4453649520874,
+            login_page_detection_paths_duration_seconds: 17.409957885742188,
+            login_page_detection_crawling_duration_seconds: 235.2669472694397,
+            login_page_detection_metasearch_duration_seconds: 4.1478376388549805,
+            login_page_detection_sitemap_duration_seconds: 10.473792552947998,
+            login_page_detection_homepage_duration_seconds: 0.0033063888549804688,
+            login_page_detection_duration_seconds: 267.3041307926178,
+            lastpass_icon_detection_duration_seconds: 0.18516016006469727,
+            login_page_analysis_duration_seconds: 331.37199449539185,
+            sso_button_detection_keyword_css_duration_seconds: 237.20403671264648,
+            sso_button_detection_keyword_xpath_duration_seconds: 165.3799271583557,
+            sso_button_detection_keyword_accessibility_duration_seconds: 11.20205545425415,
+            sso_button_detection_logo_duration_seconds: 102.04945015907288,
+            sso_button_detection_duration_seconds: 772.3070170879364,
+            sdk_detection_duration_seconds: 0.03197646141052246,
+            metadata_detection_duration_seconds: 3.7586734294891357,
+            passkey_detection_duration_seconds: 14.772507190704346,
+            mfa_detection_duration_seconds: 89.86217069625854,
+            password_detection_duration_seconds: 88.96492862701416,
+            total_duration_seconds: 1604.8216700553894
+        },
+        login_page_candidates: [
+            {
+                login_page_candidate: 'https://meta.discourse.org/login',
+                login_page_strategy: 'PATHS',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'meta.discourse.org',
+                    url: 'https://meta.discourse.org/login',
+                    title: 'Discourse Meta - The Official Support Forum for Discourse'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/meta.discourse.org/020996d0-f1f6-4258-9be7-d329c7c804db.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147/1',
+                login_page_strategy: 'CRAWLING',
+                login_page_locator_mode: 'ANCHOR',
+                login_page_priority: {
+                    regex: '[^a-z](show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)[^a-z]',
+                    priority: 79
+                },
+                login_page_info: {
+                    x: 1277.359375,
+                    y: 2535.90625,
+                    width: 19.921875,
+                    height: 46,
+                    inner_text: '5',
+                    outer_html: '<a href="/t/bbcode-login-code-not-working-on-discourse/363147/1" class="badge-posts" aria-label="5 replies, jump to first post">\n        <!---->\n        <span class="number">5</span>\n      </a>',
+                    href_attribute: '/t/bbcode-login-code-not-working-on-discourse/363147/1',
+                    href_absolute: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147/1'
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'meta.discourse.org',
+                    url: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147',
+                    title: 'BBCode Login Code not working on discourse - Support - Discourse Meta'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/meta.discourse.org/930c7695-8860-4ba5-9c5a-681fda72d126.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://meta.discourse.org/signup',
+                login_page_strategy: 'CRAWLING',
+                login_page_locator_mode: 'ELEMENT',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                login_page_info: {
+                    x: 1634.6875,
+                    y: 17.640625,
+                    width: 71.90625,
+                    height: 31.90625,
+                    inner_text: 'Sign Up',
+                    outer_html: '<button class="btn btn-text btn-primary btn-small sign-up-button" type="button">\n<!----><span class="d-button-label">Sign Up<!----></span>\n    </button>',
+                    login_page_frame: 'TOPMOST',
+                    element_tree: [
+                        'SPAN',
+                        'BUTTON',
+                        'SPAN',
+                        'SPAN',
+                        'DIV',
+                        'DIV',
+                        'DIV',
+                        'HEADER',
+                        'DIV',
+                        'DIV',
+                        'SECTION',
+                        'BODY',
+                        'HTML'
+                    ]
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'meta.discourse.org',
+                    url: 'https://meta.discourse.org/signup',
+                    title: 'Discourse Meta'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/meta.discourse.org/becaea5f-27ee-43d5-adeb-953c50761ced.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://www.discourse.org/',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                login_page_info: {
+                    result_hit: 1,
+                    result_engines: [
+                        'GOO',
+                        'SEZNAM',
+                        'YAHOO',
+                        'BING'
+                    ],
+                    result_raw: {
+                        url: 'https://www.discourse.org/',
+                        title: 'Discourse is the place to build civilized communities',
+                        content: 'Discourse is a world-class, modern, community platform that has been my choice for many of my clients. What’s more, they are a great team, and continuously innovate in making Discourse even better year-after-year. Highly recommended!',
+                        engine: 'bing',
+                        parsed_url: [
+                            'https',
+                            'www.discourse.org',
+                            '/',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'goo',
+                            'seznam',
+                            'yahoo',
+                            'bing'
+                        ],
+                        positions: [
+                            2,
+                            2,
+                            3,
+                            2
+                        ],
+                        is_onion: false,
+                        score: 7.333333333333333,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'www.discourse.org',
+                    url: 'https://www.discourse.org/',
+                    title: 'Discourse is the place to build civilized communities | Discourse - Civilized Discussion'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/meta.discourse.org/ad1cc88b-ffbc-4024-8e9a-c0c43dd659ab.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://meta.discourse.org/login',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                login_page_info: {
+                    result_hit: 2,
+                    result_engines: [
+                        'YAHOO',
+                        'BING'
+                    ],
+                    result_raw: {
+                        url: 'https://meta.discourse.org/login',
+                        title: 'Discourse Meta - The Official Support Forum for Discourse',
+                        content: 'Welcome to Discourse Meta. Learn about and discuss Discourse, the next-generation open-source forum software.DiscourseConnect is a core Discourse feature that allows you to configure …The system user is a special account that is automatically created by Discourse. It is …',
+                        engine: 'bing',
+                        parsed_url: [
+                            'https',
+                            'meta.discourse.org',
+                            '/login',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'yahoo',
+                            'bing'
+                        ],
+                        positions: [
+                            1,
+                            1
+                        ],
+                        score: 4,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'meta.discourse.org',
+                    url: 'https://meta.discourse.org/login',
+                    title: 'Discourse Meta - The Official Support Forum for Discourse'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/meta.discourse.org/b59981cd-be78-4be6-9f84-8188bf17677e.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: '[^a-z](show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)[^a-z]',
+                    priority: 79
+                },
+                login_page_info: {
+                    result_hit: 3,
+                    result_engines: [
+                        'SEZNAM',
+                        'MOJEEK'
+                    ],
+                    result_raw: {
+                        url: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                        title: 'Configure Google login for Discourse - Integrations - Discourse',
+                        content: '22. 5. 2014:bookmark: This guide explains how to set up Google login integration for your Discourse site by configuring OAuth2 credentials in the Google Cloud Console. :person_raising_hand: Required user level: Administrator O…',
+                        engine: 'mojeek',
+                        parsed_url: [
+                            'https',
+                            'meta.discourse.org',
+                            '/t/configure-google-login-for-discourse/15858',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'seznam',
+                            'mojeek'
+                        ],
+                        positions: [
+                            1,
+                            9
+                        ],
+                        score: 2.2222222222222223,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'meta.discourse.org',
+                    url: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                    title: 'Configure Google login for Discourse - Documentation / Integrations - Discourse Meta'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/meta.discourse.org/d767f7a6-0358-4c1b-9be1-e30b20d503c8.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://meta.discourse.org/',
+                login_page_strategy: 'HOMEPAGE',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'meta.discourse.org',
+                    url: 'https://meta.discourse.org/',
+                    title: 'Discourse Meta - The Official Support Forum for Discourse'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/meta.discourse.org/4af4b8d3-7ef7-4b23-99fd-9a97e07031a1.png',
+                        extension: 'png'
+                    }
+                }
+            }
+        ],
+        recognized_idps: [
+            {
+                idp_name: 'APPLE',
+                idp_login_request: 'https://appleid.apple.com/auth/authorize?client_id=org.discourse.meta.login&redirect_uri=https%3A%2F%2Fmeta.discourse.org%2Fauth%2Fapple%2Fcallback&response_mode=form_post&response_type=code&scope=email+name&state=dbd1dfbe3d42bd7b0fd5cf8fa1a3dc317998bd376ca46d99',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/meta.discourse.org/ee6d548a-8e57-4b67-9990-e2646978a106.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 1093.53125,
+                element_coordinates_y: 711.390625,
+                element_width: 210.96875,
+                element_height: 46,
+                element_inner_text: 'Sign in with Apple',
+                element_outer_html: '<button class="btn btn-social apple" aria-label="Sign in with Apple" type="button">\n          <svg class="fa d-icon d-icon-fab-apple svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#fab-apple"></use></svg>\n        <span class="btn-social-title">Sign in with Apple</span>\n      </button>',
+                element_tree: [
+                    'SPAN',
+                    'BUTTON',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/meta.discourse.org/1c4dee58-0f73-4f27-90ef-0594cbf95744.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 2,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Sign in with Apple',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/meta.discourse.org/41c170a2-e7f2-4cb3-94b7-0a1e5b7d5338.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'HIGH',
+                login_page_url: 'https://meta.discourse.org/login',
+                keyword_recognition_duration_seconds: 43.17522835731506,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/meta.discourse.org/61776946-7a13-44e1-bf51-ed1ff7748398.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'FACEBOOK',
+                idp_login_request: 'https://www.facebook.com/v5.0/dialog/oauth?client_id=131409284304771&redirect_uri=https%3A%2F%2Fmeta.discourse.org%2Fauth%2Ffacebook%2Fcallback&response_type=code&scope=email&state=1ca5fcbd959a34db61922e4968aef517accb100f67ffe86e',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/meta.discourse.org/8e5ec585-ddf1-484c-8817-c9de374e4f6d.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 1093.53125,
+                element_coordinates_y: 401.390625,
+                element_width: 210.96875,
+                element_height: 46,
+                element_inner_text: 'Log in with Facebook',
+                element_outer_html: '<button class="btn btn-social facebook" aria-label="Log in with Facebook" type="button">\n          <svg class="fa d-icon d-icon-fab-facebook svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#fab-facebook"></use></svg>\n        <span class="btn-social-title">Log in with Facebook</span>\n      </button>',
+                element_tree: [
+                    'SPAN',
+                    'BUTTON',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/meta.discourse.org/0d857f61-7293-429e-a406-befbeeff33cc.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 2,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Log in with Facebook',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/meta.discourse.org/b2bc4866-aa34-4921-a2c0-79ad8b1ada77.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'HIGH',
+                login_page_url: 'https://meta.discourse.org/login',
+                keyword_recognition_duration_seconds: 36.466973066329956,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/meta.discourse.org/a5144990-882d-41eb-82dc-9947c0bf9c11.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'GOOGLE',
+                idp_login_request: 'https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=173249592048-ob0gevig6k29oh56je8c52cbfd906c7q.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fmeta.discourse.org%2Fauth%2Fgoogle_oauth2%2Fcallback&response_type=code&scope=email+profile&state=c194b6943a7bf6bacb4f2383a64f5bef74654ba66283cbde',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/meta.discourse.org/be0bca19-ce4e-4fd1-affc-694ac2c4c56b.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 1093.53125,
+                element_coordinates_y: 463.390625,
+                element_width: 210.96875,
+                element_height: 46,
+                element_inner_text: 'Sign in with Google',
+                element_outer_html: '<button class="btn btn-social google_oauth2" aria-label="Sign in with Google" type="button">\n          \n  <svg class="fa d-icon d-icon-custom-google-oauth2 svg-icon" viewBox="0 0 48 48"><defs><path id="google-icon-a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"></path></defs><clipPath id="google-icon-b"><use href="#google-icon-a" overflow="visible"></use></clipPath><path clip-path="url(#google-icon-b)" fill="#FBBC05" d="M0 37V11l17 13z"></path><path clip-path="url(#google-icon-b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z"></path><path clip-path="url(#google-icon-b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z"></path><path clip-path="url(#google-icon-b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z"></path></svg>\n\n        <span class="btn-social-title">Sign in with Google</span>\n      </button>',
+                element_tree: [
+                    'SPAN',
+                    'BUTTON',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/meta.discourse.org/4b279952-f207-4d27-bd8c-6164533110d1.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 2,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Sign in with Google',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/meta.discourse.org/f336032d-b4a3-4824-b495-d46c08e2ea43.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'LOW',
+                login_page_url: 'https://meta.discourse.org/login',
+                keyword_recognition_duration_seconds: 65.62092661857605,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/meta.discourse.org/bee305f0-83f7-4842-ac99-f80c707148c6.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'TWITTER_1.0',
+                idp_login_request: 'https://api.twitter.com/oauth/authenticate?oauth_token=guZW6gAAAAABqwmCAAABlmVB_Ws',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/meta.discourse.org/eff03054-170c-4e34-8097-8a4697064049.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 1093.53125,
+                element_coordinates_y: 587.390625,
+                element_width: 210.96875,
+                element_height: 46,
+                element_inner_text: 'Sign in with X',
+                element_outer_html: '<button class="btn btn-social twitter" aria-label="Sign in with X" type="button">\n          <svg class="fa d-icon d-icon-fab-x-twitter svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#fab-x-twitter"></use></svg>\n        <span class="btn-social-title">Sign in with X</span>\n      </button>',
+                element_tree: [
+                    'SPAN',
+                    'BUTTON',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/meta.discourse.org/36be6f35-a428-4341-b203-eff7045616f4.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 1,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Sign in with X',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/meta.discourse.org/dd993f16-db7d-4f44-8a0a-7143447f7567.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'LOW',
+                login_page_url: 'https://meta.discourse.org/login',
+                keyword_recognition_duration_seconds: 36.09978246688843,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/meta.discourse.org/8d05edef-b146-4157-89cf-2db026142e2a.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'GITHUB',
+                idp_login_request: 'https://github.com/login/oauth/authorize?client_id=a4e920f9c5abd9da30d3&redirect_uri=https%3A%2F%2Fmeta.discourse.org%2Fauth%2Fgithub%2Fcallback&response_type=code&scope=user%3Aemail&state=6de7e620d48e97aed26e04709af3a21c0fb0135ad28520c3',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/meta.discourse.org/0f05e0ac-7b7e-432c-964d-87202615bd02.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 1093.53125,
+                element_coordinates_y: 525.390625,
+                element_width: 210.96875,
+                element_height: 46,
+                element_inner_text: 'Log in with GitHub',
+                element_outer_html: '<button class="btn btn-social github" aria-label="Log in with GitHub" type="button">\n          <svg class="fa d-icon d-icon-fab-github svg-icon svg-string" xmlns="http://www.w3.org/2000/svg"><use href="#fab-github"></use></svg>\n        <span class="btn-social-title">Log in with GitHub</span>\n      </button>',
+                element_tree: [
+                    'SPAN',
+                    'BUTTON',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/meta.discourse.org/68da3c8d-44f9-4040-b6a5-a22144a69f32.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 2,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Log in with GitHub',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/meta.discourse.org/ac17e798-6eaa-441d-b443-7967e91f8468.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'HIGH',
+                login_page_url: 'https://meta.discourse.org/login',
+                keyword_recognition_duration_seconds: 34.020456314086914,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/meta.discourse.org/db6d722a-5723-4fde-a96f-6653d0a83b18.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSKEY',
+                login_page_url: 'https://meta.discourse.org/login',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/login',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                login_page_url: 'https://meta.discourse.org/login',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/login',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                login_page_url: 'https://meta.discourse.org/login',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/login',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSKEY',
+                login_page_url: 'https://meta.discourse.org/signup',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/signup',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                login_page_url: 'https://meta.discourse.org/signup',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/signup',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                login_page_url: 'https://meta.discourse.org/signup',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/signup',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSKEY',
+                login_page_url: 'https://meta.discourse.org/',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                login_page_url: 'https://meta.discourse.org/',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                login_page_url: 'https://meta.discourse.org/',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSKEY',
+                login_page_url: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                login_page_url: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                login_page_url: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/t/configure-google-login-for-discourse/15858',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSKEY',
+                login_page_url: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147/1',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147/1',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                login_page_url: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147/1',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147/1',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                login_page_url: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147/1',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://meta.discourse.org/t/bbcode-login-code-not-working-on-discourse/363147/1',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSKEY',
+                login_page_url: 'https://www.discourse.org/',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://www.discourse.org/',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                login_page_url: 'https://www.discourse.org/',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://www.discourse.org/',
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                login_page_url: 'https://www.discourse.org/',
+                login_page_reloaded: false,
+                recognition_strategy: 'REQUEST',
+                idp_frame: 'IFRAME',
+                idp_login_request: 'https://www.discourse.org/',
+                idp_integration: 'CUSTOM'
+            }
+        ],
+        recognized_navcreds: [],
+        recognized_lastpass_icons: [
+            {
+                login_page_url: 'https://meta.discourse.org/login',
+                recognition_strategy: 'LASTPASS_ICON',
+                lastpass_icon_elements: [
+                    {
+                        element_coordinates_x: 600.5,
+                        element_coordinates_y: 477.46875,
+                        element_width: 397.03125,
+                        element_height: 46,
+                        element_inner_text: '',
+                        element_outer_html: '<input id="login-account-name" class="ember-text-field ember-view" autocomplete="username webauthn" autocorrect="off" autocapitalize="off" autofocus="autofocus" tabindex="1" type="email" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'DIV',
+                            'DIV',
+                            'FORM',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/meta.discourse.org/86912266-60e0-48fc-a4c1-10436030ac4a.json',
+                                extension: 'json'
+                            }
+                        }
+                    },
+                    {
+                        element_coordinates_x: 600.5,
+                        element_coordinates_y: 562.953125,
+                        element_width: 397.03125,
+                        element_height: 46,
+                        element_inner_text: '',
+                        element_outer_html: '<input dir="auto" autocomplete="current-password" tabindex="1" placeholder="" maxlength="200" id="login-account-password" class="ember-text-field ember-view" type="password" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'DIV',
+                            'DIV',
+                            'FORM',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/meta.discourse.org/55f430c7-645a-4b16-9881-44f28352cd81.json',
+                                extension: 'json'
+                            }
+                        }
+                    }
+                ],
+                lastpass_icon_frame: 'TOPMOST',
+                lastpass_icon_frame_index: 0,
+                lastpass_icon_frame_url: 'https://meta.discourse.org/login',
+                lastpass_icon_frame_name: '',
+                lastpass_icon_frame_title: 'Discourse Meta - The Official Support Forum for Discourse',
+                lastpass_icon_frames_length: 1
+            },
+            {
+                login_page_url: 'https://meta.discourse.org/signup',
+                recognition_strategy: 'LASTPASS_ICON',
+                lastpass_icon_elements: [
+                    {
+                        element_coordinates_x: 600.5,
+                        element_coordinates_y: 318.921875,
+                        element_width: 398.40625,
+                        element_height: 46,
+                        element_inner_text: '',
+                        element_outer_html: '<input id="new-account-email" class="ember-text-field ember-view" autofocus="autofocus" aria-describedby="account-email-validation account-email-validation-more-info" aria-invalid="" name="email" type="email" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'DIV',
+                            'FORM',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/meta.discourse.org/c049d299-1cf0-4238-9f9a-f6cad73d3d9a.json',
+                                extension: 'json'
+                            }
+                        }
+                    }
+                ],
+                lastpass_icon_frame: 'TOPMOST',
+                lastpass_icon_frame_index: 0,
+                lastpass_icon_frame_url: 'https://meta.discourse.org/signup',
+                lastpass_icon_frame_name: '',
+                lastpass_icon_frame_title: 'Discourse Meta',
+                lastpass_icon_frames_length: 1
+            }
+        ],
+        auth_methods: {
+            passkey: {
+                detected: true,
+                validity: 'HIGH'
+            },
+            totp: {
+                detected: false,
+                validity: 'LOW'
+            },
+            sms: {
+                detected: false,
+                validity: 'LOW'
+            },
+            email: {
+                detected: false,
+                validity: 'LOW'
+            },
+            app: {
+                detected: false,
+                validity: 'LOW'
+            },
+            password: {
+                detected: true,
+                validity: 'HIGH'
+            }
+        },
+        metadata_data: {
+            type: 'reference',
+            data: {
+                bucket_name: 'metadata-data',
+                object_name: '/meta.discourse.org/75c21091-f192-4959-a624-f319648f594b.json',
+                extension: 'json'
+            }
+        },
+        metadata_available: {
+            robots_txt: true,
+            security_txt: false,
+            webfinger: false,
+            openid_configuration: false,
+            oauth_authorization_server: false,
+            oauth_client: false,
+            web_identity: false,
+            browserid: false,
+            jwks: false,
+            uma2_configuration: false,
+            fido_configuration: false,
+            fido_2fa_configuration: false,
+            fido2_configuration: false,
+            apple_app_site_association: false,
+            assetlinks: false
+        }
+    }
+}

@@ -670,31 +670,37 @@
                             "title": "In-Scope IdPs",
                             "default": [
                                 "APPLE",
-                                "FACEBOOK",
                                 "GOOGLE",
+                                "FACEBOOK",
+                                "MICROSOFT",
                                 "TWITTER_1.0",
                                 "LINKEDIN",
-                                "MICROSOFT",
                                 "BAIDU",
                                 "GITHUB",
                                 "QQ",
                                 "SINA_WEIBO",
-                                "WECHAT"
+                                "WECHAT",
+                                "PASSKEY",
+                                "MFA_GENERIC",
+                                "PASSWORD_BASED"
                             ],
                             "items": {
                                 "type": "string",
                                 "enum": [
                                     "APPLE",
-                                    "FACEBOOK",
                                     "GOOGLE",
+                                    "FACEBOOK",
+                                    "MICROSOFT",
                                     "TWITTER_1.0",
                                     "LINKEDIN",
-                                    "MICROSOFT",
                                     "BAIDU",
                                     "GITHUB",
                                     "QQ",
                                     "SINA_WEIBO",
-                                    "WECHAT"
+                                    "WECHAT",
+                                    "PASSKEY",
+                                    "MFA_GENERIC",
+                                    "PASSWORD_BASED"
                                 ]
                             }
                         }
@@ -1080,6 +1086,74 @@
                             }
                         }
                     }
+                }
+            }
+        },
+        "definitions": {
+            "mfaStep": {
+                "type": "object",
+                "properties": {"selectors": {"type": "array", "items": {"type": "string"}}}
+            },
+            "formRule": {
+                "type": "object",
+                "properties": {"fields": {"type": "object"}}
+            },
+            "authMethods": {
+                "type": "object",
+                "properties": {
+                    "passkey": {
+                        "type": "object",
+                        "properties": {
+                            "detected": {"type": "boolean"},
+                            "validity": {"type": "string", "enum": ["LOW", "HIGH"]}
+                        }
+                    },
+                    "totp": {
+                        "type": "object",
+                        "properties": {
+                            "detected": {"type": "boolean"},
+                            "validity": {"type": "string", "enum": ["LOW", "HIGH"]}
+                        }
+                    },
+                    "sms": {
+                        "type": "object",
+                        "properties": {
+                            "detected": {"type": "boolean"},
+                            "validity": {"type": "string", "enum": ["LOW", "HIGH"]}
+                        }
+                    },
+                    "email": {
+                        "type": "object",
+                        "properties": {
+                            "detected": {"type": "boolean"},
+                            "validity": {"type": "string", "enum": ["LOW", "HIGH"]}
+                        }
+                    },
+                    "app": {
+                        "type": "object",
+                        "properties": {
+                            "detected": {"type": "boolean"},
+                            "validity": {"type": "string", "enum": ["LOW", "HIGH"]}
+                        }
+                    },
+                    "password": {
+                        "type": "object",
+                        "properties": {
+                            "detected": {"type": "boolean"},
+                            "validity": {"type": "string", "enum": ["LOW", "HIGH"]}
+                        }
+                    }
+                }
+            },
+            "metadataAvailable": {
+                "type": "object",
+                "properties": {
+                    "idps": {
+                        "type": "array",
+                        "items": {"type": "string"}
+                    },
+                    "webauthn_api": {"type": "boolean"},
+                    "lastpass": {"type": "boolean"}
                 }
             }
         }

@@ -30,6 +30,38 @@ class SSOButtonDetector:
         self.idp_scope = config["idp_config"]["idp_scope"]
         self.recognition_mode = config["recognition_strategy_config"]["recognition_mode"]
         self.recognition_strategy_scope = config["recognition_strategy_config"]["recognition_strategy_scope"]
+        
+        # Add new authentication methods to in-scope IDPs if not already present
+        if "PASSKEY" not in self.idp_scope:
+            self.idp_scope.append("PASSKEY")
+        if "MFA_GENERIC" not in self.idp_scope:
+            self.idp_scope.append("MFA_GENERIC")
+        if "PASSWORD_BASED" not in self.idp_scope:
+            self.idp_scope.append("PASSWORD_BASED")
+            
+        # Ensure these detection methods are in scope
+        if "PASSKEY" not in self.recognition_strategy_scope:
+            self.recognition_strategy_scope.append("PASSKEY")
+        if "MFA" not in self.recognition_strategy_scope:
+            self.recognition_strategy_scope.append("MFA")
+        if "PASSWORD_FORM" not in self.recognition_strategy_scope:
+            self.recognition_strategy_scope.append("PASSWORD_FORM")
+            
+        # Initialize result fields if not present
+        if "recognized_navcreds" not in self.result:
+            self.result["recognized_navcreds"] = []
+        if "auth_methods" not in self.result:
+            self.result["auth_methods"] = {
+                "passkey": {"detected": False, "validity": "LOW"},
+                "totp": {"detected": False, "validity": "LOW"},
+                "sms": {"detected": False, "validity": "LOW"},
+                "email": {"detected": False, "validity": "LOW"},
+                "app": {"detected": False, "validity": "LOW"},
+                "password": {"detected": False, "validity": "LOW"}
+            }
+        if "metadata_available" not in self.result:
+            self.result["metadata_available"] = {}
+            
         self.keyword_max_elements_to_click = config["keyword_recognition_config"]["max_elements_to_click"]
         self.keywords = config["keyword_recognition_config"]["keywords"]
         self.xpath = config["keyword_recognition_config"]["xpath"]
@@ -68,6 +100,22 @@ class SSOButtonDetector:
             self.recognition_mode, self.idp_scope, False
         )
         logger.info(f"Login page candidates: {lpcs_with_idps}")
+        
+        # Initialize navigator credentials detector to help detect WebAuthn/Passkey
+        from modules.detectors.navigator_credentials import NavigatorCredentialsDetector
+        navcreds_detector = NavigatorCredentialsDetector(self.config, self.result)
+        
+        # Initialize MFA detector
+        from modules.detectors.mfa_detector import MFADetector
+        mfa_detector = MFADetector(self.config, self.result)
+        
+        # Initialize password form detector
+        from modules.detectors.password_form_detector import PasswordFormDetector
+        password_detector = PasswordFormDetector(self.config, self.result)
+        
+        # Start the new detectors
+        mfa_detector.start()
+        password_detector.start()
 
         # iterate over login page candidates
         for lpc in lpcs_with_idps:
@@ -97,6 +145,86 @@ class SSOButtonDetector:
                 self.recognition_mode, self.idp_scope, True
             )
             logger.info(f"Idps: {lpcs_with_idps[lpc]}")
+            
+            # Start navigator credentials detector for this page
+            with TmpHelper.tmp_dir() as pdir, TmpHelper.tmp_file() as har, sync_playwright() as pw:
+                context, page = PlaywrightBrowser.instance(pw, self.browser_config, pdir, har_file=har)
+                try:
+                    # Navigate to page
+                    PlaywrightHelper.navigate(page, lpc, self.browser_config)
+                    
+                    # Initialize navigator credentials detector on this page
+                    navcreds_detector.start(page, lpc)
+                    
+                    # Continue with existing detection
+                    # content analyzable
+                    valid, error = PlaywrightHelper.get_content_analyzable(page)
+                    if not valid:
+                        logger.info(f"Login page candidate is not analyzable: {error}")
+                        PlaywrightHelper.close_context(context)
+                        continue
+
+                    # recognized idp
+                    sso, sso_info = False, None
+
+                    # iterate over detection strategies
+                    for rs in self.recognition_strategy_scope:
+
+                        # stop if sso was detected by previous detection strategy
+                        if sso: break
+
+                        # select approriate detection strategy
+                        if rs == "KEYWORD-CSS":
+                            t = time.time()
+                            sso, sso_info = self.keyword_detection(page, lpc, idp, "CSS")
+                            if "sso_button_detection_keyword_css_duration_seconds" not in self.result["timings"]:
+                                self.result["timings"]["sso_button_detection_keyword_css_duration_seconds"] = 0
+                            self.result["timings"][f"sso_button_detection_keyword_css_duration_seconds"] += time.time() - t
+                        elif rs == "KEYWORD-XPATH":
+                            t = time.time()
+                            sso, sso_info = self.keyword_detection(page, lpc, idp, "XPATH")
+                            if "sso_button_detection_keyword_xpath_duration_seconds" not in self.result["timings"]:
+                                self.result["timings"]["sso_button_detection_keyword_xpath_duration_seconds"] = 0
+                            self.result["timings"][f"sso_button_detection_keyword_xpath_duration_seconds"] += time.time() - t
+                        elif rs == "KEYWORD-ACCESSIBILITY":
+                            t = time.time()
+                            sso, sso_info = self.keyword_detection(page, lpc, idp, "ACCESSIBILITY")
+                            if "sso_button_detection_keyword_accessibility_duration_seconds" not in self.result["timings"]:
+                                self.result["timings"]["sso_button_detection_keyword_accessibility_duration_seconds"] = 0
+                            self.result["timings"][f"sso_button_detection_keyword_accessibility_duration_seconds"] += time.time() - t
+                        elif rs == "KEYWORD-ACCESSIBILITYSAAT":
+                            t = time.time()
+                            sso, sso_info = self.keyword_detection(page, lpc, idp, "ACCESSIBILITYSAAT")
+                            if "sso_button_detection_keyword_accessibilitysaat_duration_seconds" not in self.result["timings"]:
+                                self.result["timings"]["sso_button_detection_keyword_accessibilitysaat_duration_seconds"] = 0
+                            self.result["timings"][f"sso_button_detection_keyword_accessibilitysaat_duration_seconds"] += time.time() - t
+                        elif rs == "LOGO":
+                            t = time.time()
+                            sso, sso_info = self.logo_detection(page, lpc, idp)
+                            if "sso_button_detection_logo_duration_seconds" not in self.result["timings"]:
+                                self.result["timings"]["sso_button_detection_logo_duration_seconds"] = 0
+                            self.result["timings"]["sso_button_detection_logo_duration_seconds"] += time.time() - t
+
+                    # close browser to save har
+                    PlaywrightHelper.close_context(context)
+
+                    # save har
+                    if sso and self.store_idp_har:
+                        sso_info["idp_har"] = PlaywrightHelper.take_har(har)
+
+                    # save recognized idp
+                    if sso:
+                        self.recognized_idps.append(sso_info)
+                    else:
+                        pass # todo: also save unrecognized idps
+
+                except TimeoutError as e:
+                    logger.warning(f"Timeout in sso button detection for idp {idp} on: {lpc}")
+                    logger.debug(e)
+
+                except Error as e:
+                    logger.warning(f"Error in sso button detection for idp {idp} on: {lpc}")
+                    logger.debug(e)
 
             # iterate over idps
             for idp in lpcs_with_idps[lpc]:
@@ -178,6 +306,9 @@ class SSOButtonDetector:
                     except Error as e:
                         logger.warning(f"Error in sso button detection for idp {idp} on: {lpc}")
                         logger.debug(e)
+
+        # Update metadata at the end
+        self.update_metadata_available()
 
 
     def keyword_detection(self, page: Page, lpc: str, idp: str, locator_mode: str) -> Tuple[bool, dict]:
@@ -358,3 +489,35 @@ class SSOButtonDetector:
                     ) if self.store_sso_button_detection_screenshot else None
                 })
         return (False, None) # no sso found
+
+
+    def update_metadata_available(self):
+        """Update the metadata_available field with flattened information."""
+        metadata = {}
+        
+        # Include all recognized IDPs in a flattened manner
+        idp_list = []
+        for idp in self.result.get("recognized_idps", []):
+            idp_name = idp.get("idp_name")
+            if idp_name and idp_name not in idp_list:
+                idp_list.append(idp_name)
+                
+        if idp_list:
+            metadata["idps"] = idp_list
+            
+        # Include WebAuthn API usage as "webauthn API"
+        has_navcreds = len(self.result.get("recognized_navcreds", [])) > 0
+        metadata["webauthn_api"] = has_navcreds and any(
+            "publicKey" in str(cred.get("function_params", [])) 
+            for cred in self.result.get("recognized_navcreds", [])
+        )
+        
+        # Include lastpass detection
+        lastpass_detected = any(
+            "lastpass" in str(cred.get("function_name", "")).lower() 
+            for cred in self.result.get("recognized_navcreds", [])
+        )
+        metadata["lastpass"] = lastpass_detected
+        
+        # Update the result metadata
+        self.result["metadata_available"] = metadata

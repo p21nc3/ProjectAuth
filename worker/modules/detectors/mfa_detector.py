@@ -11,6 +11,8 @@ from playwright.sync_api import sync_playwright, Error, TimeoutError
 logger = logging.getLogger(__name__)
 
 class MFADetector:
+    """Detector for multi-factor authentication (MFA) elements like OTP fields, verification codes, etc."""
+    
     def __init__(self, config: dict, result: dict):
         self.config = config
         self.result = result
@@ -24,6 +26,10 @@ class MFADetector:
         self.login_page_candidates = result["login_page_candidates"]
         self.recognized_idps = result["recognized_idps"]
         
+        # Get MFA selectors from IdpRules
+        self.mfa_selectors = IdpRules.get("MFA_GENERIC", {}).get("mfa_step", {}).get("selectors", [])
+        self.mfa_keywords = IdpRules.get("MFA_GENERIC", {}).get("keywords", [])
+        
         # Initialize auth_methods if not present
         if "auth_methods" not in self.result:
             self.result["auth_methods"] = {}
@@ -35,33 +41,45 @@ class MFADetector:
                 self.result["auth_methods"][mfa_type] = {"detected": False, "validity": "LOW"}
 
     def start(self):
+        """Begin detection of MFA elements on login pages."""
         logger.info("Starting MFA detection")
         
-        # targets: login page candidates
-        lpcs_with_idps = {}
-        
-        # update login page candidates based on recognition mode
-        DetectionHelper.get_lpcs_with_idps(
-            lpcs_with_idps, self.login_page_candidates, self.recognized_idps,
-            self.recognition_mode, self.idp_scope, False
-        )
-        
-        for lpc in lpcs_with_idps:
-            logger.info(f"Checking for MFA authentication on: {lpc}")
-            
-            # check if login page candidate is reachable and analyzable
-            lpc_details = DetectionHelper.get_lpc_from_url(lpc, self.login_page_candidates)
-            reachable = lpc_details.get("resolved", {}).get("reachable", False)
-            valid = lpc_details.get("content_analyzable", {}).get("valid", False)
-            
+        # Process each login page candidate
+        for lpc in self.login_page_candidates:
+            url = lpc.get("url")
+            if not url:
+                continue
+                
+            # Check if page is reachable and analyzable
+            reachable = lpc.get("resolved", {}).get("reachable", False)
+            valid = lpc.get("content_analyzable", {}).get("valid", False)
             if not reachable or not valid:
-                logger.info(f"Login page candidate is not reachable or analyzable: {lpc}")
+                logger.info(f"Login page candidate is not reachable or analyzable: {url}")
                 continue
             
-            self.detect_mfa_elements(lpc)
+            # Check for MFA elements
+            detected = self.detect_mfa_elements(url)
+            if detected:
+                # Add to recognized_idps if not already present
+                if not any(idp.get("idp_name") == "MFA_GENERIC" for idp in self.recognized_idps):
+                    self.recognized_idps.append({
+                        "idp_name": "MFA_GENERIC",
+                        "idp_integration": "GENERIC",
+                        "recognition_strategy": "MFA_ELEMENTS",
+                        "element_validity": "HIGH",
+                        "login_page_url": url
+                    })
+                    
+                # Update auth_methods if present - default to TOTP
+                if "auth_methods" in self.result:
+                    self.result["auth_methods"]["totp"]["detected"] = True
+                    self.result["auth_methods"]["totp"]["validity"] = "HIGH"
+                    
+                # Only need to find one valid MFA form
+                return
     
-    def detect_mfa_elements(self, url: str):
-        """Detect MFA elements on the page."""
+    def detect_mfa_elements(self, url: str) -> bool:
+        """Check if the page contains MFA-related elements."""
         with TmpHelper.tmp_dir() as pdir, sync_playwright() as pw:
             context, page = PlaywrightBrowser.instance(pw, self.browser_config, pdir)
             
@@ -69,19 +87,81 @@ class MFADetector:
                 # Navigate to page
                 PlaywrightHelper.navigate(page, url, self.browser_config)
                 
-                # Look for MFA indicators
-                mfa_detected = self.check_for_mfa_indicators(page)
+                # Check for MFA UI elements using selectors and keywords
+                has_mfa = page.evaluate("""
+                    (selectors, keywords) => {
+                        // Check for specific input elements using selectors
+                        for (const selector of selectors) {
+                            if (document.querySelector(selector)) {
+                                return { type: 'selector', value: selector };
+                            }
+                        }
+                        
+                        // Look for OTP input fields (multiple single-digit inputs)
+                        const shortInputs = document.querySelectorAll('input[maxlength="1"], input[maxlength="2"]');
+                        if (shortInputs.length >= 4 && shortInputs.length <= 8) {
+                            return { type: 'otp_digits', count: shortInputs.length };
+                        }
+                        
+                        // Check for SMS or email verification codes
+                        const codeInputs = document.querySelectorAll('input[name*="code"], input[id*="code"], input[placeholder*="code"]');
+                        if (codeInputs.length > 0) {
+                            return { type: 'verification_code' };
+                        }
+                        
+                        // Check visible text for MFA-related keywords
+                        const bodyText = document.body.innerText.toLowerCase();
+                        for (const keyword of keywords) {
+                            if (bodyText.includes(keyword.toLowerCase())) {
+                                return { type: 'keyword', value: keyword };
+                            }
+                        }
+                        
+                        // Check for QR code images
+                        const qrImages = Array.from(document.querySelectorAll('img'))
+                            .filter(img => 
+                                img.alt && (img.alt.toLowerCase().includes('qr') || 
+                                           img.alt.toLowerCase().includes('code')));
+                        if (qrImages.length > 0) {
+                            return { type: 'qr_code' };
+                        }
+                        
+                        return false;
+                    }
+                """, self.mfa_selectors, self.mfa_keywords)
                 
                 # Close browser
                 PlaywrightHelper.close_context(context)
                 
+                if has_mfa:
+                    mfa_type = has_mfa.get('type', '')
+                    logger.info(f"Detected MFA element ({mfa_type}) on {url}")
+                    
+                    # If we detected a specific type of MFA, update auth_methods
+                    if "auth_methods" in self.result:
+                        if mfa_type == 'keyword':
+                            keyword = has_mfa.get('value', '').lower()
+                            if 'sms' in keyword or 'text message' in keyword:
+                                self.result["auth_methods"]["sms"]["detected"] = True
+                                self.result["auth_methods"]["sms"]["validity"] = "HIGH"
+                            elif 'email' in keyword:
+                                self.result["auth_methods"]["email"]["detected"] = True
+                                self.result["auth_methods"]["email"]["validity"] = "HIGH"
+                            elif 'app' in keyword or 'authenticator' in keyword:
+                                self.result["auth_methods"]["app"]["detected"] = True
+                                self.result["auth_methods"]["app"]["validity"] = "HIGH"
+                    
+                return bool(has_mfa)
+                
             except TimeoutError as e:
                 logger.warning(f"Timeout in MFA detection on: {url}")
                 logger.debug(e)
-            
+                return False
+                
             except Error as e:
                 logger.warning(f"Error in MFA detection on: {url}")
                 logger.debug(e)
+                return False
     
     def check_for_mfa_indicators(self, page: Page) -> bool:
         """Look for indicators of various MFA methods."""

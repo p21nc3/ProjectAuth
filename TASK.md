@@ -69,7 +69,7 @@ mkdir -p worker/config/idp_patterns/passkey/{16x16,100x100,250x250}
 **A. IDP Rule** (`worker/config/idp_rules.py`):
 ```python
 IdpRules['MFA_GENERIC'] = {
-  'keywords': ['2fa','mfa','one-time code','verification code','sms','email code'],
+  'keywords': ['2fa','mfa','one-time code','verification code','qr code','sms','email code'],
   'logos':    None,
   'passive_login_request_rule': {'domain': '.*', 'path': '.*'},
   'mfa_step': {
