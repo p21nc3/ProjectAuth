@@ -387,6 +387,16 @@ IdpRules = {
             "path": ".*",
             "params": []
         },
+        "login_response_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "login_response_originator_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
         "passive_login_request_rule": {},
         "form_rule": {
             "fields": {
@@ -417,6 +427,16 @@ IdpRules = {
                 }
             ]
         },
+        "login_response_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "login_response_originator_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
         "passive_login_request_rule": {},
         "sdks": {
             "WEBAUTHN": {
@@ -439,6 +459,16 @@ IdpRules = {
         "keywords": ["2fa", "mfa", "one-time code", "verification code", "qr code", "sms", "email code", "otp", "one time password", "authenticator", "two factor", "two-factor"],
         "logos": "mfa/",
         "login_request_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "login_response_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "login_response_originator_rule": {
             "domain": ".*",
             "path": ".*",
             "params": []
