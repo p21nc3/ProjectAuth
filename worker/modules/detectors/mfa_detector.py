@@ -72,16 +72,6 @@ class MFADetector:
                 # Look for MFA indicators
                 mfa_detected = self.check_for_mfa_indicators(page)
                 
-                # If MFA detected, add to recognized IDPs
-                if mfa_detected and not any(idp.get("idp_name") == "MFA_GENERIC" for idp in self.recognized_idps):
-                    self.recognized_idps.append({
-                        "idp_name": "MFA_GENERIC",
-                        "idp_integration": "MFA",
-                        "detection_method": "MFA",
-                        "login_page_candidate": url,
-                        "validity": "HIGH"
-                    })
-                
                 # Close browser
                 PlaywrightHelper.close_context(context)
                 
@@ -124,7 +114,17 @@ class MFADetector:
             self.result["auth_methods"]["app"]["detected"] = True
             self.result["auth_methods"]["app"]["validity"] = "HIGH"
             detected = True
-            
+        
+        # Add to recognized_idps if any MFA method was detected
+        if detected and not any(idp.get("idp_name") == "MFA_GENERIC" for idp in self.recognized_idps):
+            self.recognized_idps.append({
+                "idp_name": "MFA_GENERIC",
+                "idp_integration": "MFA",
+                "detection_method": "MFA",
+                "login_page_candidate": page.url,
+                "validity": "HIGH"
+            })
+        
         return detected
     
     def check_for_totp(self, page: Page) -> bool:

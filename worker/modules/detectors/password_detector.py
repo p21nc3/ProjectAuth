@@ -71,10 +71,11 @@ class PasswordDetector:
                 
                 if password_detected:
                     logger.info(f"Password-based authentication detected on: {url}")
+                    # Update auth_methods
                     self.result["auth_methods"]["password"]["detected"] = True
                     self.result["auth_methods"]["password"]["validity"] = "HIGH"
                     
-                    # Add to recognized IDPs
+                    # Add to recognized_idps explicitly
                     if not any(idp.get("idp_name") == "PASSWORD_BASED" for idp in self.recognized_idps):
                         self.recognized_idps.append({
                             "idp_name": "PASSWORD_BASED",

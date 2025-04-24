@@ -55,9 +55,11 @@ class PasskeyDetector:
             
             detected = self.detect_passkey_elements(lpc)
             if detected:
+                # Update auth_methods
                 self.result["auth_methods"]["passkey"]["detected"] = True
                 self.result["auth_methods"]["passkey"]["validity"] = "HIGH"
-                # Add to recognized IDPs as well
+                
+                # Add to recognized_idps explicitly
                 if not any(idp.get("idp_name") == "PASSKEY" for idp in self.recognized_idps):
                     self.recognized_idps.append({
                         "idp_name": "PASSKEY",

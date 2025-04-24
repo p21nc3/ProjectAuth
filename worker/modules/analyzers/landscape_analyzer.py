@@ -49,8 +49,16 @@ class LandscapeAnalyzer:
         self.result["recognized_idps_passive"] = []
         self.result["recognized_navcreds"] = []
         self.result["recognized_lastpass_icons"] = []
-        # Initialize auth_methods dict for new authentication methods
-        self.result["auth_methods"] = {}
+        
+        # Initialize auth_methods as a separate list at same level as recognized_idps
+        self.result["auth_methods"] = {
+            "passkey": {"detected": False, "validity": "LOW"},
+            "totp": {"detected": False, "validity": "LOW"},
+            "sms": {"detected": False, "validity": "LOW"},
+            "email": {"detected": False, "validity": "LOW"},
+            "app": {"detected": False, "validity": "LOW"},
+            "password": {"detected": False, "validity": "LOW"}
+        }
 
 
     def start(self) -> dict:
@@ -115,9 +123,57 @@ class LandscapeAnalyzer:
             PasswordDetector(self.config, self.result).start()
             self.result["timings"]["password_detection_duration_seconds"] = time.time() - t
 
+        # Ensure that any detected auth methods are also represented as IDPs in recognized_idps
+        self.sync_auth_methods_to_idps()
+
         self.result["timings"]["total_duration_seconds"] = time.time() - ttotal
 
         return self.result
+
+    def sync_auth_methods_to_idps(self):
+        """Ensure any detected auth methods are also represented in the recognized_idps list."""
+        # Check for PASSWORD_BASED
+        if self.result["auth_methods"]["password"]["detected"] and not any(idp.get("idp_name") == "PASSWORD_BASED" for idp in self.result["recognized_idps"]):
+            self.result["recognized_idps"].append({
+                "idp_name": "PASSWORD_BASED",
+                "idp_integration": "PASSWORD",
+                "detection_method": "PASSWORD_BASED",
+                "login_page_candidate": self.result["resolved"].get("url", ""),
+                "validity": self.result["auth_methods"]["password"]["validity"]
+            })
+            
+        # Check for PASSKEY
+        if self.result["auth_methods"]["passkey"]["detected"] and not any(idp.get("idp_name") == "PASSKEY" for idp in self.result["recognized_idps"]):
+            self.result["recognized_idps"].append({
+                "idp_name": "PASSKEY",
+                "idp_integration": "WEBAUTHN",
+                "detection_method": "PASSKEY_BUTTON",
+                "login_page_candidate": self.result["resolved"].get("url", ""),
+                "validity": self.result["auth_methods"]["passkey"]["validity"]
+            })
+            
+        # Check for MFA methods and add MFA_GENERIC if any are detected
+        mfa_detected = (
+            self.result["auth_methods"]["totp"]["detected"] or
+            self.result["auth_methods"]["sms"]["detected"] or
+            self.result["auth_methods"]["email"]["detected"] or
+            self.result["auth_methods"]["app"]["detected"]
+        )
+        if mfa_detected and not any(idp.get("idp_name") == "MFA_GENERIC" for idp in self.result["recognized_idps"]):
+            # Find the highest validity MFA method
+            validity = "LOW"
+            for mfa_type in ["totp", "sms", "email", "app"]:
+                if self.result["auth_methods"][mfa_type]["detected"] and self.result["auth_methods"][mfa_type]["validity"] == "HIGH":
+                    validity = "HIGH"
+                    break
+            
+            self.result["recognized_idps"].append({
+                "idp_name": "MFA_GENERIC",
+                "idp_integration": "MFA",
+                "detection_method": "MFA",
+                "login_page_candidate": self.result["resolved"].get("url", ""),
+                "validity": validity
+            })
 
 
     def resolve(self):
