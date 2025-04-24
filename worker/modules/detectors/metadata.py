@@ -171,9 +171,28 @@ class MetadataDetector:
 
         }
 
+        # Add flat metadata information
         self.result["metadata_available"] = {}
         for k, v in self.result["metadata_data"].items():
             self.result["metadata_available"][k] = True if v else False
+            
+        # Add recognized IDPs to metadata_available
+        if "recognized_idps" in self.result and self.result["recognized_idps"]:
+            idp_names = [idp["idp_name"] for idp in self.result["recognized_idps"]]
+            for idp_name in set(idp_names):  # Use set to avoid duplicates
+                self.result["metadata_available"][f"idp_{idp_name.lower()}"] = True
+        
+        # Add WebAuthn API detection to metadata_available
+        if "recognized_navcreds" in self.result and self.result["recognized_navcreds"]:
+            self.result["metadata_available"]["webauthn_api"] = True
+        else:
+            self.result["metadata_available"]["webauthn_api"] = False
+            
+        # Add LastPass icon detection to metadata_available
+        if "recognized_lastpass_icons" in self.result and self.result["recognized_lastpass_icons"]:
+            self.result["metadata_available"]["lastpass"] = True
+        else:
+            self.result["metadata_available"]["lastpass"] = False
 
 
     @staticmethod

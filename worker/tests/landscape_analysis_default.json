@@ -236,15 +236,20 @@
         ]
     },
     "recognition_strategy_config": {
+        "recognition_mode": "MERGED_MODE",
         "recognition_strategy_scope": [
             "KEYWORD-CSS",
+            "KEYWORD-XPATH",
+            "KEYWORD-ACCESSIBILITY",
             "LOGO",
             "REQUEST",
-            "NAVIGATOR_CREDENTIALS",
             "LASTPASS_ICON",
-            "METADATA"
-        ],
-        "recognition_mode": "FAST"
+            "METADATA",
+            "NAVIGATOR_CREDENTIALS",
+            "PASSWORD_FIELD",
+            "MFA_FIELD",
+            "PASSKEY_BUTTON"
+        ]
     },
     "keyword_recognition_config": {
         "keywords": [
