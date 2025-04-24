@@ -19,9 +19,6 @@ from modules.detectors.request import RequestDetector
 from modules.detectors.lastpass_icon import LastpassIconDetector
 from modules.detectors.metadata import MetadataDetector
 from modules.detectors.navigator_credentials import NavigatorCredentialsDetector
-from modules.detectors.password_field import PasswordFieldDetector
-from modules.detectors.mfa_field import MFAFieldDetector
-from modules.detectors.passkey_button import PasskeyButtonDetector
 
 
 logger = logging.getLogger(__name__)
@@ -78,24 +75,6 @@ class LandscapeAnalyzer:
             t = time.time()
             SSOButtonDetector(self.config, self.result).start()
             self.result["timings"]["sso_button_detection_duration_seconds"] = time.time() - t
-            
-        # password field detection
-        if self.result["resolved"]["reachable"]:
-            t = time.time()
-            self.password_field_detection()
-            self.result["timings"]["password_field_detection_duration_seconds"] = time.time() - t
-            
-        # mfa field detection
-        if self.result["resolved"]["reachable"]:
-            t = time.time()
-            self.mfa_field_detection()
-            self.result["timings"]["mfa_field_detection_duration_seconds"] = time.time() - t
-            
-        # passkey button detection
-        if self.result["resolved"]["reachable"]:
-            t = time.time()
-            self.passkey_button_detection()
-            self.result["timings"]["passkey_button_detection_duration_seconds"] = time.time() - t
 
         # merge recognized_idps_passive into recognized_idps
         self.result["recognized_idps"].extend(self.result["recognized_idps_passive"])
@@ -387,117 +366,3 @@ class LandscapeAnalyzer:
                     logger.info(f"Matched login request rule for integration: {integration}")
                     self.result["recognized_idps"][i]["idp_integration"] = integration
                     break # use first integration rule that matches
-
-
-    def password_field_detection(self):
-        logger.info(f"Starting password field detection for domain: {self.domain}")
-        
-        bconf = self.config["browser_config"]
-        lpcs = self.result["login_page_candidates"]
-        
-        with TmpHelper.tmp_dir() as pdir, sync_playwright() as pw:
-            context, page = PlaywrightBrowser.instance(pw, bconf, pdir)
-            
-            # Loop over login page candidates
-            for lpc_url, lpc_idxs in DetectionHelper.get_lpcs_with_idxs(lpcs):
-                logger.info(f"Starting password field detection on login page candidate: {lpc_url}")
-                
-                try:
-                    # Load login page
-                    PlaywrightHelper.navigate(page, lpc_url, bconf)
-                    PlaywrightHelper.sleep(page, 3)
-                    
-                    # Check if page is analyzable
-                    valid, error = PlaywrightHelper.get_content_analyzable(page)
-                    if not valid:
-                        logger.info(f"Login page candidate is not analyzable for password field detection: {error}")
-                        continue
-                    
-                    # Run password field detector
-                    PasswordFieldDetector(self.config, self.result).start(lpc_url, page)
-                    
-                except TimeoutError as e:
-                    logger.warning(f"Timeout during password field detection on: {lpc_url}")
-                    logger.debug(e)
-                except Error as e:
-                    logger.warning(f"Error during password field detection on: {lpc_url}")
-                    logger.debug(e)
-            
-            # Close browser
-            PlaywrightHelper.close_context(context)
-
-
-    def mfa_field_detection(self):
-        logger.info(f"Starting MFA field detection for domain: {self.domain}")
-        
-        bconf = self.config["browser_config"]
-        lpcs = self.result["login_page_candidates"]
-        
-        with TmpHelper.tmp_dir() as pdir, sync_playwright() as pw:
-            context, page = PlaywrightBrowser.instance(pw, bconf, pdir)
-            
-            # Loop over login page candidates
-            for lpc_url, lpc_idxs in DetectionHelper.get_lpcs_with_idxs(lpcs):
-                logger.info(f"Starting MFA field detection on login page candidate: {lpc_url}")
-                
-                try:
-                    # Load login page
-                    PlaywrightHelper.navigate(page, lpc_url, bconf)
-                    PlaywrightHelper.sleep(page, 3)
-                    
-                    # Check if page is analyzable
-                    valid, error = PlaywrightHelper.get_content_analyzable(page)
-                    if not valid:
-                        logger.info(f"Login page candidate is not analyzable for MFA field detection: {error}")
-                        continue
-                    
-                    # Run MFA field detector
-                    MFAFieldDetector(self.config, self.result).start(lpc_url, page)
-                    
-                except TimeoutError as e:
-                    logger.warning(f"Timeout during MFA field detection on: {lpc_url}")
-                    logger.debug(e)
-                except Error as e:
-                    logger.warning(f"Error during MFA field detection on: {lpc_url}")
-                    logger.debug(e)
-            
-            # Close browser
-            PlaywrightHelper.close_context(context)
-
-
-    def passkey_button_detection(self):
-        logger.info(f"Starting passkey button detection for domain: {self.domain}")
-        
-        bconf = self.config["browser_config"]
-        lpcs = self.result["login_page_candidates"]
-        
-        with TmpHelper.tmp_dir() as pdir, sync_playwright() as pw:
-            context, page = PlaywrightBrowser.instance(pw, bconf, pdir)
-            
-            # Loop over login page candidates
-            for lpc_url, lpc_idxs in DetectionHelper.get_lpcs_with_idxs(lpcs):
-                logger.info(f"Starting passkey button detection on login page candidate: {lpc_url}")
-                
-                try:
-                    # Load login page
-                    PlaywrightHelper.navigate(page, lpc_url, bconf)
-                    PlaywrightHelper.sleep(page, 3)
-                    
-                    # Check if page is analyzable
-                    valid, error = PlaywrightHelper.get_content_analyzable(page)
-                    if not valid:
-                        logger.info(f"Login page candidate is not analyzable for passkey button detection: {error}")
-                        continue
-                    
-                    # Run passkey button detector
-                    PasskeyButtonDetector(self.config, self.result).start(lpc_url, page)
-                    
-                except TimeoutError as e:
-                    logger.warning(f"Timeout during passkey button detection on: {lpc_url}")
-                    logger.debug(e)
-                except Error as e:
-                    logger.warning(f"Error during passkey button detection on: {lpc_url}")
-                    logger.debug(e)
-            
-            # Close browser
-            PlaywrightHelper.close_context(context)

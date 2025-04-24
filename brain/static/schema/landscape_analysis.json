@@ -679,10 +679,7 @@
                                 "GITHUB",
                                 "QQ",
                                 "SINA_WEIBO",
-                                "WECHAT",
-                                "PASSKEY",
-                                "MFA_GENERIC",
-                                "USERNAME_PASSWORD"
+                                "WECHAT"
                             ],
                             "items": {
                                 "type": "string",
@@ -697,10 +694,7 @@
                                     "GITHUB",
                                     "QQ",
                                     "SINA_WEIBO",
-                                    "WECHAT",
-                                    "PASSKEY",
-                                    "MFA_GENERIC",
-                                    "USERNAME_PASSWORD"
+                                    "WECHAT"
                                 ]
                             }
                         }
