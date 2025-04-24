@@ -15,9 +15,19 @@ class AutoConsentHelper:
 
 
     IDP_COOKIE_URLS = {
+        "APPLE": [],
+        "FACEBOOK": [],
         "GOOGLE": [
             "https://accounts.google.com"
-        ]
+        ],
+        "TWITTER_1.0": [],
+        "LINKEDIN": [],
+        "MICROSOFT": [],
+        "BAIDU": [],
+        "GITHUB": [],
+        "QQ": [],
+        "SINA_WEIBO": [],
+        "WECHAT": []
     }
 
 

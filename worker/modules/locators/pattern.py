@@ -39,8 +39,8 @@ class PatternLocator:
         self.max_matching = max_matching
         self.upper_bound = upper_bound
         self.lower_bound = lower_bound
-        self.scale_upper_bound = scale_upper_bound
-        self.scale_lower_bound = scale_lower_bound
+        self.scale_upper_bound = max(0.01, scale_upper_bound)
+        self.scale_lower_bound = max(0.01, scale_lower_bound)  # Ensure this is never less than 0.01
         self.scale_method = scale_method
         self.scale_space = scale_space
         self.scale_order = scale_order
@@ -86,13 +86,23 @@ class PatternLocator:
         for template_image in template_images:
             logger.info(f"Pattern matching template image filename: {template_image['filename']}")
 
+            # Ensure scale bounds are positive
+            lower_bound = max(0.01, self.scale_lower_bound)
+            upper_bound = max(lower_bound + 0.01, self.scale_upper_bound)
+            
             # scale space: linspace or geomspace
             if self.scale_space == "linspace":
-                scales = numpy.linspace(self.scale_lower_bound, self.scale_upper_bound, self.match_intensity)
+                scales = numpy.linspace(lower_bound, upper_bound, self.match_intensity)
             elif self.scale_space == "geomspace":
-                scales = numpy.geomspace(self.scale_lower_bound, self.scale_upper_bound, self.match_intensity)
+                scales = numpy.geomspace(lower_bound, upper_bound, self.match_intensity)
             else:
                 raise Exception(f"Unknown scale space: {self.scale_space}")
+
+            # safety check: ensure no zero or negative scales
+            scales = scales[scales > 0]
+            if len(scales) == 0:
+                logger.warning("No valid scales generated. Using default scale of 0.15.")
+                scales = numpy.array([0.15])
 
             # scale order: ascending or descending
             if self.scale_order == "ascending":
@@ -105,6 +115,11 @@ class PatternLocator:
             # loop over scale factors
             for template_image_scale in scales:
                 logger.info(f"Pattern matching template image scale: {template_image_scale}")
+                
+                # Safety check
+                if template_image_scale <= 0:
+                    logger.warning(f"Skipping invalid scale factor: {template_image_scale}")
+                    continue
 
                 # scale template image
                 template_image_scaled = imutils.resize(
@@ -176,13 +191,23 @@ class PatternLocator:
         # store all pattern matches
         pattern_matches = []
 
+        # Ensure scale bounds are positive
+        lower_bound = max(0.01, self.scale_lower_bound)
+        upper_bound = max(lower_bound + 0.01, self.scale_upper_bound)
+        
         # scale space: linspace or geomspace
         if self.scale_space == "linspace":
-            scales = numpy.linspace(self.scale_lower_bound, self.scale_upper_bound, self.match_intensity)
+            scales = numpy.linspace(lower_bound, upper_bound, self.match_intensity)
         elif self.scale_space == "geomspace":
-            scales = numpy.geomspace(self.scale_lower_bound, self.scale_upper_bound, self.match_intensity)
+            scales = numpy.geomspace(lower_bound, upper_bound, self.match_intensity)
         else:
             raise Exception(f"Unknown scale space: {self.scale_space}")
+
+        # safety check: ensure no zero or negative scales
+        scales = scales[scales > 0]
+        if len(scales) == 0:
+            logger.warning("No valid scales generated. Using default scale of 0.15.")
+            scales = numpy.array([0.15])
 
         # scale order: ascending or descending
         if self.scale_order == "ascending":
@@ -195,6 +220,11 @@ class PatternLocator:
         # loop over scale factors
         for screenshot_image_scale in scales:
             logger.info(f"Pattern matching screenshot image scale: {screenshot_image_scale}")
+            
+            # Safety check
+            if screenshot_image_scale <= 0:
+                logger.warning(f"Skipping invalid scale factor: {screenshot_image_scale}")
+                continue
 
             # scale input image
             input_image_scaled = imutils.resize(
@@ -244,7 +274,7 @@ class PatternLocator:
 
                 # if pattern matching result exceeds max matching, skip further pattern matching
                 if max_val > self.max_matching:
-                    logger.info(f"Pattern matching result ({pattern_matches['max_val']}) is above max matching ({self.max_matching})")
+                    logger.info(f"Pattern matching result ({max_val}) is above max matching ({self.max_matching})")
 
                     # sort pattern matches by max_val (accuracy of pattern match)
                     pattern_matches = sorted(pattern_matches, key=lambda x: x["max_val"], reverse=True)
