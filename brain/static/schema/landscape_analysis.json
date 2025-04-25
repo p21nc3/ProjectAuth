@@ -669,7 +669,7 @@
                             "uniqueItems": true,
                             "title": "In-Scope IdPs",
                             "default": [
-                                "PASSKEY",
+                                "PASSKEY BUTTON",
                                 "MFA_GENERIC",
                                 "PASSWORD_BASED",
                                 "APPLE",
@@ -687,7 +687,7 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
-                                    "PASSKEY",
+                                    "PASSKEY BUTTON",
                                     "MFA_GENERIC",
                                     "PASSWORD_BASED",
                                     "APPLE",
@@ -724,10 +724,10 @@
                                 "REQUEST",
                                 "NAVIGATOR_CREDENTIALS",
                                 "LASTPASS_ICON",
-                                "PASSWORD-FORM",
-                                "MFA-MULTIPHASE",
                                 "PASSKEY-KEYWORD",
-                                "PASSKEY-API"
+                                "PASSKEY-API",
+                                "PASSWORD-FORM",
+                                "MFA-MULTIPHASE"
                             ],
                             "title": "In-Scope Recognition Strategies",
                             "items": {
@@ -742,10 +742,10 @@
                                     "REQUEST",
                                     "NAVIGATOR_CREDENTIALS",
                                     "LASTPASS_ICON",
-                                    "PASSWORD-FORM",
-                                    "MFA-MULTIPHASE",
                                     "PASSKEY-KEYWORD",
-                                    "PASSKEY-API"
+                                    "PASSKEY-API",
+                                    "PASSWORD-FORM",
+                                    "MFA-MULTIPHASE"
                                 ]
                             }
                         },

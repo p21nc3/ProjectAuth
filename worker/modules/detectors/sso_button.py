@@ -171,16 +171,6 @@ class SSOButtonDetector:
                                 if "sso_button_detection_logo_duration_seconds" not in self.result["timings"]:
                                     self.result["timings"]["sso_button_detection_logo_duration_seconds"] = 0
                                 self.result["timings"]["sso_button_detection_logo_duration_seconds"] += time.time() - t
-                            elif rs == "PASSWORD-FORM":
-                                t = time.time()
-                                password_detector = PasswordDetector(self.result, page)
-                                sso, sso_info = password_detector.detect_password_form(lpc)
-                                self.result["timings"]["sso_button_detection_password_form_duration_seconds"] += time.time() - t
-                            elif rs == "MFA-MULTIPHASE":
-                                t = time.time()
-                                mfa_detector = MFADetector(self.result, page)
-                                sso, sso_info = mfa_detector.detect_mfa(lpc)
-                                self.result["timings"]["sso_button_detection_mfa_duration_seconds"] += time.time() - t
                             elif rs == "PASSKEY-KEYWORD":
                                 t = time.time()
                                 passkey_detector = PasskeyDetector(self.result, page)
@@ -191,7 +181,17 @@ class SSOButtonDetector:
                                 navcred_detector = NavigatorCredentialsDetector(self.result, page)
                                 sso, sso_info = navcred_detector.detect_passkey_api(lpc)
                                 self.result["timings"]["sso_button_detection_passkey_api_duration_seconds"] += time.time() - t
-
+                            elif rs == "PASSWORD-FORM":
+                                t = time.time()
+                                password_detector = PasswordDetector(self.result, page)
+                                sso, sso_info = password_detector.detect_password_form(lpc)
+                                self.result["timings"]["sso_button_detection_password_form_duration_seconds"] += time.time() - t
+                            elif rs == "MFA-MULTIPHASE":
+                                t = time.time()
+                                mfa_detector = MFADetector(self.result, page)
+                                sso, sso_info = mfa_detector.detect_mfa(lpc)
+                                self.result["timings"]["sso_button_detection_mfa_duration_seconds"] += time.time() - t
+                            
                         # close browser to save har
                         PlaywrightHelper.close_context(context)
 

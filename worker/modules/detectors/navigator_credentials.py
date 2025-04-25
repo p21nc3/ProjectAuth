@@ -59,6 +59,14 @@ class NavigatorCredentialsDetector:
         """
         logger.info(f"Checking for Passkey WebAuthn API usage on: {url}")
         
+        # Check if this URL already has a passkey API detection to avoid duplicates
+        for idp in self.result.get("recognized_idps", []):
+            if (idp.get("idp_name") == "PASSKEY BUTTON" and 
+                idp.get("login_page_url") == url and 
+                idp.get("detection_method") == "PASSKEY-API"):
+                logger.info(f"Passkey API already detected for {url}, skipping")
+                return False, None
+        
         # Check if any recognized_navcreds contains WebAuthn related calls
         webauthn_functions = [
             "navigator.credentials.create",
@@ -74,7 +82,7 @@ class NavigatorCredentialsDetector:
                     logger.info(f"WebAuthn API detected: {navcred['function_name']}")
                     
                     passkey_info = {
-                        "idp_name": "PASSKEY",
+                        "idp_name": "PASSKEY BUTTON",
                         "idp_sdk": "WEBAUTHN",
                         "idp_integration": "CUSTOM",
                         "idp_frame": "SAME_WINDOW",
