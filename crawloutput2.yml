@@ -1,0 +1,1238 @@
+{
+    _id: ObjectId('680afa5bc306a556b1880253'),
+    scan_config: {
+        scan_id: 'f7712b23-95b3-407e-8786-da491e6dbfcc',
+        scan_type: 'single',
+        domain: 'github.com'
+    },
+    landscape_analysis_config: {
+        browser_config: {
+            name: 'CHROMIUM',
+            width: 1920,
+            height: 1080,
+            user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+            extensions: [
+                'chromium/isdcac-v1.1.1'
+            ],
+            scripts: [],
+            headless: false,
+            locale: 'en-US',
+            wait_for_networkidle: true,
+            timeout_default: 30,
+            timeout_navigation: 30,
+            timeout_networkidle: 5,
+            sleep_after_onload: 0,
+            sleep_after_networkidle: 2
+        },
+        login_page_config: {
+            login_page_strategy_scope: [
+                'PATHS',
+                'CRAWLING',
+                'METASEARCH',
+                'SITEMAP',
+                'HOMEPAGE'
+            ],
+            login_page_url_regexes: [
+                {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                {
+                    regex: '/(sso|oauth|openid|identity)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(accounts?|profiles?|users?)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(register|registration)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(manage|managing|anmelden|portal|dashboard)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 97
+                },
+                {
+                    regex: '/connect(ing|ion|ed)?(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 97
+                },
+                {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)',
+                    priority: 89
+                },
+                {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)',
+                    priority: 89
+                },
+                {
+                    regex: '/(sso|oauth|openid|identity)',
+                    priority: 88
+                },
+                {
+                    regex: '/(accounts?|profiles?|users?)',
+                    priority: 88
+                },
+                {
+                    regex: '/(register|registration)',
+                    priority: 88
+                },
+                {
+                    regex: '/(manage|managing|anmelden|portal|dashboard)',
+                    priority: 87
+                },
+                {
+                    regex: '/connect(ing|ion|ed)?',
+                    priority: 87
+                },
+                {
+                    regex: '[^a-z](show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)[^a-z]',
+                    priority: 79
+                },
+                {
+                    regex: '[^a-z](auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)[^a-z]',
+                    priority: 79
+                },
+                {
+                    regex: '[^a-z](sso|oauth|openid|identity)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](accounts?|profiles?|users?)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](register|registration)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](manage|managing|anmelden|portal|dashboard)[^a-z]',
+                    priority: 77
+                },
+                {
+                    regex: '[^a-z]connect(ing|ion|ed)?[^a-z]',
+                    priority: 77
+                }
+            ],
+            login_page_element_keywords: [
+                'login',
+                'log in',
+                'log-in',
+                'log_in',
+                'logon',
+                'log on',
+                'log-on',
+                'log_on',
+                'signin',
+                'sign in',
+                'sign-in',
+                'sign_in',
+                'signup',
+                'sign up',
+                'sign-up',
+                'sign_up',
+                'signon',
+                'sign on',
+                'sign-on',
+                'sign_on',
+                'register',
+                'registration',
+                'anmelden',
+                'registrieren'
+            ],
+            manual_strategy_config: {
+                login_page_candidates: []
+            },
+            paths_strategy_config: {
+                paths: [
+                    '/login',
+                    '/log-in',
+                    '/log_in',
+                    '/signin',
+                    '/sign-in',
+                    '/sign_in',
+                    '/account',
+                    '/account/login',
+                    '/account/log-in',
+                    '/account/log_in',
+                    '/account/signin',
+                    '/account/sign-in',
+                    '/account/sign_in',
+                    '/accounts',
+                    '/accounts/login',
+                    '/accounts/signin',
+                    '/profile',
+                    '/profile/login',
+                    '/profile/signin',
+                    '/user/login',
+                    '/user/signin',
+                    '/users/login',
+                    '/users/signin',
+                    '/users/connect',
+                    '/auth',
+                    '/auth/login',
+                    '/auth/signin',
+                    '/m/login',
+                    '/m/signin',
+                    '/registration',
+                    '/registration/login',
+                    '/registration/signin',
+                    '/.well-known/change-password'
+                ],
+                subdomains: [
+                    'login',
+                    'signin',
+                    'account',
+                    'profile',
+                    'auth'
+                ]
+            },
+            crawling_strategy_config: {
+                max_anchor_candidates: 1,
+                max_element_candidates: 1,
+                max_elements_to_click: 10
+            },
+            sitemap_strategy_config: {
+                max_candidates: 1,
+                max_recursion_level: 0,
+                max_sitemap_size: 50000000,
+                timeout_fetch_sitemap: 10
+            },
+            robots_strategy_config: {
+                max_candidates: 1,
+                timeout_fetch_robots: 10
+            },
+            metasearch_strategy_config: {
+                search_term: '%s login',
+                search_engines: [
+                    'BING',
+                    'BRAVE',
+                    'DUCKDUCKGO',
+                    'GOOGLE',
+                    'MOJEEK',
+                    'QWANT',
+                    'STARTPAGE',
+                    'WIBY',
+                    'YAHOO',
+                    'SEZNAM',
+                    'GOO',
+                    'NAVER',
+                    'PETALSEARCH',
+                    'YEP'
+                ],
+                search_results_number: 3
+            }
+        },
+        idp_config: {
+            idp_scope: [
+                'PASSKEY',
+                'MFA_GENERIC',
+                'PASSWORD_BASED',
+                'APPLE',
+                'FACEBOOK',
+                'GOOGLE',
+                'TWITTER_1.0',
+                'LINKEDIN',
+                'MICROSOFT',
+                'BAIDU',
+                'GITHUB',
+                'QQ',
+                'SINA_WEIBO',
+                'WECHAT'
+            ]
+        },
+        recognition_strategy_config: {
+            recognition_strategy_scope: [
+                'KEYWORD-CSS',
+                'LOGO',
+                'METADATA',
+                'REQUEST',
+                'NAVIGATOR_CREDENTIALS',
+                'LASTPASS_ICON',
+                'PASSWORD-FORM',
+                'MFA-MULTIPHASE',
+                'PASSKEY-KEYWORD',
+                'PASSKEY-API'
+            ],
+            recognition_mode: 'FAST'
+        },
+        keyword_recognition_config: {
+            keywords: [
+                'login with %s',
+                'log in with %s',
+                'logon with %s',
+                'log on with %s',
+                'signin with %s',
+                'sign in with %s',
+                'signup with %s',
+                'sign up with %s',
+                'signon with %s',
+                'sign on with %s',
+                'continue with %s',
+                'connect with %s',
+                'login using %s',
+                'log in using %s',
+                'logon using %s',
+                'log on using %s',
+                'signin using %s',
+                'sign in using %s',
+                'signup using %s',
+                'sign up using %s',
+                'signon using %s',
+                'sign on using %s',
+                'continue using %s',
+                'connect using %s',
+                'use %s',
+                'mit %s anmelden',
+                'mit %s einloggen',
+                'mit %s registrieren',
+                'mit %s fortfahren',
+                'mit %s fortsetzen',
+                'mit %s verbinden',
+                '%s verwenden zum anmelden',
+                '%s verwenden zum einloggen',
+                '%s verwenden zum registrieren',
+                '%s verwenden zum fortfahren',
+                '%s verwenden zum verbinden',
+                '%s verwenden',
+                'weiter mit %s',
+                'anmelden mit %s',
+                'über %s fortfahren',
+                'masuk dengan %s',
+                'entrar com %s',
+                'continuar com o %s',
+                'daftar/masuk lewat %s',
+                '使用 %s 登录'
+            ],
+            xpath: [
+                '//*'
+            ],
+            max_elements_to_click: 3
+        },
+        logo_recognition_config: {
+            logo_size: '100x100',
+            max_matching: 0.9,
+            upper_bound: 0.8,
+            lower_bound: 0.7,
+            scale_upper_bound: 0.5,
+            scale_lower_bound: 0.12,
+            scale_method: 'scale_template',
+            scale_space: 'linspace',
+            scale_order: 'descending',
+            match_intensity: 10,
+            match_algorithm: 5,
+            max_elements_to_click: 3
+        },
+        artifacts_config: {
+            store_login_page_candidate_screenshot: true,
+            store_sso_button_detection_screenshot: true,
+            store_idp_screenshot: true,
+            store_idp_har: true,
+            store_login_page_analysis_har: false,
+            store_sitemap: false,
+            store_robots: false
+        }
+    },
+    task_config: {
+        task_id: '2d220640-eb8a-4344-8f24-7f33e6150c67',
+        task_state: 'RESPONSE_RECEIVED',
+        task_timestamp_request_sent: 1745549008.9335988,
+        task_timestamp_request_received: 1745549009.544068,
+        task_timestamp_response_sent: 1745549908.0371156,
+        task_timestamp_response_received: 1745549911.3222575
+    },
+    domain: 'github.com',
+    landscape_analysis_result: {
+        resolved: {
+            reachable: true,
+            domain: 'github.com',
+            url: 'https://github.com/'
+        },
+        timings: {
+            resolve_duration_seconds: 18.468273162841797,
+            login_page_detection_paths_duration_seconds: 20.101713180541992,
+            login_page_detection_crawling_duration_seconds: 130.10554838180542,
+            login_page_detection_metasearch_duration_seconds: 5.131223440170288,
+            login_page_detection_sitemap_duration_seconds: 25.84396529197693,
+            login_page_detection_homepage_duration_seconds: 0.0018281936645507812,
+            login_page_detection_duration_seconds: 181.18508458137512,
+            lastpass_icon_detection_duration_seconds: 0.08864951133728027,
+            login_page_analysis_duration_seconds: 114.5309226512909,
+            sso_button_detection_password_form_duration_seconds: 4.173542022705078,
+            sso_button_detection_mfa_duration_seconds: 3.722677230834961,
+            sso_button_detection_passkey_button_duration_seconds: 0.4305241107940674,
+            sso_button_detection_passkey_api_duration_seconds: 0,
+            sso_button_detection_keyword_css_duration_seconds: 270.60917711257935,
+            sso_button_detection_logo_duration_seconds: 130.83450841903687,
+            sso_button_detection_duration_seconds: 579.4824998378754,
+            sdk_detection_duration_seconds: 0.0025224685668945312,
+            metadata_detection_duration_seconds: 3.3241755962371826,
+            total_duration_seconds: 896.9937188625336
+        },
+        login_page_candidates: [
+            {
+                login_page_candidate: 'https://github.com/login',
+                login_page_strategy: 'PATHS',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'github.com',
+                    url: 'https://github.com/login',
+                    title: 'Sign in to GitHub · GitHub'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/github.com/15ba0b81-6e9d-44c1-b8a5-550ce5ca5da2.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=/&source=header-home',
+                login_page_strategy: 'CRAWLING',
+                login_page_locator_mode: 'ANCHOR',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                login_page_info: {
+                    x: 1799.515625,
+                    y: 20,
+                    width: 73.484375,
+                    height: 32,
+                    inner_text: 'Sign up',
+                    outer_html: '<a href="/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home" class="HeaderMenu-link HeaderMenu-link--sign-up HeaderMenu-button flex-shrink-0 d-flex d-lg-inline-flex no-underline border color-border-default rounded px-2 py-1" data-hydro-click="{"event_type":"authentication.click","payload":{"location_in_page":"site header menu","repository_id":null,"auth_type":"SIGN_UP","originating_url":"https://github.com/","user_id":null}}" data-hydro-click-hmac="1ac0bd316eb4ecff0fd1f338bc397cea8b5025ce78fffb7ade6ffdd600360286" data-analytics-event="{"category":"Sign up","action":"click to sign up for account","label":"ref_page:/;ref_cta:Sign up;ref_loc:header logged out"}">\n                Sign up\n              </a>',
+                    href_attribute: '/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home',
+                    href_absolute: 'https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home'
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'github.com',
+                    url: 'https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=/&source=header-home',
+                    title: 'Sign up to GitHub · GitHub'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/github.com/ceb5176b-669c-4cc0-b3de-338557918a8a.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://github.com/login',
+                login_page_strategy: 'CRAWLING',
+                login_page_locator_mode: 'ELEMENT',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                login_page_info: {
+                    x: 1720.703125,
+                    y: 20,
+                    width: 66.8125,
+                    height: 32,
+                    inner_text: 'Sign in',
+                    outer_html: '<a href="/login" class="HeaderMenu-link HeaderMenu-link--sign-in HeaderMenu-button flex-shrink-0 no-underline d-none d-lg-inline-flex border border-lg-0 rounded rounded-lg-0 px-2 py-1" style="margin-left: 12px;" data-hydro-click="{"event_type":"authentication.click","payload":{"location_in_page":"site header menu","repository_id":null,"auth_type":"SIGN_UP","originating_url":"https://github.com/","user_id":null}}" data-hydro-click-hmac="1ac0bd316eb4ecff0fd1f338bc397cea8b5025ce78fffb7ade6ffdd600360286" data-analytics-event="{"category":"Marketing nav","action":"click to go to homepage","label":"ref_page:Marketing;ref_cta:Sign in;ref_loc:Header"}">\n                Sign in\n              </a>',
+                    login_page_frame: 'TOPMOST',
+                    element_tree: [
+                        'A',
+                        'DIV',
+                        'DIV',
+                        'DIV',
+                        'DIV',
+                        'HEADER',
+                        'DIV',
+                        'DIV',
+                        'DIV',
+                        'DIV',
+                        'DIV',
+                        'SECTION',
+                        'DIV',
+                        'DIV',
+                        'DIV',
+                        'REACT-APP',
+                        'MAIN',
+                        'DIV',
+                        'DIV',
+                        'BODY',
+                        'HTML'
+                    ]
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'github.com',
+                    url: 'https://github.com/login',
+                    title: 'Sign in to GitHub · GitHub'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/github.com/6973eaff-030b-409c-915b-5390712a9ec1.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://github.com/login',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                login_page_info: {
+                    result_hit: 1,
+                    result_engines: [
+                        'SEZNAM',
+                        'BRAVE',
+                        'YAHOO',
+                        'MOJEEK'
+                    ],
+                    result_raw: {
+                        url: 'https://github.com/login',
+                        title: 'Sign in to GitHub · GitHub',
+                        content: 'Sign in with a passkey. New to GitHub? Create an account. Terms. Privacy. Docs. Contact GitHub Support. You can’t perform that action at this time. GitHub is where people build software. More than 150 million people use GitHub to discover, fork, and contribute to over 420 million projects.',
+                        engine: 'seznam',
+                        parsed_url: [
+                            'https',
+                            'github.com',
+                            '/login',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'seznam',
+                            'brave',
+                            'yahoo',
+                            'mojeek'
+                        ],
+                        positions: [
+                            1,
+                            1,
+                            1,
+                            1
+                        ],
+                        img_src: '',
+                        score: 16,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'github.com',
+                    url: 'https://github.com/login',
+                    title: 'Sign in to GitHub · GitHub'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/github.com/72086a5a-adca-47bd-b90d-a38c0dbc436f.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://github.com/',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                login_page_info: {
+                    result_hit: 2,
+                    result_engines: [
+                        'SEZNAM',
+                        'BRAVE',
+                        'MOJEEK',
+                        'YAHOO',
+                        'BING'
+                    ],
+                    result_raw: {
+                        url: 'https://github.com/',
+                        title: 'GitHub · Build and ship software on a single, collaborative…',
+                        content: 'Millions of developers and businesses call GitHub home. Whether you’re scaling your development process or just learning how to code, GitHub is where you belong. Join the world’s most widely adopted AI-powered developer platform to build the technologies that redefine what’s possible.',
+                        engine: 'seznam',
+                        parsed_url: [
+                            'https',
+                            'github.com',
+                            '/',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'seznam',
+                            'brave',
+                            'mojeek',
+                            'yahoo',
+                            'bing'
+                        ],
+                        positions: [
+                            2,
+                            2,
+                            5,
+                            3,
+                            1
+                        ],
+                        img_src: '',
+                        score: 12.666666666666668,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'github.com',
+                    url: 'https://github.com/',
+                    title: 'GitHub · Build and ship software on a single, collaborative platform · GitHub'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/github.com/5851c630-2df2-493b-a2ba-17fced231296.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://docs.github.com/en/authentication/authenticating-with-a-passkey/signing-in-with-a-passkey',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                login_page_info: {
+                    result_hit: 3,
+                    result_engines: [
+                        'BRAVE',
+                        'YAHOO',
+                        'MOJEEK'
+                    ],
+                    result_raw: {
+                        url: 'https://docs.github.com/en/authentication/authenticating-with-a-passkey/signing-in-with-a-passkey',
+                        title: 'Signing in with a passkey - GitHub Docs',
+                        content: 'You can use a passkey to sign in safely and easily to GitHub in your browser, without requiring a password and two-factor authentication. You can also sign in using a passkey on a nearby device.',
+                        engine: 'yahoo',
+                        parsed_url: [
+                            'https',
+                            'docs.github.com',
+                            '/en/authentication/authenticating-with-a-passkey/signing-in-with-a-passkey',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'brave',
+                            'yahoo',
+                            'mojeek'
+                        ],
+                        positions: [
+                            4,
+                            7,
+                            5
+                        ],
+                        img_src: '',
+                        score: 1.7785714285714285,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'docs.github.com',
+                    url: 'https://docs.github.com/en/authentication/authenticating-with-a-passkey/signing-in-with-a-passkey',
+                    title: 'Signing in with a passkey - GitHub Docs'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/github.com/3376da84-f368-4835-ab6c-8909aa60d591.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://github.com/',
+                login_page_strategy: 'HOMEPAGE',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'github.com',
+                    url: 'https://github.com/',
+                    title: 'GitHub · Build and ship software on a single, collaborative platform · GitHub'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/github.com/c3e7e8b9-cd9c-46be-bc8e-b59e42df6983.png',
+                        extension: 'png'
+                    }
+                }
+            }
+        ],
+        recognized_idps: [
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/c8a0eda8-ee85-45a5-ba75-bc46e0b3ea97.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/4fa65339-cdf2-4da4-ab1a-53f1372a5bbe.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/3c17b886-191e-4b5b-8634-3d8388d833c9.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/99a37c31-0df6-4ce6-8e3e-7fd3ae6638dc.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/9b6e76f9-fdd7-4a30-a520-749cde0e23aa.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/62e05cdf-5e2b-4076-99ff-28a4c24379ee.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/531b0ad7-2f1d-4567-b16d-8ad775cb2001.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/1473778d-2a86-421e-933c-ed26fb7c26d1.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/1f3affdf-bc17-4c0b-8c53-8d2852608e4e.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/8c097853-803a-4168-a481-b07e7ea3a1f5.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/5bf7d4fb-ca1e-4d04-b939-292186304d76.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/304624d1-f420-4de6-ae13-f7a85b7ade79.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/1a197d58-b17f-4ec9-b5d8-07c979dcde6b.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSKEY',
+                idp_sdk: 'WEBAUTHN',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://github.com/login',
+                element_validity: 'HIGH',
+                detection_method: 'PASSKEY-BUTTON',
+                passkey_type: 'WEBAUTHN',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/github.com/193b14c4-022a-44c4-ba99-a1ad0db0ed0f.har',
+                        extension: 'har'
+                    }
+                }
+            }
+        ],
+        recognized_navcreds: [],
+        recognized_lastpass_icons: [
+            {
+                login_page_url: 'https://github.com/login',
+                recognition_strategy: 'LASTPASS_ICON',
+                lastpass_icon_elements: [
+                    {
+                        element_coordinates_x: 833,
+                        element_coordinates_y: 205,
+                        element_width: 254,
+                        element_height: 32,
+                        element_inner_text: '',
+                        element_outer_html: '<input type="text" name="login" id="login_field" class="form-control input-block js-login-field" autocapitalize="off" autocorrect="off" autocomplete="username" autofocus="autofocus" required="required" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'FORM',
+                            'DIV',
+                            'DIV',
+                            'MAIN',
+                            'DIV',
+                            'DIV',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/github.com/ae78d5e7-c66a-4942-aa2f-34524d7b10fb.json',
+                                extension: 'json'
+                            }
+                        }
+                    },
+                    {
+                        element_coordinates_x: 833,
+                        element_coordinates_y: 282,
+                        element_width: 254,
+                        element_height: 32,
+                        element_inner_text: '',
+                        element_outer_html: '<input type="password" name="password" id="password" class="form-control form-control input-block js-password-field" autocomplete="current-password" required="required" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'DIV',
+                            'FORM',
+                            'DIV',
+                            'DIV',
+                            'MAIN',
+                            'DIV',
+                            'DIV',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/github.com/a3db2f9f-38c1-4538-a367-1758ebc9cb74.json',
+                                extension: 'json'
+                            }
+                        }
+                    }
+                ],
+                lastpass_icon_frame: 'TOPMOST',
+                lastpass_icon_frame_index: 0,
+                lastpass_icon_frame_url: 'https://github.com/login',
+                lastpass_icon_frame_name: '',
+                lastpass_icon_frame_title: 'Sign in to GitHub · GitHub',
+                lastpass_icon_frames_length: 1
+            },
+            {
+                login_page_url: 'https://github.com/',
+                recognition_strategy: 'LASTPASS_ICON',
+                lastpass_icon_elements: [
+                    {
+                        element_coordinates_x: 609.203125,
+                        element_coordinates_y: 401.59375,
+                        element_width: 260,
+                        element_height: 46,
+                        element_inner_text: '',
+                        element_outer_html: '<input type="email" class="Primer_Brand__TextInput-module__TextInput___EtKj3 TextInput Primer_Brand__TextInput-module__TextInput--medium___kJrew CtaFormControl-input" placeholder="you@domain.com" aria-invalid="false" id="hero_user_email" autocomplete="email" spellcheck="false" name="user_email" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'SPAN',
+                            'LABEL',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'FORM',
+                            'DIV',
+                            'DIV',
+                            'CANVAS',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'REACT-APP',
+                            'MAIN',
+                            'DIV',
+                            'DIV',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/github.com/edd01563-b9f2-4464-aa1f-0d04a43a23b1.json',
+                                extension: 'json'
+                            }
+                        }
+                    },
+                    {
+                        element_coordinates_x: 609.203125,
+                        element_coordinates_y: 10436.78125,
+                        element_width: 260,
+                        element_height: 46,
+                        element_inner_text: '',
+                        element_outer_html: '<input type="email" class="Primer_Brand__TextInput-module__TextInput___EtKj3 TextInput Primer_Brand__TextInput-module__TextInput--medium___kJrew CtaFormControl-input" placeholder="you@domain.com" aria-invalid="false" id="bottom_cta_section_user_email" autocomplete="email" spellcheck="false" name="user_email" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/github.com/bb56b403-a788-4f52-a6de-774e0d9b9607.json',
+                                extension: 'json'
+                            }
+                        }
+                    }
+                ],
+                lastpass_icon_frame: 'TOPMOST',
+                lastpass_icon_frame_index: 0,
+                lastpass_icon_frame_url: 'https://github.com/',
+                lastpass_icon_frame_name: '',
+                lastpass_icon_frame_title: 'GitHub · Build and ship software on a single, collaborative platform · GitHub',
+                lastpass_icon_frames_length: 1
+            },
+            {
+                login_page_url: 'https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=/&source=header-home',
+                recognition_strategy: 'LASTPASS_ICON',
+                lastpass_icon_elements: [
+                    {
+                        element_coordinates_x: 1214,
+                        element_coordinates_y: 167,
+                        element_width: 452,
+                        element_height: 39,
+                        element_inner_text: '',
+                        element_outer_html: '<input id="email" class="width-full js-octocaptcha-data-field js-auto-check-input js-nux-input signup-form-fields__input" required="" placeholder="Email" autocomplete="off" dir="auto" data-target="text-suggester.input" data-octocaptcha-field-name="email_address" aria-describedby="email-err" type="email" name="user[email]" spellcheck="false" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'AUTO-CHECK',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'FORM',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'MAIN',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/github.com/4a7177c6-6b03-465f-8a8b-4707da0dfc35.json',
+                                extension: 'json'
+                            }
+                        }
+                    },
+                    {
+                        element_coordinates_x: 1214,
+                        element_coordinates_y: 366,
+                        element_width: 452,
+                        element_height: 38,
+                        element_inner_text: '',
+                        element_outer_html: '<input id="login" class="form-control width-full js-octocaptcha-data-field js-auto-check-input js-nux-input signup-form-fields__input" required="" placeholder="Username" autocapitalize="off" autocomplete="off" aria-describedby="username-helper" autocorrect="off" dir="auto" data-octocaptcha-field-name="login" type="text" name="user[login]" spellcheck="false" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'AUTO-CHECK',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'FORM',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'MAIN',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/github.com/f52af774-fa32-416d-b55d-3c3ced55754e.json',
+                                extension: 'json'
+                            }
+                        }
+                    }
+                ],
+                lastpass_icon_frame: 'TOPMOST',
+                lastpass_icon_frame_index: 0,
+                lastpass_icon_frame_url: 'https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=/&source=header-home',
+                lastpass_icon_frame_name: '',
+                lastpass_icon_frame_title: 'Sign up to GitHub · GitHub',
+                lastpass_icon_frames_length: 2
+            }
+        ],
+        metadata_data: {
+            type: 'reference',
+            data: {
+                bucket_name: 'metadata-data',
+                object_name: '/github.com/7bca1fc7-5676-491f-9d1a-2e89b59ef48b.json',
+                extension: 'json'
+            }
+        },
+        metadata_available: {
+            robots_txt: true,
+            security_txt: true,
+            webfinger: false,
+            openid_configuration: false,
+            oauth_authorization_server: false,
+            oauth_client: false,
+            web_identity: false,
+            browserid: false,
+            jwks: false,
+            uma2_configuration: false,
+            fido_configuration: false,
+            fido_2fa_configuration: false,
+            fido2_configuration: false,
+            apple_app_site_association: false,
+            assetlinks: true,
+            passkey: true,
+            webauthn_api: false,
+            lastpass: false
+        }
+    }
+}

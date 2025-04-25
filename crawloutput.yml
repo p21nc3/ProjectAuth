@@ -1,0 +1,1280 @@
+{
+    _id: ObjectId('680af26bc306a556b1880252'),
+    scan_config: {
+        scan_id: '1fc990c0-2cc8-4b33-8c97-30300962fdeb',
+        scan_type: 'single',
+        domain: 'adobe.com'
+    },
+    landscape_analysis_config: {
+        browser_config: {
+            name: 'CHROMIUM',
+            width: 1920,
+            height: 1080,
+            user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+            extensions: [
+                'chromium/isdcac-v1.1.1'
+            ],
+            scripts: [],
+            headless: false,
+            locale: 'en-GB',
+            wait_for_networkidle: true,
+            timeout_default: 30,
+            timeout_navigation: 30,
+            timeout_networkidle: 5,
+            sleep_after_onload: 0,
+            sleep_after_networkidle: 2
+        },
+        login_page_config: {
+            login_page_strategy_scope: [
+                'PATHS',
+                'CRAWLING',
+                'METASEARCH',
+                'SITEMAP',
+                'HOMEPAGE'
+            ],
+            login_page_url_regexes: [
+                {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                {
+                    regex: '/(sso|oauth|openid|identity)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(accounts?|profiles?|users?)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(register|registration)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(manage|managing|anmelden|portal|dashboard)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 97
+                },
+                {
+                    regex: '/connect(ing|ion|ed)?(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 97
+                },
+                {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)',
+                    priority: 89
+                },
+                {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)',
+                    priority: 89
+                },
+                {
+                    regex: '/(sso|oauth|openid|identity)',
+                    priority: 88
+                },
+                {
+                    regex: '/(accounts?|profiles?|users?)',
+                    priority: 88
+                },
+                {
+                    regex: '/(register|registration)',
+                    priority: 88
+                },
+                {
+                    regex: '/(manage|managing|anmelden|portal|dashboard)',
+                    priority: 87
+                },
+                {
+                    regex: '/connect(ing|ion|ed)?',
+                    priority: 87
+                },
+                {
+                    regex: '[^a-z](show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)[^a-z]',
+                    priority: 79
+                },
+                {
+                    regex: '[^a-z](auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)[^a-z]',
+                    priority: 79
+                },
+                {
+                    regex: '[^a-z](sso|oauth|openid|identity)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](accounts?|profiles?|users?)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](register|registration)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](manage|managing|anmelden|portal|dashboard)[^a-z]',
+                    priority: 77
+                },
+                {
+                    regex: '[^a-z]connect(ing|ion|ed)?[^a-z]',
+                    priority: 77
+                }
+            ],
+            login_page_element_keywords: [
+                'login',
+                'log in',
+                'log-in',
+                'log_in',
+                'logon',
+                'log on',
+                'log-on',
+                'log_on',
+                'signin',
+                'sign in',
+                'sign-in',
+                'sign_in',
+                'signup',
+                'sign up',
+                'sign-up',
+                'sign_up',
+                'signon',
+                'sign on',
+                'sign-on',
+                'sign_on',
+                'register',
+                'registration',
+                'anmelden',
+                'registrieren'
+            ],
+            manual_strategy_config: {
+                login_page_candidates: []
+            },
+            paths_strategy_config: {
+                paths: [
+                    '/login',
+                    '/log-in',
+                    '/log_in',
+                    '/signin',
+                    '/sign-in',
+                    '/sign_in',
+                    '/account',
+                    '/account/login',
+                    '/account/log-in',
+                    '/account/log_in',
+                    '/account/signin',
+                    '/account/sign-in',
+                    '/account/sign_in',
+                    '/accounts',
+                    '/accounts/login',
+                    '/accounts/signin',
+                    '/profile',
+                    '/profile/login',
+                    '/profile/signin',
+                    '/user/login',
+                    '/user/signin',
+                    '/users/login',
+                    '/users/signin',
+                    '/users/connect',
+                    '/auth',
+                    '/auth/login',
+                    '/auth/signin',
+                    '/m/login',
+                    '/m/signin',
+                    '/registration',
+                    '/registration/login',
+                    '/registration/signin',
+                    '/.well-known/change-password'
+                ],
+                subdomains: [
+                    'login',
+                    'signin',
+                    'account',
+                    'profile',
+                    'auth'
+                ]
+            },
+            crawling_strategy_config: {
+                max_anchor_candidates: 1,
+                max_element_candidates: 1,
+                max_elements_to_click: 10
+            },
+            sitemap_strategy_config: {
+                max_candidates: 1,
+                max_recursion_level: 0,
+                max_sitemap_size: 50000000,
+                timeout_fetch_sitemap: 10
+            },
+            robots_strategy_config: {
+                max_candidates: 1,
+                timeout_fetch_robots: 10
+            },
+            metasearch_strategy_config: {
+                search_term: '%s login',
+                search_engines: [
+                    'BING',
+                    'BRAVE',
+                    'DUCKDUCKGO',
+                    'GOOGLE',
+                    'MOJEEK',
+                    'QWANT',
+                    'STARTPAGE',
+                    'WIBY',
+                    'YAHOO',
+                    'SEZNAM',
+                    'GOO',
+                    'NAVER',
+                    'PETALSEARCH',
+                    'YEP'
+                ],
+                search_results_number: 3
+            }
+        },
+        idp_config: {
+            idp_scope: [
+                'PASSKEY',
+                'MFA_GENERIC',
+                'PASSWORD_BASED',
+                'APPLE',
+                'FACEBOOK',
+                'GOOGLE',
+                'TWITTER_1.0',
+                'LINKEDIN',
+                'MICROSOFT',
+                'BAIDU',
+                'GITHUB',
+                'QQ',
+                'SINA_WEIBO',
+                'WECHAT'
+            ]
+        },
+        recognition_strategy_config: {
+            recognition_strategy_scope: [
+                'KEYWORD-CSS',
+                'LOGO',
+                'METADATA',
+                'REQUEST',
+                'NAVIGATOR_CREDENTIALS',
+                'LASTPASS_ICON',
+                'PASSWORD-FORM',
+                'MFA-MULTIPHASE',
+                'PASSKEY-KEYWORD',
+                'PASSKEY-API'
+            ],
+            recognition_mode: 'FAST'
+        },
+        keyword_recognition_config: {
+            keywords: [
+                'login with %s',
+                'log in with %s',
+                'logon with %s',
+                'log on with %s',
+                'signin with %s',
+                'sign in with %s',
+                'signup with %s',
+                'sign up with %s',
+                'signon with %s',
+                'sign on with %s',
+                'continue with %s',
+                'connect with %s',
+                'login using %s',
+                'log in using %s',
+                'logon using %s',
+                'log on using %s',
+                'signin using %s',
+                'sign in using %s',
+                'signup using %s',
+                'sign up using %s',
+                'signon using %s',
+                'sign on using %s',
+                'continue using %s',
+                'connect using %s',
+                'use %s',
+                'mit %s anmelden',
+                'mit %s einloggen',
+                'mit %s registrieren',
+                'mit %s fortfahren',
+                'mit %s fortsetzen',
+                'mit %s verbinden',
+                '%s verwenden zum anmelden',
+                '%s verwenden zum einloggen',
+                '%s verwenden zum registrieren',
+                '%s verwenden zum fortfahren',
+                '%s verwenden zum verbinden',
+                '%s verwenden',
+                'weiter mit %s',
+                'anmelden mit %s',
+                'über %s fortfahren',
+                'masuk dengan %s',
+                'entrar com %s',
+                'continuar com o %s',
+                'daftar/masuk lewat %s',
+                '使用 %s 登录'
+            ],
+            xpath: [
+                '//*'
+            ],
+            max_elements_to_click: 3
+        },
+        logo_recognition_config: {
+            logo_size: '100x100',
+            max_matching: 0.9,
+            upper_bound: 0.8,
+            lower_bound: 0.7,
+            scale_upper_bound: 0.5,
+            scale_lower_bound: 0.12,
+            scale_method: 'scale_template',
+            scale_space: 'linspace',
+            scale_order: 'descending',
+            match_intensity: 10,
+            match_algorithm: 5,
+            max_elements_to_click: 3
+        },
+        artifacts_config: {
+            store_login_page_candidate_screenshot: true,
+            store_sso_button_detection_screenshot: true,
+            store_idp_screenshot: true,
+            store_idp_har: true,
+            store_login_page_analysis_har: false,
+            store_sitemap: false,
+            store_robots: false
+        }
+    },
+    task_config: {
+        task_id: '08104c91-047e-465d-a83b-1b53507d37f2',
+        task_state: 'RESPONSE_RECEIVED',
+        task_timestamp_request_sent: 1745546461.4379592,
+        task_timestamp_request_received: 1745546461.8535142,
+        task_timestamp_response_sent: 1745547865.626035,
+        task_timestamp_response_received: 1745547871.96122
+    },
+    domain: 'adobe.com',
+    landscape_analysis_result: {
+        resolved: {
+            reachable: true,
+            domain: 'www.adobe.com',
+            url: 'https://www.adobe.com/'
+        },
+        timings: {
+            resolve_duration_seconds: 7.659115552902222,
+            login_page_detection_paths_duration_seconds: 15.547266721725464,
+            login_page_detection_crawling_duration_seconds: 36.548919677734375,
+            login_page_detection_metasearch_duration_seconds: 3.8936514854431152,
+            login_page_detection_sitemap_duration_seconds: 89.97056436538696,
+            login_page_detection_homepage_duration_seconds: 0.0008451938629150391,
+            login_page_detection_duration_seconds: 145.96197271347046,
+            lastpass_icon_detection_duration_seconds: 0.057001352310180664,
+            login_page_analysis_duration_seconds: 432.3455069065094,
+            sso_button_detection_password_form_duration_seconds: 4.109216690063477,
+            sso_button_detection_mfa_duration_seconds: 0,
+            sso_button_detection_passkey_button_duration_seconds: 0,
+            sso_button_detection_passkey_api_duration_seconds: 0,
+            sso_button_detection_keyword_css_duration_seconds: 310.474506855011,
+            sso_button_detection_logo_duration_seconds: 120.41587090492249,
+            sso_button_detection_duration_seconds: 810.3939530849457,
+            sdk_detection_duration_seconds: 0.027192115783691406,
+            metadata_detection_duration_seconds: 2.3465993404388428,
+            total_duration_seconds: 1398.7347569465637
+        },
+        login_page_candidates: [
+            {
+                login_page_candidate: 'https://www.adobe.com/login',
+                login_page_strategy: 'PATHS',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'auth.services.adobe.com',
+                    url: 'https://auth.services.adobe.com/en_US/deeplink.html?deeplink=ssofirst&callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fadobeid%2FSunbreakWebUI1%2FAdobeID%2Ftoken%3Fredirect_uri%3Dhttps%253A%252F%252Faccount.adobe.com%252F%2523old_hash%253D%2526from_ims%253Dtrue%253Fclient_id%253DSunbreakWebUI1%2526api%253Dauthorize%2526scope%253DAdobeID%252Copenid%252Cacct_mgmt_api%252Cgnav%252Cread_countries_regions%252Csocial.link%252Cunlink_social_account%252Cadditional_info.address.mail_to%252Cclient.scopes.read%252Cpublisher.read%252Cadditional_info.account_type%252Cadditional_info.roles%252Cadditional_info.social%252Cadditional_info.screen_name%252Cadditional_info.optionalAgreements%252Cadditional_info.secondary_email%252Cadditional_info.secondary_email_verified%252Cadditional_info.phonetic_name%252Cadditional_info.dob%252Cupdate_profile.all%252Csecurity_profile.read%252Csecurity_profile.update%252Cadmin_manage_user_consent%252Cadmin_slo%252Cpiip_write%252Cmps%252Clast_password_update%252Cupdate_email%252Cread_organizations%252Cuds_write%252Cuds_read%252Cfirefly_api%252Cpasskey_read%252Cpasskey_write%252Caccount_cluster.read%252Caccount_cluster.update%252Cadditional_info.authenticatingAccount%2526reauth%253Dtrue%26state%3D%257B%2522jslibver%2522%253A%2522v2-v0.31.0-2-g1e8a8a8%2522%252C%2522nonce%2522%253A%25229864680821914518%2522%257D%26code_challenge_method%3Dplain%26use_ms_for_expiry%3Dtrue&client_id=SunbreakWebUI1&scope=AdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%2Creauthenticated&state=%7B%22jslibver%22%3A%22v2-v0.31.0-2-g1e8a8a8%22%2C%22nonce%22%3A%229864680821914518%22%7D&relay=cc17e95c-652f-4df8-9df7-01e78210e660&locale=en_US&flow_type=token&idp_flow_type=login&reauthenticate=force&s_p=google%2Cmicrosoft%2Capple%2Cfacebook%2Cline%2Ckakao&response_type=token&code_challenge_method=plain&redirect_uri=https%3A%2F%2Faccount.adobe.com%2F%23old_hash%3D%26from_ims%3Dtrue%3Fclient_id%3DSunbreakWebUI1%26api%3Dauthorize%26scope%3DAdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%26reauth%3Dtrue&use_ms_for_expiry=true#/',
+                    title: 'Adobe ID'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/adobe.com/85abc47f-5383-49a2-be83-fb0220f7ba42.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://account.adobe.com/',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: '/(accounts?|profiles?|users?)',
+                    priority: 88
+                },
+                login_page_info: {
+                    result_hit: 1,
+                    result_engines: [
+                        'SEZNAM',
+                        'BRAVE',
+                        'MOJEEK',
+                        'YAHOO',
+                        'BING'
+                    ],
+                    result_raw: {
+                        url: 'https://account.adobe.com/',
+                        title: 'Adobe Account',
+                        content: 'Manage your Adobe Account profile, password, security options, product and service subscriptions, privacy settings, and communication preferences.',
+                        engine: 'bing',
+                        parsed_url: [
+                            'https',
+                            'account.adobe.com',
+                            '/',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'seznam',
+                            'brave',
+                            'mojeek',
+                            'yahoo',
+                            'bing'
+                        ],
+                        positions: [
+                            1,
+                            4,
+                            3,
+                            1,
+                            2
+                        ],
+                        img_src: '',
+                        score: 15.416666666666668,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'auth.services.adobe.com',
+                    url: 'https://auth.services.adobe.com/en_US/deeplink.html?deeplink=ssofirst&callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fadobeid%2FSunbreakWebUI1%2FAdobeID%2Ftoken%3Fredirect_uri%3Dhttps%253A%252F%252Faccount.adobe.com%252F%2523old_hash%253D%2526from_ims%253Dtrue%253Fclient_id%253DSunbreakWebUI1%2526api%253Dauthorize%2526scope%253DAdobeID%252Copenid%252Cacct_mgmt_api%252Cgnav%252Cread_countries_regions%252Csocial.link%252Cunlink_social_account%252Cadditional_info.address.mail_to%252Cclient.scopes.read%252Cpublisher.read%252Cadditional_info.account_type%252Cadditional_info.roles%252Cadditional_info.social%252Cadditional_info.screen_name%252Cadditional_info.optionalAgreements%252Cadditional_info.secondary_email%252Cadditional_info.secondary_email_verified%252Cadditional_info.phonetic_name%252Cadditional_info.dob%252Cupdate_profile.all%252Csecurity_profile.read%252Csecurity_profile.update%252Cadmin_manage_user_consent%252Cadmin_slo%252Cpiip_write%252Cmps%252Clast_password_update%252Cupdate_email%252Cread_organizations%252Cuds_write%252Cuds_read%252Cfirefly_api%252Cpasskey_read%252Cpasskey_write%252Caccount_cluster.read%252Caccount_cluster.update%252Cadditional_info.authenticatingAccount%2526reauth%253Dtrue%26state%3D%257B%2522jslibver%2522%253A%2522v2-v0.31.0-2-g1e8a8a8%2522%252C%2522nonce%2522%253A%25221438251697436763%2522%257D%26code_challenge_method%3Dplain%26use_ms_for_expiry%3Dtrue&client_id=SunbreakWebUI1&scope=AdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%2Creauthenticated&state=%7B%22jslibver%22%3A%22v2-v0.31.0-2-g1e8a8a8%22%2C%22nonce%22%3A%221438251697436763%22%7D&relay=cc17e95c-652f-4df8-9df7-01e78210e660&locale=en_US&flow_type=token&idp_flow_type=login&reauthenticate=force&s_p=google%2Cmicrosoft%2Capple%2Cfacebook%2Cline%2Ckakao&response_type=token&code_challenge_method=plain&redirect_uri=https%3A%2F%2Faccount.adobe.com%2F%23old_hash%3D%26from_ims%3Dtrue%3Fclient_id%3DSunbreakWebUI1%26api%3Dauthorize%26scope%3DAdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%26reauth%3Dtrue&use_ms_for_expiry=true#/',
+                    title: 'Adobe ID'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/adobe.com/cb2c5de0-1d7b-4a91-bc42-b42139dfecdb.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://acrobat.adobe.com/us/en/',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                login_page_info: {
+                    result_hit: 2,
+                    result_engines: [
+                        'BRAVE',
+                        'YAHOO'
+                    ],
+                    result_raw: {
+                        url: 'https://acrobat.adobe.com/us/en/',
+                        title: 'Adobe Acrobat acrobat.adobe.com › us › en Acrobat online sign in | Login to Acrobat | Adobe Acrobat',
+                        content: 'Adobe Acrobat online services let you work with PDFs in any browser. Create, convert, compress, edit, fill, sign, and share files. Sign in to get started.',
+                        img_src: '',
+                        engine: 'brave',
+                        parsed_url: [
+                            'https',
+                            'acrobat.adobe.com',
+                            '/us/en/',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'brave',
+                            'yahoo'
+                        ],
+                        positions: [
+                            1,
+                            2
+                        ],
+                        score: 3,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'acrobat.adobe.com',
+                    url: 'https://acrobat.adobe.com/us/en/',
+                    title: 'Acrobat online sign in | Login to Acrobat | Adobe Acrobat'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/adobe.com/b2e95fd0-f795-47fc-8ef5-ce8beeff3788.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://creativecloud.adobe.com/',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                login_page_info: {
+                    result_hit: 3,
+                    result_engines: [
+                        'BRAVE',
+                        'YAHOO',
+                        'BING'
+                    ],
+                    result_raw: {
+                        url: 'https://creativecloud.adobe.com/',
+                        title: 'Log in to Adobe Creative Cloud',
+                        content: 'Log in to access your Creative Cloud apps, services, and assets. Explore curated inspiration, learning, and creative challenges from the Adobe community.',
+                        engine: 'bing',
+                        parsed_url: [
+                            'https',
+                            'creativecloud.adobe.com',
+                            '/',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'brave',
+                            'yahoo',
+                            'bing'
+                        ],
+                        positions: [
+                            3,
+                            5,
+                            3
+                        ],
+                        img_src: '',
+                        score: 2.6,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'creativecloud.adobe.com',
+                    url: 'https://creativecloud.adobe.com/',
+                    title: 'Log in to Adobe Creative Cloud'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/adobe.com/508e5758-9e33-41b7-9c66-e3cb3de2c251.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://www.adobe.com/',
+                login_page_strategy: 'HOMEPAGE',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'www.adobe.com',
+                    url: 'https://www.adobe.com/',
+                    title: 'Adobe: Creative, marketing and document management solutions'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/adobe.com/b65f23d4-21ed-4157-af14-188091ae4b11.png',
+                        extension: 'png'
+                    }
+                }
+            }
+        ],
+        recognized_idps: [
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_sdk: 'CUSTOM',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.adobe.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'PASSWORD-FORM',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/983fa1e3-af6d-47dc-b726-d6c3a8573881.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_sdk: 'CUSTOM',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.adobe.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'PASSWORD-FORM',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/06f3a7e1-427f-49c9-aed6-f4b75a5a5e51.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'APPLE',
+                idp_login_request: 'https://appleid.apple.com/auth/authorize?client_id=com.adobe.services.adobeid-na1.web&redirect_uri=https://federatedid-na1.services.adobe.com/federated/fromOIDC&state=Ad2wAeMUqpjUwuPvOVFL2k-25dMuBa1AV0Rjk-yOLQIkegj_E1c0nAhbgXPH7wbMsNQFsy_J2kaR&scope=email%20name&response_type=code&response_mode=form_post',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/adobe.com/6ef615ba-e736-4898-a5af-96b35a9c90b5.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 1182.953125,
+                element_coordinates_y: 707.5,
+                element_width: 141.09375,
+                element_height: 19,
+                element_inner_text: 'Continue with Apple',
+                element_outer_html: '<span class="spectrum-ActionButton-label">Continue with Apple</span>',
+                element_tree: [
+                    'SPAN',
+                    'A',
+                    'SECTION',
+                    'SECTION',
+                    'SECTION',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/adobe.com/99a02009-96eb-40f3-ba2f-bf3e94ede48d.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 1,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Continue with Apple',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/adobe.com/e6ad7c4d-dd0d-4d42-a138-1dc8a496dc43.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'HIGH',
+                login_page_url: 'https://www.adobe.com/login',
+                keyword_recognition_duration_seconds: 33.80128502845764,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/3406c3f9-826e-4cc7-a174-926af7534d24.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_sdk: 'CUSTOM',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.adobe.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'PASSWORD-FORM',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/fe4c5638-a863-407b-8b6b-f4a24a7bdfde.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'GOOGLE',
+                idp_login_request: 'https://accounts.google.com/o/oauth2/v2/auth?client_id=1014431251553-kq98rctnjtv76ag4ulrfkem43b74poni.apps.googleusercontent.com&redirect_uri=https://federatedid-na1.services.adobe.com/federated/fromOIDC&state=AYkhmm7HnCiSHuXQ44mrBcnh4R7cds-OIRr6PAqmaraMY5ky_8fQ5FdUIhowSZEAGJnE18eUqnAc&scope=email%20openid%20profile&response_type=code',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/adobe.com/083f9fcc-3742-46f6-bb91-88553b55c7fc.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 1178.796875,
+                element_coordinates_y: 559.5,
+                element_width: 149.390625,
+                element_height: 19,
+                element_inner_text: 'Continue with Google',
+                element_outer_html: '<span class="spectrum-ActionButton-label">Continue with Google</span>',
+                element_tree: [
+                    'SPAN',
+                    'A',
+                    'SECTION',
+                    'SECTION',
+                    'SECTION',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/adobe.com/3aedc8cd-8a8f-4dc4-9e17-2da2d0435638.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 1,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Continue with Google',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/adobe.com/76f530bd-e4d6-479e-8f62-e5d3684d3717.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'LOW',
+                login_page_url: 'https://www.adobe.com/login',
+                keyword_recognition_duration_seconds: 44.86301946640015,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/6b9cabef-3d36-4494-8f66-d3c73b203e5e.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_sdk: 'CUSTOM',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.adobe.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'PASSWORD-FORM',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/a9a67abc-d0ff-4778-910a-5b2ebe325416.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_sdk: 'CUSTOM',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.adobe.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'PASSWORD-FORM',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/f8862a60-3267-4bb4-a2be-89179c670d09.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MICROSOFT',
+                idp_login_request: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6aba272b-e383-44cd-8eda-34c66dfd9546&redirect_uri=https://federatedid-na1.services.adobe.com/federated/fromOIDC&state=AVe22ktJcZipSDtrzNyDGOJDvY-hSPeiEDV2CL5BtchwDSQbzB1P11YFCZlPV3V8Ou-p7AabUsjj&scope=email%20offline_access%20openid%20profile&response_type=code',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/adobe.com/650b9c3b-41c2-4cc0-870e-e394aa2350a8.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 1171.640625,
+                element_coordinates_y: 633.5,
+                element_width: 163.71875,
+                element_height: 19,
+                element_inner_text: 'Continue with Microsoft',
+                element_outer_html: '<span class="spectrum-ActionButton-label">Continue with Microsoft</span>',
+                element_tree: [
+                    'SPAN',
+                    'A',
+                    'SECTION',
+                    'SECTION',
+                    'SECTION',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/adobe.com/9bd8c1ed-dd40-42da-b065-22b8c4cb1459.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 1,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Continue with Microsoft',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/adobe.com/b2f33228-8adb-423d-824e-3cfc7dc70a69.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'LOW',
+                login_page_url: 'https://www.adobe.com/login',
+                keyword_recognition_duration_seconds: 45.28105401992798,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/a77985ec-8ddf-4464-b8ce-961e9b9d8d9e.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_sdk: 'CUSTOM',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.adobe.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'PASSWORD-FORM',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/626b9895-0cfb-433d-8932-395b98b41857.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_sdk: 'CUSTOM',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.adobe.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'PASSWORD-FORM',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/c70e20be-d509-4aa0-95f1-2ea8d3666609.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_sdk: 'CUSTOM',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.adobe.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'PASSWORD-FORM',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/adobe.com/35d88192-6d25-4e93-877f-63f8b50cbff6.har',
+                        extension: 'har'
+                    }
+                }
+            }
+        ],
+        recognized_navcreds: [
+            {
+                login_page_url: 'https://account.adobe.com/',
+                function_name: 'get',
+                function_params: [
+                    {
+                        publicKey: {
+                            challenge: {},
+                            timeout: 60000,
+                            rpId: 'adobe.com',
+                            userVerification: 'preferred',
+                            extensions: {}
+                        },
+                        mediation: 'conditional',
+                        signal: {}
+                    }
+                ]
+            },
+            {
+                login_page_url: 'https://acrobat.adobe.com/us/en/',
+                function_name: 'get',
+                function_params: [
+                    {
+                        identity: {}
+                    }
+                ]
+            },
+            {
+                login_page_url: 'https://acrobat.adobe.com/us/en/',
+                function_name: 'get',
+                function_params: [
+                    {
+                        signal: {},
+                        federated: {
+                            context: 'signin',
+                            providers: [
+                                {
+                                    url: 'https://accounts.google.com/gsi/',
+                                    configURL: 'https://accounts.google.com/gsi/fedcm.json',
+                                    clientId: '937551566806-3a7v6v32b0grjja076jjcigjhe7ird7e.apps.googleusercontent.com',
+                                    params: {
+                                        as: 'BpHFlCITgWwTaOdnZSE1RA6ruUcTX+hGC6OY2oksoeM'
+                                    },
+                                    nonce: '1f2bff9b-c775-4021-9609-4955fdac9460'
+                                }
+                            ],
+                            mode: 'widget',
+                            autoReauthn: false
+                        },
+                        identity: {
+                            context: 'signin',
+                            providers: [
+                                {
+                                    url: 'https://accounts.google.com/gsi/',
+                                    configURL: 'https://accounts.google.com/gsi/fedcm.json',
+                                    clientId: '937551566806-3a7v6v32b0grjja076jjcigjhe7ird7e.apps.googleusercontent.com',
+                                    params: {
+                                        as: 'BpHFlCITgWwTaOdnZSE1RA6ruUcTX+hGC6OY2oksoeM'
+                                    },
+                                    nonce: '1f2bff9b-c775-4021-9609-4955fdac9460'
+                                }
+                            ],
+                            mode: 'widget',
+                            autoReauthn: false
+                        },
+                        mediation: 'required'
+                    }
+                ]
+            },
+            {
+                login_page_url: 'https://www.adobe.com/',
+                function_name: 'get',
+                function_params: [
+                    {
+                        signal: {},
+                        federated: {
+                            context: 'signin',
+                            providers: [
+                                {
+                                    url: 'https://accounts.google.com/gsi/',
+                                    configURL: 'https://accounts.google.com/gsi/fedcm.json',
+                                    clientId: '937551566806-3a7v6v32b0grjja076jjcigjhe7ird7e.apps.googleusercontent.com',
+                                    params: {
+                                        as: 'pm0xW4mbPKAmkQhmj/EyB3oIgaQcHOzMavyDFYqF2dI'
+                                    },
+                                    nonce: '8e9a3909-36e5-4461-b218-6cdf11390893'
+                                }
+                            ],
+                            mode: 'widget',
+                            autoReauthn: false
+                        },
+                        identity: {
+                            context: 'signin',
+                            providers: [
+                                {
+                                    url: 'https://accounts.google.com/gsi/',
+                                    configURL: 'https://accounts.google.com/gsi/fedcm.json',
+                                    clientId: '937551566806-3a7v6v32b0grjja076jjcigjhe7ird7e.apps.googleusercontent.com',
+                                    params: {
+                                        as: 'pm0xW4mbPKAmkQhmj/EyB3oIgaQcHOzMavyDFYqF2dI'
+                                    },
+                                    nonce: '8e9a3909-36e5-4461-b218-6cdf11390893'
+                                }
+                            ],
+                            mode: 'widget',
+                            autoReauthn: false
+                        },
+                        mediation: 'required'
+                    }
+                ]
+            },
+            {
+                login_page_url: 'https://www.adobe.com/login',
+                function_name: 'get',
+                function_params: [
+                    {
+                        publicKey: {
+                            challenge: {},
+                            timeout: 60000,
+                            rpId: 'adobe.com',
+                            userVerification: 'preferred',
+                            extensions: {}
+                        },
+                        mediation: 'conditional',
+                        signal: {}
+                    }
+                ]
+            },
+            {
+                login_page_url: 'https://creativecloud.adobe.com/',
+                function_name: 'get',
+                function_params: [
+                    {
+                        publicKey: {
+                            challenge: {},
+                            timeout: 60000,
+                            rpId: 'adobe.com',
+                            userVerification: 'preferred',
+                            extensions: {}
+                        },
+                        mediation: 'conditional',
+                        signal: {}
+                    }
+                ]
+            }
+        ],
+        recognized_lastpass_icons: [
+            {
+                login_page_url: 'https://account.adobe.com/',
+                recognition_strategy: 'LASTPASS_ICON',
+                lastpass_icon_elements: [
+                    {
+                        element_coordinates_x: 1037,
+                        element_coordinates_y: 366,
+                        element_width: 396,
+                        element_height: 32,
+                        element_inner_text: '',
+                        element_outer_html: '<input aria-label="Email address" id="EmailPage-EmailField" data-id="EmailPage-EmailField" aria-describedby="EmailPage-EmailField-Error" type="email" autocomplete="email webauthn" name="username" tabindex="0" class="zo2IKa_spectrum-Textfield-input zo2IKa_i18nFontFamily" value="" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'FORM',
+                            'SECTION',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/adobe.com/5aef6e20-50eb-43f0-b8a9-67f195cc370d.json',
+                                extension: 'json'
+                            }
+                        }
+                    }
+                ],
+                lastpass_icon_frame: 'TOPMOST',
+                lastpass_icon_frame_index: 0,
+                lastpass_icon_frame_url: 'https://auth.services.adobe.com/en_US/deeplink.html?deeplink=ssofirst&callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fadobeid%2FSunbreakWebUI1%2FAdobeID%2Ftoken%3Fredirect_uri%3Dhttps%253A%252F%252Faccount.adobe.com%252F%2523old_hash%253D%2526from_ims%253Dtrue%253Fclient_id%253DSunbreakWebUI1%2526api%253Dauthorize%2526scope%253DAdobeID%252Copenid%252Cacct_mgmt_api%252Cgnav%252Cread_countries_regions%252Csocial.link%252Cunlink_social_account%252Cadditional_info.address.mail_to%252Cclient.scopes.read%252Cpublisher.read%252Cadditional_info.account_type%252Cadditional_info.roles%252Cadditional_info.social%252Cadditional_info.screen_name%252Cadditional_info.optionalAgreements%252Cadditional_info.secondary_email%252Cadditional_info.secondary_email_verified%252Cadditional_info.phonetic_name%252Cadditional_info.dob%252Cupdate_profile.all%252Csecurity_profile.read%252Csecurity_profile.update%252Cadmin_manage_user_consent%252Cadmin_slo%252Cpiip_write%252Cmps%252Clast_password_update%252Cupdate_email%252Cread_organizations%252Cuds_write%252Cuds_read%252Cfirefly_api%252Cpasskey_read%252Cpasskey_write%252Caccount_cluster.read%252Caccount_cluster.update%252Cadditional_info.authenticatingAccount%2526reauth%253Dtrue%26state%3D%257B%2522jslibver%2522%253A%2522v2-v0.31.0-2-g1e8a8a8%2522%252C%2522nonce%2522%253A%25221438251697436763%2522%257D%26code_challenge_method%3Dplain%26use_ms_for_expiry%3Dtrue&client_id=SunbreakWebUI1&scope=AdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%2Creauthenticated&state=%7B%22jslibver%22%3A%22v2-v0.31.0-2-g1e8a8a8%22%2C%22nonce%22%3A%221438251697436763%22%7D&relay=cc17e95c-652f-4df8-9df7-01e78210e660&locale=en_US&flow_type=token&idp_flow_type=login&reauthenticate=force&s_p=google%2Cmicrosoft%2Capple%2Cfacebook%2Cline%2Ckakao&response_type=token&code_challenge_method=plain&redirect_uri=https%3A%2F%2Faccount.adobe.com%2F%23old_hash%3D%26from_ims%3Dtrue%3Fclient_id%3DSunbreakWebUI1%26api%3Dauthorize%26scope%3DAdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%26reauth%3Dtrue&use_ms_for_expiry=true#/',
+                lastpass_icon_frame_name: '',
+                lastpass_icon_frame_title: 'Adobe ID',
+                lastpass_icon_frames_length: 2
+            },
+            {
+                login_page_url: 'https://www.adobe.com/login',
+                recognition_strategy: 'LASTPASS_ICON',
+                lastpass_icon_elements: [
+                    {
+                        element_coordinates_x: 1037,
+                        element_coordinates_y: 366,
+                        element_width: 396,
+                        element_height: 32,
+                        element_inner_text: '',
+                        element_outer_html: '<input aria-label="Email address" id="EmailPage-EmailField" data-id="EmailPage-EmailField" aria-describedby="EmailPage-EmailField-Error" type="email" autocomplete="email webauthn" name="username" tabindex="0" class="zo2IKa_spectrum-Textfield-input zo2IKa_i18nFontFamily" value="" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">',
+                        element_tree: [
+                            'INPUT',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'FORM',
+                            'SECTION',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'SECTION',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'DIV',
+                            'BODY',
+                            'HTML'
+                        ],
+                        element_tree_markup: {
+                            type: 'reference',
+                            data: {
+                                bucket_name: 'element-tree-markup',
+                                object_name: '/adobe.com/617d9cc1-c0c5-4b40-929a-7d49cf438eee.json',
+                                extension: 'json'
+                            }
+                        }
+                    }
+                ],
+                lastpass_icon_frame: 'TOPMOST',
+                lastpass_icon_frame_index: 0,
+                lastpass_icon_frame_url: 'https://auth.services.adobe.com/en_US/deeplink.html?deeplink=ssofirst&callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fadobeid%2FSunbreakWebUI1%2FAdobeID%2Ftoken%3Fredirect_uri%3Dhttps%253A%252F%252Faccount.adobe.com%252F%2523old_hash%253D%2526from_ims%253Dtrue%253Fclient_id%253DSunbreakWebUI1%2526api%253Dauthorize%2526scope%253DAdobeID%252Copenid%252Cacct_mgmt_api%252Cgnav%252Cread_countries_regions%252Csocial.link%252Cunlink_social_account%252Cadditional_info.address.mail_to%252Cclient.scopes.read%252Cpublisher.read%252Cadditional_info.account_type%252Cadditional_info.roles%252Cadditional_info.social%252Cadditional_info.screen_name%252Cadditional_info.optionalAgreements%252Cadditional_info.secondary_email%252Cadditional_info.secondary_email_verified%252Cadditional_info.phonetic_name%252Cadditional_info.dob%252Cupdate_profile.all%252Csecurity_profile.read%252Csecurity_profile.update%252Cadmin_manage_user_consent%252Cadmin_slo%252Cpiip_write%252Cmps%252Clast_password_update%252Cupdate_email%252Cread_organizations%252Cuds_write%252Cuds_read%252Cfirefly_api%252Cpasskey_read%252Cpasskey_write%252Caccount_cluster.read%252Caccount_cluster.update%252Cadditional_info.authenticatingAccount%2526reauth%253Dtrue%26state%3D%257B%2522jslibver%2522%253A%2522v2-v0.31.0-2-g1e8a8a8%2522%252C%2522nonce%2522%253A%25229864680821914518%2522%257D%26code_challenge_method%3Dplain%26use_ms_for_expiry%3Dtrue&client_id=SunbreakWebUI1&scope=AdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%2Creauthenticated&state=%7B%22jslibver%22%3A%22v2-v0.31.0-2-g1e8a8a8%22%2C%22nonce%22%3A%229864680821914518%22%7D&relay=cc17e95c-652f-4df8-9df7-01e78210e660&locale=en_US&flow_type=token&idp_flow_type=login&reauthenticate=force&s_p=google%2Cmicrosoft%2Capple%2Cfacebook%2Cline%2Ckakao&response_type=token&code_challenge_method=plain&redirect_uri=https%3A%2F%2Faccount.adobe.com%2F%23old_hash%3D%26from_ims%3Dtrue%3Fclient_id%3DSunbreakWebUI1%26api%3Dauthorize%26scope%3DAdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%26reauth%3Dtrue&use_ms_for_expiry=true#/',
+                lastpass_icon_frame_name: '',
+                lastpass_icon_frame_title: 'Adobe ID',
+                lastpass_icon_frames_length: 1
+            }
+        ],
+        metadata_data: {
+            type: 'reference',
+            data: {
+                bucket_name: 'metadata-data',
+                object_name: '/adobe.com/8aeffa5a-3fd5-4fec-aa13-e9d595379b44.json',
+                extension: 'json'
+            }
+        },
+        metadata_available: {
+            robots_txt: false,
+            security_txt: true,
+            webfinger: false,
+            openid_configuration: false,
+            oauth_authorization_server: false,
+            oauth_client: false,
+            web_identity: false,
+            browserid: false,
+            jwks: false,
+            uma2_configuration: false,
+            fido_configuration: false,
+            fido_2fa_configuration: false,
+            fido2_configuration: false,
+            apple_app_site_association: true,
+            assetlinks: true,
+            password_based: true,
+            apple: true,
+            google: true,
+            microsoft: true,
+            webauthn_api: true,
+            lastpass: false
+        }
+    }
+}

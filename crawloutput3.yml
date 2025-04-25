@@ -1,0 +1,1092 @@
+{
+    _id: ObjectId('680b0295c306a556b1880254'),
+    scan_config: {
+        scan_id: 'e4d7ec1e-7cac-40cb-abde-fecdcb03060c',
+        scan_type: 'single',
+        domain: 'bestbuy.com'
+    },
+    landscape_analysis_config: {
+        browser_config: {
+            name: 'CHROMIUM',
+            width: 1920,
+            height: 1080,
+            user_agent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+            extensions: [
+                'chromium/isdcac-v1.1.1'
+            ],
+            scripts: [],
+            headless: false,
+            locale: 'en-US',
+            wait_for_networkidle: true,
+            timeout_default: 30,
+            timeout_navigation: 30,
+            timeout_networkidle: 5,
+            sleep_after_onload: 0,
+            sleep_after_networkidle: 2
+        },
+        login_page_config: {
+            login_page_strategy_scope: [
+                'PATHS',
+                'CRAWLING',
+                'METASEARCH',
+                'SITEMAP',
+                'HOMEPAGE'
+            ],
+            login_page_url_regexes: [
+                {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                {
+                    regex: '/(sso|oauth|openid|identity)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(accounts?|profiles?|users?)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(register|registration)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 98
+                },
+                {
+                    regex: '/(manage|managing|anmelden|portal|dashboard)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 97
+                },
+                {
+                    regex: '/connect(ing|ion|ed)?(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 97
+                },
+                {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)',
+                    priority: 89
+                },
+                {
+                    regex: '/(auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)',
+                    priority: 89
+                },
+                {
+                    regex: '/(sso|oauth|openid|identity)',
+                    priority: 88
+                },
+                {
+                    regex: '/(accounts?|profiles?|users?)',
+                    priority: 88
+                },
+                {
+                    regex: '/(register|registration)',
+                    priority: 88
+                },
+                {
+                    regex: '/(manage|managing|anmelden|portal|dashboard)',
+                    priority: 87
+                },
+                {
+                    regex: '/connect(ing|ion|ed)?',
+                    priority: 87
+                },
+                {
+                    regex: '[^a-z](show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)[^a-z]',
+                    priority: 79
+                },
+                {
+                    regex: '[^a-z](auth|authn|authenticate|authentication|auth(s|z)|authori(s|z)e|authori(s|z)ation)[^a-z]',
+                    priority: 79
+                },
+                {
+                    regex: '[^a-z](sso|oauth|openid|identity)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](accounts?|profiles?|users?)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](register|registration)[^a-z]',
+                    priority: 78
+                },
+                {
+                    regex: '[^a-z](manage|managing|anmelden|portal|dashboard)[^a-z]',
+                    priority: 77
+                },
+                {
+                    regex: '[^a-z]connect(ing|ion|ed)?[^a-z]',
+                    priority: 77
+                }
+            ],
+            login_page_element_keywords: [
+                'login',
+                'log in',
+                'log-in',
+                'log_in',
+                'logon',
+                'log on',
+                'log-on',
+                'log_on',
+                'signin',
+                'sign in',
+                'sign-in',
+                'sign_in',
+                'signup',
+                'sign up',
+                'sign-up',
+                'sign_up',
+                'signon',
+                'sign on',
+                'sign-on',
+                'sign_on',
+                'register',
+                'registration',
+                'anmelden',
+                'registrieren'
+            ],
+            manual_strategy_config: {
+                login_page_candidates: []
+            },
+            paths_strategy_config: {
+                paths: [
+                    '/login',
+                    '/log-in',
+                    '/log_in',
+                    '/signin',
+                    '/sign-in',
+                    '/sign_in',
+                    '/account',
+                    '/account/login',
+                    '/account/log-in',
+                    '/account/log_in',
+                    '/account/signin',
+                    '/account/sign-in',
+                    '/account/sign_in',
+                    '/accounts',
+                    '/accounts/login',
+                    '/accounts/signin',
+                    '/profile',
+                    '/profile/login',
+                    '/profile/signin',
+                    '/user/login',
+                    '/user/signin',
+                    '/users/login',
+                    '/users/signin',
+                    '/users/connect',
+                    '/auth',
+                    '/auth/login',
+                    '/auth/signin',
+                    '/m/login',
+                    '/m/signin',
+                    '/registration',
+                    '/registration/login',
+                    '/registration/signin',
+                    '/.well-known/change-password'
+                ],
+                subdomains: [
+                    'login',
+                    'signin',
+                    'account',
+                    'profile',
+                    'auth'
+                ]
+            },
+            crawling_strategy_config: {
+                max_anchor_candidates: 1,
+                max_element_candidates: 1,
+                max_elements_to_click: 10
+            },
+            sitemap_strategy_config: {
+                max_candidates: 1,
+                max_recursion_level: 0,
+                max_sitemap_size: 50000000,
+                timeout_fetch_sitemap: 10
+            },
+            robots_strategy_config: {
+                max_candidates: 1,
+                timeout_fetch_robots: 10
+            },
+            metasearch_strategy_config: {
+                search_term: '%s login',
+                search_engines: [
+                    'BING',
+                    'BRAVE',
+                    'DUCKDUCKGO',
+                    'GOOGLE',
+                    'MOJEEK',
+                    'QWANT',
+                    'STARTPAGE',
+                    'WIBY',
+                    'YAHOO',
+                    'SEZNAM',
+                    'GOO',
+                    'NAVER',
+                    'PETALSEARCH',
+                    'YEP'
+                ],
+                search_results_number: 3
+            }
+        },
+        idp_config: {
+            idp_scope: [
+                'PASSKEY',
+                'MFA_GENERIC',
+                'PASSWORD_BASED',
+                'APPLE',
+                'FACEBOOK',
+                'GOOGLE',
+                'TWITTER_1.0',
+                'LINKEDIN',
+                'MICROSOFT',
+                'BAIDU',
+                'GITHUB',
+                'QQ',
+                'SINA_WEIBO',
+                'WECHAT'
+            ]
+        },
+        recognition_strategy_config: {
+            recognition_strategy_scope: [
+                'KEYWORD-CSS',
+                'LOGO',
+                'METADATA',
+                'REQUEST',
+                'NAVIGATOR_CREDENTIALS',
+                'LASTPASS_ICON',
+                'PASSWORD-FORM',
+                'MFA-MULTIPHASE',
+                'PASSKEY-KEYWORD',
+                'PASSKEY-API'
+            ],
+            recognition_mode: 'FAST'
+        },
+        keyword_recognition_config: {
+            keywords: [
+                'login with %s',
+                'log in with %s',
+                'logon with %s',
+                'log on with %s',
+                'signin with %s',
+                'sign in with %s',
+                'signup with %s',
+                'sign up with %s',
+                'signon with %s',
+                'sign on with %s',
+                'continue with %s',
+                'connect with %s',
+                'login using %s',
+                'log in using %s',
+                'logon using %s',
+                'log on using %s',
+                'signin using %s',
+                'sign in using %s',
+                'signup using %s',
+                'sign up using %s',
+                'signon using %s',
+                'sign on using %s',
+                'continue using %s',
+                'connect using %s',
+                'use %s',
+                'mit %s anmelden',
+                'mit %s einloggen',
+                'mit %s registrieren',
+                'mit %s fortfahren',
+                'mit %s fortsetzen',
+                'mit %s verbinden',
+                '%s verwenden zum anmelden',
+                '%s verwenden zum einloggen',
+                '%s verwenden zum registrieren',
+                '%s verwenden zum fortfahren',
+                '%s verwenden zum verbinden',
+                '%s verwenden',
+                'weiter mit %s',
+                'anmelden mit %s',
+                'über %s fortfahren',
+                'masuk dengan %s',
+                'entrar com %s',
+                'continuar com o %s',
+                'daftar/masuk lewat %s',
+                '使用 %s 登录'
+            ],
+            xpath: [
+                '//*'
+            ],
+            max_elements_to_click: 3
+        },
+        logo_recognition_config: {
+            logo_size: '100x100',
+            max_matching: 0.9,
+            upper_bound: 0.8,
+            lower_bound: 0.7,
+            scale_upper_bound: 0.5,
+            scale_lower_bound: 0.12,
+            scale_method: 'scale_template',
+            scale_space: 'linspace',
+            scale_order: 'descending',
+            match_intensity: 10,
+            match_algorithm: 5,
+            max_elements_to_click: 3
+        },
+        artifacts_config: {
+            store_login_page_candidate_screenshot: true,
+            store_sso_button_detection_screenshot: true,
+            store_idp_screenshot: true,
+            store_idp_har: true,
+            store_login_page_analysis_har: false,
+            store_sitemap: false,
+            store_robots: false
+        }
+    },
+    task_config: {
+        task_id: '21d15e3a-4ffa-46d7-8325-f7cb83ee125a',
+        task_state: 'RESPONSE_RECEIVED',
+        task_timestamp_request_sent: 1745550900.8705385,
+        task_timestamp_request_received: 1745550901.7750247,
+        task_timestamp_response_sent: 1745552013.6419754,
+        task_timestamp_response_received: 1745552016.3360538
+    },
+    domain: 'bestbuy.com',
+    landscape_analysis_result: {
+        resolved: {
+            reachable: true,
+            domain: 'www.bestbuy.com',
+            url: 'https://www.bestbuy.com/'
+        },
+        timings: {
+            resolve_duration_seconds: 13.867705345153809,
+            login_page_detection_paths_duration_seconds: 24.005263805389404,
+            login_page_detection_crawling_duration_seconds: 13.188523530960083,
+            login_page_detection_metasearch_duration_seconds: 4.632827997207642,
+            login_page_detection_sitemap_duration_seconds: 15.726181745529175,
+            login_page_detection_homepage_duration_seconds: 0.0021848678588867188,
+            login_page_detection_duration_seconds: 57.55705785751343,
+            lastpass_icon_detection_duration_seconds: 0.04318094253540039,
+            login_page_analysis_duration_seconds: 221.39832615852356,
+            sso_button_detection_password_form_duration_seconds: 5.720988750457764,
+            sso_button_detection_mfa_duration_seconds: 3.2270548343658447,
+            sso_button_detection_passkey_button_duration_seconds: 0,
+            sso_button_detection_passkey_api_duration_seconds: 0,
+            sso_button_detection_keyword_css_duration_seconds: 232.83376049995422,
+            sso_button_detection_logo_duration_seconds: 121.68467831611633,
+            sso_button_detection_duration_seconds: 647.4944393634796,
+            sdk_detection_duration_seconds: 0.043004751205444336,
+            metadata_detection_duration_seconds: 167.8655710220337,
+            total_duration_seconds: 1108.2281007766724
+        },
+        login_page_candidates: [
+            {
+                login_page_candidate: 'https://www.bestbuy.com/login',
+                login_page_strategy: 'PATHS',
+                login_page_priority: {
+                    regex: '/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$',
+                    priority: 99
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'www.bestbuy.com',
+                    url: 'https://www.bestbuy.com/identity/signin?token=tid%3Aab15a4ae-2183-11f0-9834-0e1f9d64f9f1',
+                    title: 'Sign In to Best Buy'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/bestbuy.com/c7dcbcd2-99c0-46e5-9989-8654f9a1ef28.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://www.bestbuy.com/site/customer/myaccount',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                login_page_info: {
+                    result_hit: 1,
+                    result_engines: [
+                        'BRAVE',
+                        'YAHOO',
+                        'BING'
+                    ],
+                    result_raw: {
+                        url: 'https://www.bestbuy.com/site/customer/myaccount',
+                        title: 'Account Home - Best Buy',
+                        content: 'Sign in to your Best Buy account to view and manage your orders, rewards, and more.',
+                        engine: 'bing',
+                        parsed_url: [
+                            'https',
+                            'www.bestbuy.com',
+                            '/site/customer/myaccount',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'brave',
+                            'yahoo',
+                            'bing'
+                        ],
+                        positions: [
+                            1,
+                            1,
+                            2
+                        ],
+                        img_src: '',
+                        score: 7.5,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'www.bestbuy.com',
+                    url: 'https://www.bestbuy.com/site/customer/myaccount',
+                    title: 'Account Home - Best Buy'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/bestbuy.com/0f2c059a-60d1-4c5f-b411-9414e022c3cd.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://www.bestbuy.com/',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                login_page_info: {
+                    result_hit: 2,
+                    result_engines: [
+                        'SEZNAM',
+                        'BRAVE',
+                        'YAHOO',
+                        'BING'
+                    ],
+                    result_raw: {
+                        url: 'https://www.bestbuy.com/',
+                        title: 'Best Buy | Official Online Store | Shop Now & Save',
+                        content: 'Shop Best Buy for electronics, computers, appliances, cell phones, video games & more new tech. Store pickup & free 2-day shipping on thousands of items.',
+                        engine: 'bing',
+                        parsed_url: [
+                            'https',
+                            'www.bestbuy.com',
+                            '/',
+                            '',
+                            '',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'seznam',
+                            'brave',
+                            'yahoo',
+                            'bing'
+                        ],
+                        positions: [
+                            4,
+                            1,
+                            3,
+                            7
+                        ],
+                        img_src: '',
+                        score: 6.904761904761904,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'www.bestbuy.com',
+                    url: 'https://www.bestbuy.com/',
+                    title: 'Best Buy International: Select your Country - Best Buy'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/bestbuy.com/4099ea8c-7853-4710-b378-57f79227a78e.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&st=best+buy+login',
+                login_page_strategy: 'METASEARCH',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                login_page_info: {
+                    result_hit: 3,
+                    result_engines: [
+                        'BRAVE',
+                        'YAHOO',
+                        'BING'
+                    ],
+                    result_raw: {
+                        url: 'https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&st=best+buy+login',
+                        title: 'best buy login - Best Buy',
+                        content: 'Shop for best buy login at Best Buy. Find low everyday prices and buy online for delivery or in-store pick-up',
+                        engine: 'bing',
+                        parsed_url: [
+                            'https',
+                            'www.bestbuy.com',
+                            '/site/searchpage.jsp',
+                            '',
+                            'id=pcat17071&st=best+buy+login',
+                            ''
+                        ],
+                        template: 'default.html',
+                        engines: [
+                            'brave',
+                            'yahoo',
+                            'bing'
+                        ],
+                        positions: [
+                            3,
+                            4,
+                            3
+                        ],
+                        img_src: '',
+                        score: 2.75,
+                        category: 'general'
+                    }
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'www.bestbuy.com',
+                    url: 'https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&st=best+buy+login',
+                    title: 'Best Buy International: Select your Country - Best Buy'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/bestbuy.com/d7f6a783-7802-4104-98f6-27abc712c294.png',
+                        extension: 'png'
+                    }
+                }
+            },
+            {
+                login_page_candidate: 'https://www.bestbuy.com/',
+                login_page_strategy: 'HOMEPAGE',
+                login_page_priority: {
+                    regex: null,
+                    priority: 0
+                },
+                resolved: {
+                    reachable: true,
+                    domain: 'www.bestbuy.com',
+                    url: 'https://www.bestbuy.com/',
+                    title: 'Best Buy International: Select your Country - Best Buy'
+                },
+                content_type: 'text/html',
+                content_analyzable: {
+                    valid: true,
+                    error: null
+                },
+                login_page_candidate_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'login-page-candidate-screenshot',
+                        object_name: '/bestbuy.com/d32e3c6f-3b61-470c-b8c0-d0ed23e51d3e.png',
+                        extension: 'png'
+                    }
+                }
+            }
+        ],
+        recognized_idps: [
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/4051eaa0-3350-400d-b77f-f37061b71c9d.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/9059822b-6b60-45db-b07f-6ff613f7554c.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'PASSWORD_BASED',
+                idp_login_request: 'https://4448269.fls.doubleclick.net/activityi;dc_pre=CMiiqdud8owDFVNM9ggdW4ITdw;src=4448269;type=bbycom;cat=BBY-S0;ord=7607254500181;npa=0;auiddc=442369704.1745551403;u3=;u5=;u6=anonymous;u7=en-US;u14=;u15=;u16=;u18=not%20provided;u19=Sign%20In;u20=43432572251350231964433781122357294942;uaa=;uab=;uafvl=;uamb=0;uam=;uap=;uapv=;uaw=0;pscdl=noapi;frm=0;_tu=IFA;gtm=45fe54n0v9179369925za200;gcd=13l3l3l3l1l1;dma=0;dc_fmt=2;tag_exp=102887800~103051953~103077950~103106314~103106316~103116026~103130360~103130362~103200004;epver=2;dc_random=1745551403166;_dc_test=1;~oref=https%3A%2F%2Fwww.bestbuy.com%2Fidentity%2Fsignin%3Ftoken%3Dtid%253A8bffc4a0-2184-11f0-a7f3-12d05e4d8377?',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/bestbuy.com/879498e9-b8a8-40f5-ac3f-8d8319cf950b.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 788.5,
+                element_coordinates_y: 131,
+                element_width: 345,
+                element_height: 24,
+                element_inner_text: 'Sign In to Best Buy',
+                element_outer_html: '<h1 tabindex="-1" class="c-section-title cia-section-title cia-section-title__header heading-5 v-fw-medium">Sign In to Best Buy</h1>',
+                element_tree: [
+                    'H1',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'MAIN',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/bestbuy.com/e860de6d-2718-40db-9f7f-180503aeeab5.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 5,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Sign In to Best Buy',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/bestbuy.com/eee5e9a0-153c-4ab0-b2a3-6eb599d3aa36.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'LOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                keyword_recognition_duration_seconds: 41.5813946723938,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/8e3f12f3-e894-4caa-a901-165bb711733e.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'APPLE',
+                idp_login_request: 'https://appleid.apple.com/auth/authorize?client_id=com.bestbuy.signinwithapple&redirect_uri=https%3A%2F%2Fwww.bestbuy.com%2Fidentity%2Fapple%2Flink&response_type=code%20id_token&state=eyJzdGF0ZSI6Ii0xMjUzNzEwMDc2Iiwic29jaWFsUHJvdmlkZXIiOiJhcHBsZSIsInRva2VuIjoidGlkOmFmZDhiNWU4LTIxODQtMTFmMC1hYjEzLTBhZmZmNzAxZTAzZiIsInJlZmVycmVyQ29kZSI6InNpZ25PbiJ9&response_mode=form_post&frame_id=557286d9-cde9-4d4c-a80f-f04755143adb&m=12&v=1.5.5',
+                idp_frame: 'TOPMOST',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/bestbuy.com/110ecfec-cc7e-469b-8bff-b39202e647d7.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 788.5,
+                element_coordinates_y: 329,
+                element_width: 345,
+                element_height: 40,
+                element_inner_text: 'Sign in with Apple',
+                element_outer_html: '<button class="c-button c-button-outline c-button-lg c-button-block c-button-icon c-button-icon-leading svg-button social-button apple-button  font-weight-normal" type="button" data-track="Apple - signin Button" style="height: 40px;"><svg aria-hidden="true" role="img" viewBox="0 0 100 100" height="22" width="22"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M27.2 22c-1.5-1.4-2.2-3-2.2-5.1 0-2.6 1.2-4.7 3.6-6.1-1.3-1.9-3.4-3-6.1-3.2-1-.1-2.2.1-3.6.6-1.5.6-2.4.8-2.7.8-.4 0-1.2-.2-2.4-.7-1.3-.5-2.3-.7-3-.7-1.4.1-2.8.5-4 1.2-1.2.7-2.2 1.7-2.9 2.9-.9 1.5-1.4 3.4-1.4 5.5 0 1.9.3 3.8 1 5.8.7 1.9 1.5 3.5 2.5 4.9.9 1.3 1.7 2.2 2.3 2.8 1 .9 1.9 1.3 2.9 1.3.6 0 1.5-.2 2.5-.7 1-.4 2-.6 2.9-.6.9 0 1.8.2 2.8.6 1 .4 1.9.6 2.6.6 1 0 2-.4 2.8-1.2.6-.5 1.3-1.4 2.2-2.7.7-1 1.2-2 1.7-3.1l.6-1.5c-.6-.3-1.4-.8-2.1-1.4zM21 5.1c1.2-1.4 1.7-2.9 1.7-4.5V0c-.8 0-1.7.3-2.6.7-.9.5-1.7 1-2.3 1.7C16.7 3.8 16 5.4 16 7v.6c1.9.1 3.6-.8 5-2.5z"></path></svg></svg>Sign in with Apple</button>',
+                element_tree: [
+                    'BUTTON',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'MAIN',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/bestbuy.com/00b2930a-d79e-4b08-88c3-4a3d2d3846a2.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 1,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: 'Sign in with Apple',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/bestbuy.com/f542662e-fc5d-491c-b31f-fbe7db71e6dc.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'HIGH',
+                login_page_url: 'https://www.bestbuy.com/login',
+                keyword_recognition_duration_seconds: 32.453049659729004,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/7825c1db-3be3-4e9c-b7a0-538d8e3b7ed1.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'SIGN_IN_WITH_APPLE'
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/e5b65085-4291-40c2-bffe-1ecc4cceb874.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'GOOGLE',
+                idp_login_request: 'https://accounts.google.com/o/oauth2/v2/auth?as=H-WsK291H_FM6MpdCKrvFw&client_id=369075948042-gku8boqssoqo5bdnkpg2s43mscgsk68i.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=id_token&gsiwebsdk=gis_attributes&redirect_uri=https%3A%2F%2Fwww.bestbuy.com&response_mode=form_post&origin=https%3A%2F%2Fwww.bestbuy.com&display=popup&prompt=select_account&gis_params=ChdodHRwczovL3d3dy5iZXN0YnV5LmNvbRIXaHR0cHM6Ly93d3cuYmVzdGJ1eS5jb20YByoWSC1Xc0syOTFIX0ZNNk1wZENLcnZGdzJIMzY5MDc1OTQ4MDQyLWdrdThib3Fzc29xbzViZG5rcGcyczQzbXNjZ3NrNjhpLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tOAFCQDI5NTJlMTI4ZmQ4MTYwYzJlYmE2ODRiMGIzZTQxM2FiNjgwMjVjOGVkYzNiMmM1ZTkxMDBiOTMwOTU5ZjA5MWQ',
+                idp_frame: 'POPUP',
+                idp_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-screenshot',
+                        object_name: '/bestbuy.com/21c83b09-3cf8-4e3e-a8a6-15012883bbd8.png',
+                        extension: 'png'
+                    }
+                },
+                element_coordinates_x: 779.5,
+                element_coordinates_y: 383,
+                element_width: 365,
+                element_height: 44,
+                element_inner_text: '',
+                element_outer_html: '<iframe src="https://accounts.google.com/gsi/button?type=button&size=large&width=345&logo_alignment=center&click_listener=function()%7Bu().trigger(p.kq)%7D&text=signin_with&is_fedcm_supported=false&client_id=369075948042-gku8boqssoqo5bdnkpg2s43mscgsk68i.apps.googleusercontent.com&iframe_id=gsi_523563_659018&cas=tE0sqkifNoOx5qyqrR5rmd8fG3mRIfvy87JIa%2Fv1iAg" allow="identity-credentials-get" id="gsi_523563_659018" title="Sign in with Google Button" style="display: block; position: relative; top: 0px; left: 0px; height: 44px; width: 365px; border: 0px; margin: -2px -10px;"></iframe>',
+                element_tree: [
+                    'IFRAME',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'DIV',
+                    'MAIN',
+                    'SECTION',
+                    'DIV',
+                    'DIV',
+                    'BODY',
+                    'HTML'
+                ],
+                element_tree_markup: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'element-tree-markup',
+                        object_name: '/bestbuy.com/655572c2-d6a3-47bb-b11b-af66e90881d2.json',
+                        extension: 'json'
+                    }
+                },
+                recognition_strategy: 'KEYWORD',
+                keyword_recognition_locator_mode: 'CSS',
+                keyword_recognition_candidates: 1,
+                keyword_recognition_hit_number_clicks: 1,
+                keyword_recognition_hit_keyword: '',
+                keyword_recognition_screenshot: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'keyword-recognition-screenshot',
+                        object_name: '/bestbuy.com/33414335-c1c2-44e2-9b2f-7ca6815dfb8a.png',
+                        extension: 'png'
+                    }
+                },
+                element_validity: 'HIGH',
+                login_page_url: 'https://www.bestbuy.com/login',
+                keyword_recognition_duration_seconds: 31.9128737449646,
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/ec79d741-ba15-439f-b840-fdf97965c70c.har',
+                        extension: 'har'
+                    }
+                },
+                idp_integration: 'CUSTOM'
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/5078a06e-ae87-4599-959a-e23dfbbf6662.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/01026e5d-40ed-4ca8-a479-35dc3f6f0f74.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/f3b28d48-848a-45d7-a6d7-456623816f7c.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/ac079ca2-c386-4113-980a-2b0c8aea4cd4.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/e4cfa53e-8c58-4268-8986-c12db3c90e7a.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/4a199818-d8dd-4446-8b7c-0a48d38e1857.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/1cd09a4e-1d46-4f64-9ab4-d9be46dd4ea6.har',
+                        extension: 'har'
+                    }
+                }
+            },
+            {
+                idp_name: 'MFA_GENERIC',
+                idp_sdk: 'SMS',
+                idp_integration: 'N/A',
+                idp_frame: 'SAME_WINDOW',
+                login_page_url: 'https://www.bestbuy.com/login',
+                element_validity: 'MEDIUM',
+                detection_method: 'MFA-KEYWORD',
+                mfa_type: 'SMS',
+                idp_har: {
+                    type: 'reference',
+                    data: {
+                        bucket_name: 'idp-har',
+                        object_name: '/bestbuy.com/cb4f8f0b-2f52-4c44-b911-b8ca43ff753e.har',
+                        extension: 'har'
+                    }
+                }
+            }
+        ],
+        recognized_navcreds: [
+            {
+                login_page_url: 'https://www.bestbuy.com/login',
+                function_name: 'get',
+                function_params: [
+                    {
+                        password: true
+                    }
+                ]
+            },
+            {
+                login_page_url: 'https://www.bestbuy.com/login',
+                function_name: 'get',
+                function_params: [
+                    {
+                        identity: {}
+                    }
+                ]
+            }
+        ],
+        recognized_lastpass_icons: [],
+        metadata_data: {
+            type: 'reference',
+            data: {
+                bucket_name: 'metadata-data',
+                object_name: '/bestbuy.com/d69ee9f6-daaf-4d00-b946-3b4e28f0db8a.json',
+                extension: 'json'
+            }
+        },
+        metadata_available: {
+            robots_txt: false,
+            security_txt: false,
+            webfinger: false,
+            openid_configuration: false,
+            oauth_authorization_server: false,
+            oauth_client: false,
+            web_identity: false,
+            browserid: false,
+            jwks: false,
+            uma2_configuration: false,
+            fido_configuration: false,
+            fido_2fa_configuration: false,
+            fido2_configuration: false,
+            apple_app_site_association: false,
+            assetlinks: false,
+            mfa_generic: true,
+            password_based: true,
+            apple: true,
+            google: true,
+            webauthn_api: true,
+            lastpass: false
+        }
+    }
+}
