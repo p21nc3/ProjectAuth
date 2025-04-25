@@ -91,8 +91,6 @@ services:
     dns:
       - 8.8.8.8
       - 8.8.4.4
-    extra_hosts:
-      - "rabbitmq:172.17.0.1"
     expose:
       - 8080
     ports:
@@ -123,7 +121,7 @@ services:
       - MINIO_EXTERNAL_DOMAIN=${MINIO_EXTERNAL_DOMAIN:-minio.docker.localhost}
       - JUPYTER_EXTERNAL_DOMAIN=${JUPYTER_EXTERNAL_DOMAIN:-jupyter.docker.localhost}
       # rabbitmq
-      - RABBITMQ_HOST=${RABBITMQ_HOST:-172.17.0.1}
+      - RABBITMQ_HOST=${RABBITMQ_HOST:-rabbitmq}
       - RABBITMQ_PORT=${RABBITMQ_PORT:-5672}
       - RABBITMQ_PORT_API=${RABBITMQ_PORT_API:-15672}
       # mongodb
@@ -157,8 +155,6 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
-    extra_hosts:
-      - "rabbitmq:172.17.0.1"
     volumes:
       - type: tmpfs
         target: /tmpfs
@@ -261,9 +257,9 @@ services:
     networks:
       - ProjectAuth-network
     expose:
-      - 8081
+      - 8082
     ports:
-      - 127.0.0.1:8081:8081
+      - 127.0.0.1:8082:8081
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.mongo-express.entrypoints=web,websecure"
@@ -281,22 +277,22 @@ services:
 
   minio:
     image: minio/minio:RELEASE.2023-12-14T18-51-57Z-cpuv1
-    command: server /data --console-address ":9090"
+    command: server /data --console-address ":9091"
     restart: unless-stopped
     networks:
       - ProjectAuth-network
     expose:
       - 9000
-      - 9090
+      - 9091
     ports:
       - 0.0.0.0:9000:9000
-      - 127.0.0.1:9090:9090
+      - 127.0.0.1:9091:9091
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.minio.entrypoints=web,websecure"
       - "traefik.http.routers.minio.rule=Host(`${MINIO_EXTERNAL_DOMAIN:-minio.docker.localhost}`)"
       - "traefik.http.routers.minio.tls.certresolver=letsencrypt"
-      - "traefik.http.services.minio.loadbalancer.server.port=9090"
+      - "traefik.http.services.minio.loadbalancer.server.port=9091"
     healthcheck:
       test: timeout 5s bash -c ':> /dev/tcp/127.0.0.1/9000' || exit 1
       interval: 10s
@@ -335,7 +331,7 @@ services:
     expose:
       - 8080
     ports:
-      - 127.0.0.1:8082:8080
+      - 127.0.0.1:8084:8080
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.searxng.entrypoints=web,websecure"
@@ -367,7 +363,7 @@ services:
     expose:
       - 8888
     ports:
-      - 127.0.0.1:8888:8888
+      - 127.0.0.1:8889:8888
     deploy:
       resources:
         limits:
