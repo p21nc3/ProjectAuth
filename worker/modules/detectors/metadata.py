@@ -174,6 +174,18 @@ class MetadataDetector:
         self.result["metadata_available"] = {}
         for k, v in self.result["metadata_data"].items():
             self.result["metadata_available"][k] = True if v else False
+            
+        # Add flattened information about recognized IDPs
+        recognized_idp_names = [idp.get("idp_name") for idp in self.result.get("recognized_idps", [])]
+        for idp_name in recognized_idp_names:
+            if idp_name:
+                self.result["metadata_available"][idp_name.lower()] = True
+        
+        # Add webauthn API if navigator credentials are used
+        self.result["metadata_available"]["webauthn_api"] = bool(self.result.get("recognized_navcreds", []))
+        
+        # Add lastpass if lastpass icon is detected
+        self.result["metadata_available"]["lastpass"] = bool(self.result.get("recognized_lastpass_icon", []))
 
 
     @staticmethod
