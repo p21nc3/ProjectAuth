@@ -26,6 +26,13 @@ class MFADetector:
         logger.info(f"Checking for MFA/2FA on: {url}")
         self.url = url
         
+        # Check if this URL already has an MFA detection to avoid duplicates
+        for idp in self.result.get("recognized_idps", []):
+            if (idp.get("idp_name") == "MFA_GENERIC" and 
+                idp.get("login_page_url") == url):
+                logger.info(f"MFA already detected for {url}, skipping")
+                return False, None
+        
         # First try to detect OTP input fields
         otp_input_found, otp_type = self._detect_otp_inputs()
         if otp_input_found:
@@ -80,6 +87,51 @@ class MFADetector:
         """
         Detect OTP input fields that suggest MFA/2FA
         """
+        # Check page context first to ensure we're looking at verification, not passkeys
+        try:
+            page_text = self.page.content().lower()
+            mfa_context_present = any(phrase in page_text for phrase in [
+                "verification code", 
+                "security code", 
+                "one-time code",
+                "2fa code",
+                "enter the code",
+                "enter code sent"
+            ])
+            
+            # If no clear MFA verification context, be more cautious
+            if not mfa_context_present:
+                # Check for specific text that clearly indicates we're in an MFA flow
+                # and not another security mechanism
+                mfa_headers = [
+                    'h1, h2, h3, h4, h5, h6, [role="heading"]'
+                ]
+                
+                mfa_header_found = False
+                for selector in mfa_headers:
+                    elements = self.page.query_selector_all(selector)
+                    for element in elements:
+                        header_text = element.inner_text().lower()
+                        if any(phrase in header_text for phrase in [
+                            "two-factor", 
+                            "2-factor", 
+                            "verification", 
+                            "verify your identity",
+                            "additional security",
+                            "security step"
+                        ]):
+                            mfa_header_found = True
+                            break
+                    if mfa_header_found:
+                        break
+                
+                # If we don't have a clear MFA context or header, be extra cautious with detection
+                if not mfa_header_found:
+                    logger.debug("No clear MFA context found, being more cautious with detection")
+        except Exception as e:
+            logger.debug(f"Error checking page context: {e}")
+            mfa_context_present = True  # Default to less cautious if we can't check
+
         # Look for common OTP input patterns
         otp_selectors = [
             'input[autocomplete="one-time-code"]',
@@ -104,21 +156,74 @@ class MFADetector:
                 elements = self.page.query_selector_all(selector)
                 if elements:
                     logger.debug(f"Found {len(elements)} OTP input elements with selector: {selector}")
-                    # Determine the type of MFA
-                    return True, self._determine_mfa_type()
+                    
+                    # Additional validation for non-specific selectors to reduce false positives
+                    if selector in ['input[name="code"]', 'input[placeholder*="code" i][maxlength="6"]'] and not mfa_context_present:
+                        # For general selectors, validate the element is actually for OTP
+                        # by checking surrounding labels/text
+                        valid_elements = []
+                        for element in elements:
+                            # Try to get label or surrounding text
+                            try:
+                                # Check nearby text for MFA context
+                                element_rect = element.bounding_box()
+                                surrounding_elements = self.page.query_selector_all(
+                                    'label, div, p, span'
+                                )
+                                for surr_el in surrounding_elements:
+                                    surr_rect = surr_el.bounding_box()
+                                    # Check if element is close to our input (within 100px)
+                                    if (surr_rect and element_rect and 
+                                        abs(surr_rect['x'] - element_rect['x']) < 150 and
+                                        abs(surr_rect['y'] - element_rect['y']) < 100):
+                                        surr_text = surr_el.inner_text().lower()
+                                        if any(term in surr_text for term in [
+                                            "verification", "code", "two-factor",
+                                            "2fa", "security", "authentication"
+                                        ]):
+                                            valid_elements.append(element)
+                                            break
+                            except Exception as e:
+                                logger.debug(f"Error checking element context: {e}")
+                        
+                        if valid_elements:
+                            logger.debug(f"Found {len(valid_elements)} validated OTP elements")
+                            return True, self._determine_mfa_type()
+                    else:
+                        # For specific OTP selectors, we can be more confident
+                        return True, self._determine_mfa_type()
             except Exception as e:
                 logger.debug(f"Error finding OTP input with selector {selector}: {e}")
         
-        # Check for segmented OTP inputs
-        for selector in segmented_otp_selectors:
-            try:
-                elements = self.page.query_selector_all(selector)
-                # Typically segmented inputs have 4-8 boxes
-                if elements and len(elements) >= 4:
-                    logger.debug(f"Found {len(elements)} segmented OTP input elements with selector: {selector}")
-                    return True, self._determine_mfa_type()
-            except Exception as e:
-                logger.debug(f"Error finding segmented OTP input with selector {selector}: {e}")
+        # Check for segmented OTP inputs only if we have MFA context
+        # These can be false positives for other input types
+        if mfa_context_present:
+            for selector in segmented_otp_selectors:
+                try:
+                    elements = self.page.query_selector_all(selector)
+                    # Typically segmented inputs have 4-8 boxes
+                    if elements and len(elements) >= 4:
+                        logger.debug(f"Found {len(elements)} segmented OTP input elements with selector: {selector}")
+                        
+                        # Additional check - verify these inputs are arranged horizontally
+                        # and have similar y-positions (indicating a code input row)
+                        if len(elements) >= 4:
+                            try:
+                                y_positions = []
+                                for element in elements:
+                                    box = element.bounding_box()
+                                    if box:
+                                        y_positions.append(box['y'])
+                                
+                                # If y positions are within 10px of each other, they're likely in a row
+                                if y_positions and max(y_positions) - min(y_positions) < 10:
+                                    return True, self._determine_mfa_type()
+                            except Exception as e:
+                                logger.debug(f"Error checking segmented input arrangement: {e}")
+                        else:
+                            return True, self._determine_mfa_type()
+                except Exception as e:
+                    logger.debug(f"Error finding segmented OTP input with selector {selector}: {e}")
                 
         return False, ""
 
@@ -132,7 +237,21 @@ class MFADetector:
             
             # Check for specific MFA indicators in the text
             totp_indicators = ["authenticator app", "google authenticator", "microsoft authenticator", "authy", "totp"]
-            sms_indicators = ["text message", "sms", "sent to your phone", "phone number"]
+            
+            # More specific SMS indicators tied to verification/MFA context
+            sms_indicators = [
+                "verification code via sms", 
+                "verification code by text", 
+                "send code to your phone",
+                "code sent to your phone",
+                "text message with a code",
+                "sms verification code",
+                "sms code",
+                "verification code by sms",
+                "security code via text",
+                "one-time code via sms"
+            ]
+            
             email_indicators = ["email code", "sent to your email", "check your inbox"]
             
             for indicator in totp_indicators:
@@ -147,10 +266,37 @@ class MFADetector:
                 if indicator in page_text:
                     return True, "EMAIL"
             
-            # General MFA indicators if specific type not found
-            general_indicators = self.mfa_keywords
-            for indicator in general_indicators:
+            # Only use general MFA indicators if they're clearly related to verification
+            # and not potentially part of passkey descriptions
+            mfa_specific_indicators = [
+                "enter verification code",
+                "enter the code sent",
+                "verification code input", 
+                "enter one-time code",
+                "enter security code",
+                "2-step verification code",
+                "two factor code",
+                "2fa code"
+            ]
+            
+            for indicator in mfa_specific_indicators:
                 if indicator in page_text:
+                    return True, "CUSTOM"
+            
+            # For general MFA keywords, check more carefully to avoid false positives
+            # Only detect if they're used in a clear verification context
+            for indicator in self.mfa_keywords:
+                # Skip very general terms that might appear in passkey contexts
+                if indicator in ["2fa", "mfa", "two-factor", "multi-factor"]:
+                    # These need to be in a verification context
+                    verification_context = any(ctx in page_text for ctx in [
+                        "enter code", "input code", "verification step", 
+                        "additional step", "second step"
+                    ])
+                    if indicator in page_text and verification_context:
+                        return True, "CUSTOM"
+                # For more specific indicators, we can trust them more
+                elif indicator in page_text:
                     return True, "CUSTOM"
                     
         except Exception as e:
@@ -190,7 +336,17 @@ class MFADetector:
             
             if any(keyword in page_text for keyword in ["authenticator", "totp", "google authenticator", "microsoft authenticator", "authy"]):
                 return "TOTP"
-            elif any(keyword in page_text for keyword in ["sms", "text message", "phone"]):
+            # More specific SMS detection that requires clear MFA context
+            elif any(phrase in page_text for phrase in [
+                "verification code via sms", 
+                "verification code by text", 
+                "send code to your phone",
+                "code sent to your phone",
+                "text message with a code",
+                "sms verification code",
+                "sms code",
+                "security code via text"
+            ]):
                 return "SMS"
             elif any(keyword in page_text for keyword in ["email", "inbox"]):
                 return "EMAIL"

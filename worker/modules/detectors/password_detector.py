@@ -24,6 +24,13 @@ class PasswordDetector:
         logger.info(f"Checking for password form fields on: {url}")
         self.url = url
         
+        # Check if this URL already has a password form detection to avoid duplicates
+        for idp in self.result.get("recognized_idps", []):
+            if (idp.get("idp_name") == "PASSWORD_BASED" and 
+                idp.get("login_page_url") == url):
+                logger.info(f"Password form already detected for {url}, skipping")
+                return False, None
+        
         # Look for username/email field
         username_selectors = [
             'input[type="text"][name="username"]',
