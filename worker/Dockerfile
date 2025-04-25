@@ -40,3 +40,11 @@ RUN chmod +x /app/start.sh
 
 # Set up the default display
 ENV DISPLAY=:99
+
+# Set memory management environment variables to avoid segfaults
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV PYTHONMALLOC=malloc
+
+# Increase browser limits
+ENV PLAYWRIGHT_BROWSERS_PATH_ENV_VAR=/ms-playwright
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=0

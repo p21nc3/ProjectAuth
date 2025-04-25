@@ -142,7 +142,7 @@ services:
     restart: unless-stopped
     init: true
     ipc: host
-    shm_size: 4gb
+    shm_size: 8gb
     security_opt:
       - seccomp=./worker/seccomp_profile.json
     depends_on:
@@ -159,11 +159,11 @@ services:
       - type: tmpfs
         target: /tmpfs
         tmpfs:
-          size: 1g
+          size: 2g
       - type: tmpfs
         target: /dev/shm
         tmpfs:
-          size: 4g
+          size: 8g
     ulimits:
       memlock: -1
       stack: 67108864
@@ -172,9 +172,9 @@ services:
       replicas: 2
       resources:
         limits:
-          memory: 8G
+          memory: 12G
         reservations:
-          memory: 4G
+          memory: 6G
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
       - TMP_PATH=${TMP_PATH:-/tmpfs}

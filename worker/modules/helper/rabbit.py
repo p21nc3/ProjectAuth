@@ -71,19 +71,34 @@ class RabbitHelper:
         tres["task_config"]["task_state"] = "REQUEST_RECEIVED"
         tres["task_config"]["task_timestamp_request_received"] = time.time()
 
-        pool = multiprocessing.Pool(processes=1)
+        # Set resource limits for multiprocessing to avoid memory issues
+        import resource
+        # Limit the process to 8GB virtual memory (includes swap)
+        resource.setrlimit(resource.RLIMIT_AS, (8 * 1024 * 1024 * 1024, 10 * 1024 * 1024 * 1024))
+
+        # Use a more robust method with proper process isolation
+        pool = multiprocessing.Pool(processes=1, maxtasksperchild=1)
         workers = pool.apply_async(self.analyzer_process, args=(self.analysis, tres["domain"], tres[f"{self.analysis}_config"]))
 
         try:
-            tres[f"{self.analysis}_result"] = workers.get(timeout=60*60*3) # 3 hours
+            # Reduce timeout to avoid long-running processes that may cause memory issues
+            tres[f"{self.analysis}_result"] = workers.get(timeout=60*60*2) # 2 hours
             logger.info(f"Process finished executing message on queue: {self.queue}")
         except multiprocessing.TimeoutError:
             logger.error(f"Process timeout executing message on queue: {self.queue}")
             tres[f"{self.analysis}_result"] = {"exception": "Process timeout"}
+            # Make sure we terminate the pool properly
+            pool.terminate()
+        except Exception as e:
+            logger.error(f"Unexpected error in process execution: {e}")
+            tres[f"{self.analysis}_result"] = {"exception": f"Process error: {e}"}
             pool.terminate()
         finally:
             pool.close()
             pool.join()
+            # Force Python garbage collection
+            import gc
+            gc.collect()
 
         tres["task_config"]["task_state"] = "RESPONSE_SENT"
         tres["task_config"]["task_timestamp_response_sent"] = time.time()

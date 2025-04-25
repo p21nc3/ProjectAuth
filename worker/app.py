@@ -1,6 +1,9 @@
 import os
 import time
 import logging
+import gc
+import threading
+import psutil
 from modules.helper.rabbit import RabbitHelper
 
 
@@ -25,8 +28,39 @@ logging.basicConfig(
 )
 
 
+# Memory monitoring thread
+def monitor_memory():
+    """
+    Monitor memory usage and perform periodic cleanup
+    """
+    while True:
+        try:
+            process = psutil.Process(os.getpid())
+            memory_info = process.memory_info()
+            memory_percent = process.memory_percent()
+            
+            logger.info(f"Memory usage: {memory_info.rss / 1024 / 1024:.2f} MB ({memory_percent:.1f}%)")
+            
+            # Force garbage collection periodically
+            collected = gc.collect()
+            logger.debug(f"Garbage collected {collected} objects")
+            
+            # Check if memory usage is too high, restart RabbitMQ connection if needed
+            if memory_percent > 80:
+                logger.warning(f"Memory usage is high: {memory_percent:.1f}%. Consider restarting the worker.")
+                
+            time.sleep(300)  # Check every 5 minutes
+        except Exception as e:
+            logger.error(f"Error in memory monitoring: {e}")
+            time.sleep(600)  # Wait longer if there was an error
+
+
 # main
 def main():
+    # Start memory monitoring in background
+    memory_thread = threading.Thread(target=monitor_memory, daemon=True)
+    memory_thread.start()
+    
     rabbit = None
     while True:
         try:
@@ -43,6 +77,8 @@ def main():
         except Exception as e:
             logger.error(f"Error consuming messages on: {RABBITMQ_QUEUE}")
             logger.debug(e)
+            # Force garbage collection on error
+            gc.collect()
             time.sleep(30)
     rabbit.connection.close()
 
