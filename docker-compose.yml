@@ -6,7 +6,7 @@ services:
     image: traefik:v2.10
     restart: unless-stopped
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 80
       - 443
@@ -87,7 +87,7 @@ services:
       redis:
         condition: service_healthy
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 8080
     ports:
@@ -145,7 +145,7 @@ services:
       searxng:
         condition: service_healthy
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     dns:
       - 1.1.1.1
       - 1.0.0.1
@@ -174,7 +174,7 @@ services:
     image: rabbitmq:3.12-management
     restart: unless-stopped
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 5672
       - 15672
@@ -211,7 +211,7 @@ services:
     image: mongo:4.4.6
     restart: unless-stopped
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 27017
     ports:
@@ -231,7 +231,7 @@ services:
       mongodb:
         condition: service_healthy
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 8081
     ports:
@@ -256,7 +256,7 @@ services:
     command: server /data --console-address ":9090"
     restart: unless-stopped
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 9000
       - 9090
@@ -286,7 +286,7 @@ services:
     command: redis-server --save 60 1 --loglevel warning
     restart: unless-stopped
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 6379
     ports:
@@ -303,7 +303,7 @@ services:
     image: searxng/searxng:2023.12.11-8a4104b99
     restart: unless-stopped
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 8080
     ports:
@@ -335,7 +335,7 @@ services:
       minio:
         condition: service_healthy
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 8888
     ports:
@@ -366,8 +366,8 @@ services:
       - MINIO_PORT=${MINIO_PORT:-9000}
 
 networks:
-  sso-monitor-network:
-    name: sso-monitor-network
+  ProjectAuth-network:
+    name: ProjectAuth-network
 
 volumes:
   db:

@@ -3,7 +3,7 @@ services:
     image: grafana/grafana-oss:9.3.6
     restart: unless-stopped
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 3000
     labels:
@@ -21,7 +21,7 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
     restart: unless-stopped
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 9090
     volumes:
@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
     pid: host
     networks:
-      - sso-monitor-network
+      - ProjectAuth-network
     expose:
       - 9100
     volumes:
@@ -47,6 +47,6 @@ volumes:
 
 
 networks:
-  sso-monitor-network:
-    name: sso-monitor-network
+  ProjectAuth-network:
+    name: ProjectAuth-network
     external: true

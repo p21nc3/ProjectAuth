@@ -110,7 +110,7 @@ class WildcardReceiverAnalyzer:
                     auto_consent.load_idp_cookies()
 
                     # navigate to attacker page
-                    attacker_url = "https://mock.sso-monitor.me"
+                    attacker_url = "https://mock.ProjectAuth.me"
                     logger.info(f"Navigate to attacker page: {attacker_url}")
                     PlaywrightHelper.navigate(page, attacker_url, self.browser_config)
 

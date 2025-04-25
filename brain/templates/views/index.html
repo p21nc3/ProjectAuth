@@ -5,7 +5,7 @@
 
     <div class="row mb-4">
         <div class="col mb-4 bg-light rounded-3 text-center">
-            <h1 class="my-4" style="font-variant: small-caps; font-weight: bold;">SSO-Monitor</h1>
+            <h1 class="my-4" style="font-variant: small-caps; font-weight: bold;">ProjectAuth</h1>
             <h2 class="my-4">A Reliable, Reproducible, and Research-Oriented<br>Single Sign-On Archive for Landscape and Security Measurements</h2>
             <div>
                 <a class="btn btn-success btn-lg me-2 mb-4" href="/archive">Explore the <b>Archive</b></a>
@@ -21,7 +21,7 @@
             <h3>Abstract</h3>
             <p>Single Sign-On (SSO) with OAuth 2.0 and OpenID Connect 1.0 is essential for user authentication and authorization on the Internet. Billions of users worldwide rely on SSO services provided by Google, Facebook, and Apple. In the last decade, researchers provided a plethora of measurements and made significant contributions to the security of SSO.</p>
             <p>For large-scale measurements on the security of SSO, researchers need to reliably detect SSO implementations in the wild. Unfortunately, we discover gaps in prior work leading to blind spots in the SSO landscape that hinder the community to improve on large-scale research. We also observe insufficient measurements and an overall lack of reproducibility, making comparisons between distinct studies difficult, if not impossible.</p>
-            <p>To fill these gaps, we introduce SSO-Monitor &mdash; our open-source, modular, and highly extensible framework for large-scale SSO landscape and security measurements. SSO-Monitor achieves a high accuracy of 93% and, compared to prior tools, significantly improves the reliability of SSO detection techniques by 19%. It continuously takes snapshots of the SSO landscape for the top 1M websites to compose an SSO archive that is reproducible by design. Therefore, it passively monitors the SSO flows and provides an extensive set of landscape and security insights on <a href="https://sso-monitor.me">sso-monitor.me</a>. Our archive and framework allows researchers to conduct comprehensive measurements over time and even beyond the scope of SSO.</p>
+            <p>To fill these gaps, we introduce ProjectAuth &mdash; our open-source, modular, and highly extensible framework for large-scale SSO landscape and security measurements. ProjectAuth achieves a high accuracy of 93% and, compared to prior tools, significantly improves the reliability of SSO detection techniques by 19%. It continuously takes snapshots of the SSO landscape for the top 1M websites to compose an SSO archive that is reproducible by design. Therefore, it passively monitors the SSO flows and provides an extensive set of landscape and security insights on <a href="https://ProjectAuth.me">ProjectAuth.me</a>. Our archive and framework allows researchers to conduct comprehensive measurements over time and even beyond the scope of SSO.</p>
             <p>We used the data in our SSO archive to measure the security of 89k SSO authentication flows on the top 1M websites. Thereby, we discovered 48 575 violations of the OAuth Security Best Current Practices and 339 security and privacy vulnerabilities, including 30 username and password leaks.</p>
         </div>
     </div>
@@ -89,12 +89,12 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTool">
-                            What is SSO-Monitor?
+                            What is ProjectAuth?
                         </button>
                     </h2>
                     <div id="collapseTool" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>SSO-Monitor is an open-source tool that continuously iterates over millions of websites to monitor the SSO landscape across the web. Therefore, it regularly visits websites, determines their login pages, and checks whether they support Single Sign-On on their login pages. Currently, it can detect SSO logins with 10 of the most commonly used IdPs, such as Google, Facebook, Apple, Twitter, LinkedIn, and Github.</p>
+                            <p>ProjectAuth is an open-source tool that continuously iterates over millions of websites to monitor the SSO landscape across the web. Therefore, it regularly visits websites, determines their login pages, and checks whether they support Single Sign-On on their login pages. Currently, it can detect SSO logins with 10 of the most commonly used IdPs, such as Google, Facebook, Apple, Twitter, LinkedIn, and Github.</p>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                     </h2>
                     <div id="collapseArchiveVsMonitor" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>The SSO archive is our central collection and long-term storage of artifacts and data, including every component of this website that lets you explore or download our archived data. SSO-Monitor is the tool that generates the data that is fed into our SSO archive. You can think of our SSO archive as the <a href="https://tranco-list.eu/">Tranco Top Sites Ranking</a> and the <a href="https://web.archive.org/">Internet Archive's Wayback Machine</a> but for Single Sign-On research.</p>
+                            <p>The SSO archive is our central collection and long-term storage of artifacts and data, including every component of this website that lets you explore or download our archived data. ProjectAuth is the tool that generates the data that is fed into our SSO archive. You can think of our SSO archive as the <a href="https://tranco-list.eu/">Tranco Top Sites Ranking</a> and the <a href="https://web.archive.org/">Internet Archive's Wayback Machine</a> but for Single Sign-On research.</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                     </h2>
                     <div id="collapseLpDetection" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>SSO-Monitor executes the following steps to determine login pages of websites:</p>
+                            <p>ProjectAuth executes the following steps to determine login pages of websites:</p>
                             <ol>
                                 <li>It navigates to the website and checks whether it is reachable.</li>
                                 <li>
@@ -143,7 +143,7 @@
                     </h2>
                     <div id="collapseSsoDetection" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>SSO-Monitor executes the following steps to detect SSO buttons on login pages:</p>
+                            <p>ProjectAuth executes the following steps to detect SSO buttons on login pages:</p>
                             <ol>
                                 <li>It navigates to the login page and checks whether it is reachable.</li>
                                 <li>
@@ -168,7 +168,7 @@
                     </h2>
                     <div id="collapseIdps" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>SSO-Monitor currently detects the following IdPs: Apple, Facebook, Google, Twitter, LinkedIn, Microsoft, Baidu, Github, QQ, Sina Weibo, WeChat, Passkey authentication, Multi-factor authentication, and traditional password-based authentication.</p>
+                            <p>ProjectAuth currently detects the following IdPs: Apple, Facebook, Google, Twitter, LinkedIn, Microsoft, Baidu, Github, QQ, Sina Weibo, WeChat, Passkey authentication, Multi-factor authentication, and traditional password-based authentication.</p>
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                     </h2>
                     <div id="collapsePassword" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>Yes, SSO-Monitor also detects username and password logins by integrating the <a href="https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd">LastPass password manager</a>. Password managers already use sophisticated algorithms to find username and password fields. These algorithms go beyond checking the <code>type</code> attributes of <code>&lt;input&gt;</code> fields. Lastpass is the most downloaded password manager with over 10 million users in the Chrome web store and has been extensively studied in academic research. The extension injects a uniquely identifiable icon into all username and password fields, allowing SSO-Monitor to identify all fields.</p>
+                            <p>Yes, ProjectAuth also detects username and password logins by integrating the <a href="https://chrome.google.com/webstore/detail/lastpass-free-password-ma/hdokiejnpimakedhajhdlcegeplioahd">LastPass password manager</a>. Password managers already use sophisticated algorithms to find username and password fields. These algorithms go beyond checking the <code>type</code> attributes of <code>&lt;input&gt;</code> fields. Lastpass is the most downloaded password manager with over 10 million users in the Chrome web store and has been extensively studied in academic research. The extension injects a uniquely identifiable icon into all username and password fields, allowing ProjectAuth to identify all fields.</p>
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                     </h2>
                     <div id="collapseWebauthn" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>SSO-Monitor has limited support for WebAuthn and passkey detection. It hooks the <code>navigator.credentials</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/credentials">browser API</a> to detect if a website requests a <code>PublicKeyCredential</code> for WebAuthn or passkey authentication. Thereby, it can detect if a website starts the WebAuthn or passkey authentication. However, many websites commonly require some sort of user interaction before starting the WebAuthn or passkey authentication. For instance, websites require users to submit their usernames before the authentication process is started. Currently, SSO-Monitor does not explicitly scan for WebAuthn or passkey authentication but we plan to extend SSO-Monitor with full support for WebAuthn and passkey detection in the coming months.</p>
+                            <p>ProjectAuth has limited support for WebAuthn and passkey detection. It hooks the <code>navigator.credentials</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/credentials">browser API</a> to detect if a website requests a <code>PublicKeyCredential</code> for WebAuthn or passkey authentication. Thereby, it can detect if a website starts the WebAuthn or passkey authentication. However, many websites commonly require some sort of user interaction before starting the WebAuthn or passkey authentication. For instance, websites require users to submit their usernames before the authentication process is started. Currently, ProjectAuth does not explicitly scan for WebAuthn or passkey authentication but we plan to extend ProjectAuth with full support for WebAuthn and passkey detection in the coming months.</p>
                         </div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
                     </h2>
                     <div id="collapseWeb" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>A lot of web security research has focused on the unauthenticated web. Large-scale measurements on the authenticated web are hard as account logins and registrations have to be automated. Recent research has already started initial studies of the authenticated web. However, they all implemented closed-source tools or did not provide their artifacts in a reliable and reproducible manner. We see our open-source SSO archive and the SSO-Monitor tool as a baseline for future measurements on the authenticated web. In fact, we already provide the HTTP traffic of login processes, and we extended SSO-Monitor to execute the full SSO login with Google on any website. As a result, post-login security measurements such as security attributes of session cookies and secure storage of tokens in the browser can be already conducted on the data in our SSO archive. We also pave the way for active measurements on the authenticated web with SSO-Monitor's extensible architecture and automatic SSO login support.</p>
+                            <p>A lot of web security research has focused on the unauthenticated web. Large-scale measurements on the authenticated web are hard as account logins and registrations have to be automated. Recent research has already started initial studies of the authenticated web. However, they all implemented closed-source tools or did not provide their artifacts in a reliable and reproducible manner. We see our open-source SSO archive and the ProjectAuth tool as a baseline for future measurements on the authenticated web. In fact, we already provide the HTTP traffic of login processes, and we extended ProjectAuth to execute the full SSO login with Google on any website. As a result, post-login security measurements such as security attributes of session cookies and secure storage of tokens in the browser can be already conducted on the data in our SSO archive. We also pave the way for active measurements on the authenticated web with ProjectAuth's extensible architecture and automatic SSO login support.</p>
                         </div>
                     </div>
                 </div>
@@ -253,7 +253,7 @@
                     </h2>
                     <div id="collapseOS" class="accordion-collapse collapse" data-bs-parent="#accordionFaq">
                         <div class="accordion-body">
-                            <p>Yes, SSO-Monitor is <a href="/code">open-source</a> (soon on Github) and will be actively maintained for research purposes. Our SSO archive contains all data and is provided throughout this website in various formats, i.e., as downloadable JSON files or via APIs that can be filtered with queries.</p>
+                            <p>Yes, ProjectAuth is <a href="/code">open-source</a> (soon on Github) and will be actively maintained for research purposes. Our SSO archive contains all data and is provided throughout this website in various formats, i.e., as downloadable JSON files or via APIs that can be filtered with queries.</p>
                         </div>
                     </div>
                 </div>
