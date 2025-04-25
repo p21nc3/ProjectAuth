@@ -353,11 +353,21 @@ class LandscapeAnalyzer:
             # fallback if no integration matches
             self.result["recognized_idps"][i]["idp_integration"] = "N/A"
 
+            # Skip if idp_login_request doesn't exist
+            if "idp_login_request" not in idp or not idp["idp_login_request"]:
+                logger.info(f"Skipping SDK detection for {idp['idp_name']} - no login request available")
+                continue
+                
+            # Skip if idp_name is not in IdpRules or doesn't have sdks
+            if idp["idp_name"] not in IdpRules or "sdks" not in IdpRules[idp["idp_name"]]:
+                logger.info(f"Skipping SDK detection for {idp['idp_name']} - no SDK rules available")
+                continue
+
             # use first integration rule that matches
             for integration, rules in IdpRules[idp["idp_name"]]["sdks"].items():
                 logger.info(f"Matching login request against rule: {idp['idp_login_request']} <-> {rules['login_request_rule']}")
 
-                if idp["idp_login_request"] and URLHelper.match_url(
+                if URLHelper.match_url(
                     idp["idp_login_request"],
                     rules["login_request_rule"]["domain"],
                     rules["login_request_rule"]["path"],
