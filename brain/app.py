@@ -26,6 +26,19 @@ def create_app():
     app.register_blueprint(bp_views)
     app.register_blueprint(bp_api)
 
+    # Configure app with initialization
+    with app.app_context():
+        # Initialize database indexes
+        try:
+            from blueprints.api.bp_init import initialize_database
+            if initialize_database(app.config["db"]):
+                app.logger.info("Database initialization completed successfully")
+            else:
+                app.logger.warning("Database initialization completed with warnings")
+        except Exception as e:
+            app.logger.error(f"Error during app initialization: {e}")
+            # Continue anyway as this shouldn't stop the app from functioning
+
     return app
 
 # Standard WSGI handler for production deployments
