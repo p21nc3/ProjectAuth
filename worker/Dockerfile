@@ -35,5 +35,8 @@ RUN pipenv install --system
 # copy app
 COPY . .
 
+# Make start.sh executable
+RUN chmod +x /app/start.sh
+
 # Set up the default display
 ENV DISPLAY=:99

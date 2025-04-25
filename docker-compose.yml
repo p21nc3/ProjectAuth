@@ -144,11 +144,13 @@ services:
     restart: unless-stopped
     init: true
     ipc: host
-    shm_size: 2gb
+    shm_size: 4gb
     security_opt:
       - seccomp=./worker/seccomp_profile.json
     depends_on:
       searxng:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     networks:
       - ProjectAuth-network
@@ -160,18 +162,23 @@ services:
     volumes:
       - type: tmpfs
         target: /tmpfs
+        tmpfs:
+          size: 1g
       - type: tmpfs
         target: /dev/shm
         tmpfs:
-          size: 2g
+          size: 4g
+    ulimits:
+      memlock: -1
+      stack: 67108864
     deploy:
       mode: replicated
       replicas: 2
       resources:
         limits:
-          memory: 4G
+          memory: 8G
         reservations:
-          memory: 2G
+          memory: 4G
     environment:
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
       - TMP_PATH=${TMP_PATH:-/tmpfs}
@@ -181,7 +188,7 @@ services:
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASS=${ADMIN_PASS:-changeme}
       # rabbitmq
-      - RABBITMQ_HOST=${RABBITMQ_HOST:-172.17.0.1}
+      - RABBITMQ_HOST=${RABBITMQ_HOST:-rabbitmq}
       - RABBITMQ_PORT=${RABBITMQ_PORT:-5672}
       - RABBITMQ_TLS=${RABBITMQ_TLS:-0}
       - RABBITMQ_QUEUE=${RABBITMQ_QUEUE:-landscape_analysis_treq}
