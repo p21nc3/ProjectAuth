@@ -213,7 +213,7 @@ def get_auth_stats():
     try:
         # Get counts for each authentication type
         passkey_count = db["landscape_analysis_tres"].count_documents({
-            "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY"
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY BUTTON"
         })
         
         mfa_count = db["landscape_analysis_tres"].count_documents({

@@ -184,8 +184,14 @@ class MetadataDetector:
         # Add webauthn API if navigator credentials are used
         self.result["metadata_available"]["webauthn_api"] = bool(self.result.get("recognized_navcreds", []))
         
+        # Add passkey if it was detected
+        self.result["metadata_available"]["passkey"] = any(
+            idp.get("idp_name") == "PASSKEY BUTTON" 
+            for idp in self.result.get("recognized_idps", [])
+        )
+        
         # Add lastpass if lastpass icon is detected
-        self.result["metadata_available"]["lastpass"] = bool(self.result.get("recognized_lastpass_icon", []))
+        self.result["metadata_available"]["lastpass"] = len(self.result.get("recognized_lastpass_icons", [])) > 0
 
 
     @staticmethod
