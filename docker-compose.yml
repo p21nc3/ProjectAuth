@@ -88,10 +88,15 @@ services:
         condition: service_healthy
     networks:
       - ProjectAuth-network
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    extra_hosts:
+      - "rabbitmq:172.17.0.1"
     expose:
       - 8080
     ports:
-      - 127.0.0.1:8080:8080
+      - 127.0.0.1:8083:8080
     healthcheck:
       test: curl -f http://localhost:8080/api/ping
       interval: 10s
@@ -118,7 +123,7 @@ services:
       - MINIO_EXTERNAL_DOMAIN=${MINIO_EXTERNAL_DOMAIN:-minio.docker.localhost}
       - JUPYTER_EXTERNAL_DOMAIN=${JUPYTER_EXTERNAL_DOMAIN:-jupyter.docker.localhost}
       # rabbitmq
-      - RABBITMQ_HOST=${RABBITMQ_HOST:-rabbitmq}
+      - RABBITMQ_HOST=${RABBITMQ_HOST:-172.17.0.1}
       - RABBITMQ_PORT=${RABBITMQ_PORT:-5672}
       - RABBITMQ_PORT_API=${RABBITMQ_PORT_API:-15672}
       # mongodb
@@ -160,12 +165,12 @@ services:
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASS=${ADMIN_PASS:-changeme}
       # rabbitmq
-      - RABBITMQ_HOST=${RABBITMQ_HOST:-rabbitmq}
+      - RABBITMQ_HOST=${RABBITMQ_HOST:-172.17.0.1}
       - RABBITMQ_PORT=${RABBITMQ_PORT:-5672}
       - RABBITMQ_TLS=${RABBITMQ_TLS:-0}
       - RABBITMQ_QUEUE=${RABBITMQ_QUEUE:-landscape_analysis_treq}
       # urls
-      - BRAIN_URL=${BRAIN_URL:-http://brain:8080}
+      - BRAIN_URL=${BRAIN_URL:-http://brain:8083}
       - SEARXNG_URL=${SEARXNG_URL:-http://searxng:8080}
 
   rabbitmq:
