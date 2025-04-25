@@ -139,8 +139,6 @@ services:
     restart: unless-stopped
     init: true
     ipc: host
-    security_opt:
-      - seccomp=./worker/seccomp_profile.json
     depends_on:
       searxng:
         condition: service_healthy
