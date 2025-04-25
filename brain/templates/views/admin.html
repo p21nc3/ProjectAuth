@@ -31,7 +31,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center gap-3">
                             <span class="badge bg-primary">PASSKEY</span>
-                            <h2 class="mb-0">N/A</h2>
+                            <h2 class="mb-0">{{ passkey_count|default('0') }}</h2>
                         </div>
                         <div class="avatar">
                             <div class="avatar-initial bg-label-success rounded">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <span class="fw-semibold d-block mb-1">Passkey Auth</span>
-                    <small class="text-muted">New detection type</small>
+                    <small class="text-muted">WebAuthn-based detection</small>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center gap-3">
                             <span class="badge bg-primary">MFA</span>
-                            <h2 class="mb-0">N/A</h2>
+                            <h2 class="mb-0">{{ mfa_count|default('0') }}</h2>
                         </div>
                         <div class="avatar">
                             <div class="avatar-initial bg-label-warning rounded">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <span class="fw-semibold d-block mb-1">MFA Required</span>
-                    <small class="text-muted">Multi-phase detection</small>
+                    <small class="text-muted">TOTP, SMS, Email, QR</small>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center gap-3">
                             <span class="badge bg-primary">PASSWORD</span>
-                            <h2 class="mb-0">N/A</h2>
+                            <h2 class="mb-0">{{ password_count|default('0') }}</h2>
                         </div>
                         <div class="avatar">
                             <div class="avatar-initial bg-label-danger rounded">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <span class="fw-semibold d-block mb-1">Password Auth</span>
-                    <small class="text-muted">Legacy detection</small>
+                    <small class="text-muted">Username/Email + Password</small>
                 </div>
             </div>
         </div>
