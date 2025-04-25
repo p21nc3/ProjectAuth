@@ -38,7 +38,34 @@ def sso_list():
 
 @bp_views.get("/admin")
 def admin():
-    return render_template("views/admin.html", config=current_app.config)
+    db = current_app.config["db"]
+    
+    # Get authentication stats with error handling
+    try:
+        passkey_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY"
+        })
+        
+        mfa_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "MFA_GENERIC"
+        })
+        
+        password_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSWORD_BASED"
+        })
+    except Exception as e:
+        current_app.logger.error(f"Error fetching authentication stats: {e}")
+        passkey_count = 0
+        mfa_count = 0
+        password_count = 0
+    
+    return render_template(
+        "views/admin.html", 
+        config=current_app.config,
+        passkey_count=passkey_count,
+        mfa_count=mfa_count,
+        password_count=password_count
+    )
 
 
 @bp_views.get("/info")

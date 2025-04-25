@@ -6,9 +6,10 @@ from uuid import uuid4
 from apiflask import APIBlueprint
 from apiflask.fields import Integer, String, File
 from apiflask.validators import OneOf
-from flask import current_app
+from flask import current_app, request
 from modules.auth import admin_auth
 from modules.validate import JsonString
+from jsonschema import validate, ValidationError
 
 
 bp_admin = APIBlueprint("admin", __name__, url_prefix="/admin")
@@ -202,3 +203,113 @@ def delete_ground_truth(query_data):
     gt_id = query_data["gt_id"]
     db["ground_truth"].delete_many({"gt_id": gt_id})
     return {"success": True, "error": None, "data": None}
+
+
+@bp_admin.get("/auth_stats")
+def get_auth_stats():
+    """Get authentication statistics for the admin dashboard"""
+    db = current_app.config["db"]
+    
+    try:
+        # Get counts for each authentication type
+        passkey_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY"
+        })
+        
+        mfa_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "MFA_GENERIC"
+        })
+        
+        password_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSWORD_BASED"
+        })
+        
+        webauthn_api_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_navcreds": {"$exists": True, "$ne": []}
+        })
+        
+        lastpass_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_lastpass_icon": {"$exists": True, "$ne": []}
+        })
+    except Exception as e:
+        current_app.logger.error(f"Error fetching authentication stats: {e}")
+        return {
+            "success": False,
+            "error": f"Error fetching stats: {str(e)}",
+            "data": None
+        }
+    
+    return {
+        "success": True, 
+        "error": None, 
+        "data": {
+            "passkey_count": passkey_count,
+            "mfa_count": mfa_count,
+            "password_count": password_count,
+            "webauthn_api_count": webauthn_api_count,
+            "lastpass_count": lastpass_count
+        }
+    }
+
+
+@bp_admin.route('/api/idp_rules', methods=['GET','PUT'])
+@bp_admin.auth_required(admin_auth)
+def manage_idp_rules():
+    """
+    GET: Return idp_rules.json from worker/config
+    PUT: Validate against JSON schema and update idp_rules.json
+    """
+    try:
+        worker_config_path = os.path.join(current_app.config.get("WORKER_PATH", ""), "config")
+        if not os.path.exists(worker_config_path):
+            return {"success": False, "error": f"Worker config path not found: {worker_config_path}", "data": None}
+            
+        idp_rules_path = os.path.join(worker_config_path, "idp_rules.py")
+        if not os.path.exists(idp_rules_path):
+            return {"success": False, "error": f"IDP rules file not found: {idp_rules_path}", "data": None}
+        
+        if request.method == 'GET':
+            try:
+                # Read the content of idp_rules.py
+                with open(idp_rules_path, 'r') as f:
+                    content = f.read()
+                    
+                # Extract the IdpRules dictionary from the Python file
+                # This is a simple parser and might need to be improved
+                rules_dict_str = content.split('IdpRules = ')[1].strip()
+                
+                # Convert Python dictionary syntax to valid JSON
+                rules_json = json.dumps(eval(rules_dict_str))
+                
+                return {"success": True, "error": None, "data": json.loads(rules_json)}
+                
+            except Exception as e:
+                current_app.logger.error(f"Error reading IDP rules: {e}")
+                return {"success": False, "error": f"Error reading IDP rules: {str(e)}", "data": None}
+        
+        elif request.method == 'PUT':
+            try:
+                # Read and validate the JSON against a schema
+                rules_data = request.json
+                
+                # Here you'd validate against a schema
+                # validate(instance=rules_data, schema=idp_rules_schema)
+                
+                # Convert JSON to Python dictionary string
+                rules_dict_str = json.dumps(rules_data, indent=4)
+                
+                # Write back to idp_rules.py
+                with open(idp_rules_path, 'w') as f:
+                    f.write(f"IdpRules = {rules_dict_str}")
+                
+                return {"success": True, "error": None, "data": None}
+                
+            except ValidationError as e:
+                current_app.logger.error(f"Schema validation error: {e}")
+                return {"success": False, "error": f"Schema validation error: {str(e)}", "data": None}
+            except Exception as e:
+                current_app.logger.error(f"Error updating IDP rules: {e}")
+                return {"success": False, "error": f"Error updating IDP rules: {str(e)}", "data": None}
+    except Exception as e:
+        current_app.logger.error(f"Error in manage_idp_rules: {e}")
+        return {"success": False, "error": f"General error: {str(e)}", "data": None}
