@@ -34579,7 +34579,7 @@ const EXPIRATION_INTERVAL = 1 * MILLIS_IN_DAY;
  * @type {string}
  * @default
  */
-const DEFAULT_LOCALE = "en-US";
+const DEFAULT_LOCALE = "en-GB";
 
 /**
  * Returns the numerical severity of a notification.

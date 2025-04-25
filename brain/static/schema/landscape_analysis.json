@@ -226,7 +226,7 @@
                         "locale": {
                             "type": "string",
                             "required": true,
-                            "default": "en-US",
+                            "default": "en-GB",
                             "title": "Locale"
                         },
                         "wait_for_networkidle": {
