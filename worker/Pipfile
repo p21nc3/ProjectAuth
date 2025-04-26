@@ -16,6 +16,10 @@ nested-lookup = "*"
 jsonschema = "*"
 python-dateutil = "*"
 url-normalize = "*"
+psutil = "*"  # For process management
+pyee = "*"  # Required by Playwright
+websockets = "*"  # Required by Playwright
+greenlet = "*"  # For async operations
 
 [dev-packages]
 
