@@ -32,6 +32,9 @@ ADD Pipfile .
 ADD Pipfile.lock .
 RUN pipenv install --system
 
+# Explicitly install psutil
+RUN pip install --no-cache-dir psutil
+
 # copy app
 COPY . .
 

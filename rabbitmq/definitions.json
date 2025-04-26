@@ -1,0 +1,46 @@
+{
+  "exchanges": [
+    {
+      "name": "dlx",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "policies": [
+    {
+      "name": "TTL",
+      "vhost": "/",
+      "pattern": ".*",
+      "apply-to": "queues",
+      "definition": {
+        "message-ttl": 86400000
+      },
+      "priority": 0
+    },
+    {
+      "name": "MaxLength",
+      "vhost": "/",
+      "pattern": ".*",
+      "apply-to": "queues",
+      "definition": {
+        "max-length": 1000000,
+        "max-length-bytes": 1073741824
+      },
+      "priority": 0
+    },
+    {
+      "name": "DLX",
+      "vhost": "/",
+      "pattern": ".*",
+      "apply-to": "queues",
+      "definition": {
+        "dead-letter-exchange": "dlx"
+      },
+      "priority": 0
+    }
+  ]
+} 

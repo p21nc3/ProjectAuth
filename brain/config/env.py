@@ -22,6 +22,10 @@ def config_env(app):
 
     app.config["MONGODB_HOST"] = os.environ.get("MONGODB_HOST", "mongodb")
     app.config["MONGODB_PORT"] = os.environ.get("MONGODB_PORT", "27017")
+    app.config["MONGODB_USERNAME"] = os.environ.get("MONGODB_USERNAME", app.config.get("ADMIN_USER", "admin"))
+    app.config["MONGODB_PASSWORD"] = os.environ.get("MONGODB_PASSWORD", app.config.get("ADMIN_PASS", "changeme"))
+    app.config["MONGODB_DATABASE"] = os.environ.get("MONGODB_DATABASE", "ProjectAuth")
+    app.config["MONGODB_AUTH_SOURCE"] = os.environ.get("MONGODB_AUTH_SOURCE", "admin")
 
     app.config["MINIO_HOST"] = os.environ.get("MINIO_HOST", "minio")
     app.config["MINIO_PORT"] = os.environ.get("MINIO_PORT", "9000")

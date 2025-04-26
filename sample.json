@@ -1,0 +1,373 @@
+{
+    "rank": 1,
+    "domain": "google.com",
+    "task_id": "a6baec7f-0b80-4a61-aed5-b1f38ad7102f",
+    "task_timestamp_response_received": 1688139801.19531,
+    "resolved": {
+      "reachable": true,
+      "domain": "www.google.com",
+      "url": "https://www.google.com/"
+    },
+    "timings": {
+      "resolve_duration_seconds": 1.51852631568909,
+      "login_page_detection_paths_duration_seconds": 4.87272882461548,
+      "login_page_detection_crawling_duration_seconds": 31.3630146980286,
+      "login_page_detection_metasearch_duration_seconds": 6.06169319152832,
+      "login_page_detection_sitemap_duration_seconds": 4.48026895523071,
+      "login_page_detection_homepage_duration_seconds": 0.00043344497680664,
+      "login_page_detection_duration_seconds": 46.7782878875732,
+      "lastpass_icon_detection_duration_seconds": 0.0193967819213867,
+      "login_page_analysis_duration_seconds": 125.361269235611,
+      "sso_button_detection_keyword_css_duration_seconds": 203.651937961578,
+      "sso_button_detection_logo_duration_seconds": 395.089804410934,
+      "sso_button_detection_duration_seconds": 1093.42782211304,
+      "sdk_detection_duration_seconds": 0.000177621841430664,
+      "metadata_detection_duration_seconds": 1.49802947044373,
+      "total_duration_seconds": 1268.58414149284
+    },
+    "login_page_candidates": [
+      {
+        "login_page_candidate": "https://www.google.com/account",
+        "login_page_strategy": "PATHS",
+        "login_page_priority": {
+          "regex": "/(accounts?|profiles?|users?)(/.*|\\?.*|\\#.*|\\s*)$",
+          "priority": 98
+        },
+        "resolved": {
+          "reachable": true,
+          "domain": "accounts.google.com",
+          "url": "https://accounts.google.com/v3/signin/identifier?dsh=S-1492354138%3A1688138649852775&continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AeDOFXjLviCo_ZJBtrjCNp425fZD6iUJz0s_4-vyUMYYA6uGNRJIdSx4KrqYbFRevcHoKNNne5egtg&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin",
+          "title": "Sign in - Google Accounts"
+        },
+        "content_type": "text/html",
+        "content_analyzable": {
+          "valid": true,
+          "error": null
+        },
+        "login_page_candidate_screenshot": {
+          "type": "reference",
+          "data": {
+            "bucket_name": "landscape-analysis",
+            "object_name": "/login-page-candidate-screenshot/google.com/cba1c130-34f4-4b99-8b52-9efd747b5a89.png",
+            "extension": "png"
+          }
+        }
+      },
+      {
+        "login_page_candidate": "https://accounts.google.com/ServiceLogin?continue=https://www.google.com/&ec=GAZAmgQ&hl=de&passive=true",
+        "login_page_strategy": "CRAWLING",
+        "login_page_locator_mode": "ANCHOR",
+        "login_page_priority": {
+          "regex": "/(accounts?|profiles?|users?)",
+          "priority": 88
+        },
+        "login_page_info": {
+          "x": 1788.953125,
+          "y": 12,
+          "width": 113.046875,
+          "height": 36,
+          "inner_text": "Anmelden",
+          "outer_html": "\u003Ca class=\"gb_oa gb_ld gb_Nd gb_le\" href=\"https://accounts.google.com/ServiceLogin?hl=de&amp;passive=true&amp;continue=https://www.google.com/&amp;ec=GAZAmgQ\" target=\"_top\"\u003E\u003Cspan class=\"gb_Jd\"\u003EAnmelden\u003C/span\u003E\u003C/a\u003E",
+          "href_attribute": "https://accounts.google.com/ServiceLogin?hl=de&passive=true&continue=https://www.google.com/&ec=GAZAmgQ",
+          "href_absolute": "https://accounts.google.com/ServiceLogin?hl=de&passive=true&continue=https://www.google.com/&ec=GAZAmgQ"
+        },
+        "resolved": {
+          "reachable": true,
+          "domain": "accounts.google.com",
+          "url": "https://accounts.google.com/v3/signin/identifier?dsh=S84646122%3A1688138687775931&continue=https%3A%2F%2Fwww.google.com%2F&ec=GAZAmgQ&hl=de&ifkv=AeDOFXiGSwhReArtoby4x0G-y_zQej6IrX_9iIuWQDavgvQ7xbkvFk567PI4jPGBF9zuglKC2CL_uA&passive=true&flowName=GlifWebSignIn&flowEntry=ServiceLogin",
+          "title": "Anmelden – Google Konten"
+        },
+        "content_type": "text/html",
+        "content_analyzable": {
+          "valid": true,
+          "error": null
+        },
+        "login_page_candidate_screenshot": {
+          "type": "reference",
+          "data": {
+            "bucket_name": "landscape-analysis",
+            "object_name": "/login-page-candidate-screenshot/google.com/c02bd267-47fd-4ef1-a1b9-d65be1192d2b.png",
+            "extension": "png"
+          }
+        }
+      },
+      {
+        "login_page_candidate": "https://accounts.google.com/v3/signin/identifier?continue=https://www.google.com/&dsh=S1325484217:1688138551787702&ec=GAZAmgQ&flowEntry=ServiceLogin&flowName=GlifWebSignIn&hl=de&ifkv=AeDOFXgI9AzE3P3LkpRgJ7GQotrFMTkxDL2BpA3VWNR7ou4BK8e_dFgVD33EeYLMwx8fsY5d_DlFIA&passive=true",
+        "login_page_strategy": "CRAWLING",
+        "login_page_locator_mode": "ELEMENT",
+        "login_page_priority": {
+          "regex": "/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$",
+          "priority": 99
+        },
+        "login_page_info": {
+          "x": 1788.953125,
+          "y": 12,
+          "width": 113.046875,
+          "height": 36,
+          "inner_text": "Anmelden",
+          "outer_html": "\u003Ca class=\"gb_oa gb_ld gb_Nd gb_le\" href=\"https://accounts.google.com/ServiceLogin?hl=de&amp;passive=true&amp;continue=https://www.google.com/&amp;ec=GAZAmgQ\" target=\"_top\"\u003E\u003Cspan class=\"gb_Jd\"\u003EAnmelden\u003C/span\u003E\u003C/a\u003E",
+          "login_page_frame": "TOPMOST",
+          "element_tree": [
+            "SPAN",
+            "A",
+            "DIV",
+            "DIV",
+            "DIV",
+            "DIV",
+            "DIV",
+            "DIV",
+            "BODY",
+            "HTML"
+          ]
+        },
+        "resolved": {
+          "reachable": true,
+          "domain": "accounts.google.com",
+          "url": "https://accounts.google.com/v3/signin/identifier?continue=https://www.google.com/&dsh=S1325484217:1688138551787702&ec=GAZAmgQ&flowEntry=ServiceLogin&flowName=GlifWebSignIn&hl=de&ifkv=AeDOFXgI9AzE3P3LkpRgJ7GQotrFMTkxDL2BpA3VWNR7ou4BK8e_dFgVD33EeYLMwx8fsY5d_DlFIA&passive=true",
+          "title": "Anmelden – Google Konten"
+        },
+        "content_type": "text/html",
+        "content_analyzable": {
+          "valid": true,
+          "error": null
+        },
+        "login_page_candidate_screenshot": {
+          "type": "reference",
+          "data": {
+            "bucket_name": "landscape-analysis",
+            "object_name": "/login-page-candidate-screenshot/google.com/a9ed593e-f1f5-4589-b310-a982b68d0eb1.png",
+            "extension": "png"
+          }
+        }
+      },
+      {
+        "login_page_candidate": "https://www.google.com/?/login/login",
+        "login_page_strategy": "METASEARCH",
+        "login_page_priority": {
+          "regex": "/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$",
+          "priority": 99
+        },
+        "login_page_info": {
+          "result_hit": 1,
+          "result_engines": [
+            "YAHOO",
+            "BING"
+          ],
+          "result_raw": {
+            "url": "https://www.google.com/?/login/login",
+            "title": "Google",
+            "content": "WebWe would like to show you a description here but the site won’t allow us.",
+            "engine": "bing",
+            "parsed_url": [
+              "https",
+              "www.google.com",
+              "/",
+              "",
+              "/login/login",
+              ""
+            ],
+            "template": "default.html",
+            "engines": [
+              "yahoo",
+              "bing"
+            ],
+            "positions": [1, 1],
+            "score": 4,
+            "category": "general",
+            "pretty_url": "https://www.google.com/?/login/login",
+            "open_group": true
+          }
+        },
+        "resolved": {
+          "reachable": true,
+          "domain": "www.google.com",
+          "url": "https://www.google.com/?/login/login",
+          "title": "Google"
+        },
+        "content_type": "text/html",
+        "content_analyzable": {
+          "valid": true,
+          "error": null
+        },
+        "login_page_candidate_screenshot": {
+          "type": "reference",
+          "data": {
+            "bucket_name": "landscape-analysis",
+            "object_name": "/login-page-candidate-screenshot/google.com/a4db2203-a426-41e1-bd75-69569aca5138.png",
+            "extension": "png"
+          }
+        }
+      },
+      {
+        "login_page_candidate": "https://accounts.google.com/Login",
+        "login_page_strategy": "METASEARCH",
+        "login_page_priority": {
+          "regex": "/(show|users?|web|sso)*[_\\-\\s]*(log|sign)[_\\-\\s]*(in|up|on)(/.*|\\?.*|\\#.*|\\s*)$",
+          "priority": 99
+        },
+        "login_page_info": {
+          "result_hit": 2,
+          "result_engines": [
+            "QWANT",
+            "BING"
+          ],
+          "result_raw": {
+            "url": "https://accounts.google.com/Login",
+            "title": "Sign in - Google Accounts",
+            "content": "WebNot your computer? Use a private browsing window to sign in. Learn more",
+            "engine": "bing",
+            "parsed_url": [
+              "https",
+              "accounts.google.com",
+              "/Login",
+              "",
+              "",
+              ""
+            ],
+            "template": "default.html",
+            "engines": [
+              "qwant",
+              "bing"
+            ],
+            "positions": [2, 1],
+            "score": 3,
+            "category": "general",
+            "pretty_url": "https://accounts.google.com/Login"
+          }
+        },
+        "resolved": {
+          "reachable": true,
+          "domain": "accounts.google.com",
+          "url": "https://accounts.google.com/v3/signin/identifier?dsh=S1443834514%3A1688138669740557&ifkv=AeDOFXhLeuQ8QFJTz8O22x2H0lLQXoxkjBLA6hSkz9qmsmF-jYZSWUD90wijtTdc2MGalgr7YmcfnA&flowName=GlifWebSignIn&flowEntry=ServiceLogin",
+          "title": "Sign in - Google Accounts"
+        },
+        "content_type": "text/html",
+        "content_analyzable": {
+          "valid": true,
+          "error": null
+        },
+        "login_page_candidate_screenshot": {
+          "type": "reference",
+          "data": {
+            "bucket_name": "landscape-analysis",
+            "object_name": "/login-page-candidate-screenshot/google.com/09f927c8-282b-4c30-bd6a-e601773953b4.png",
+            "extension": "png"
+          }
+        }
+      },
+      {
+        "login_page_candidate": "https://www.google.com/",
+        "login_page_strategy": "METASEARCH",
+        "login_page_priority": {
+          "regex": null,
+          "priority": 0
+        },
+        "login_page_info": {
+          "result_hit": 3,
+          "result_engines": [
+            "QWANT",
+            "YAHOO",
+            "BING"
+          ],
+          "result_raw": {
+            "url": "https://www.google.com",
+            "title": "Google",
+            "content": "Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for.",
+            "engine": "bing",
+            "parsed_url": [
+              "https",
+              "www.google.com",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "template": "default.html",
+            "engines": [
+              "qwant",
+              "yahoo",
+              "bing"
+            ],
+            "positions": [3, 3, 3],
+            "score": 3,
+            "category": "general",
+            "pretty_url": "https://www.google.com"
+          }
+        },
+        "resolved": {
+          "reachable": true,
+          "domain": "www.google.com",
+          "url": "https://www.google.com/",
+          "title": "Google"
+        },
+        "content_type": "text/html",
+        "content_analyzable": {
+          "valid": true,
+          "error": null
+        },
+        "login_page_candidate_screenshot": {
+          "type": "reference",
+          "data": {
+            "bucket_name": "landscape-analysis",
+            "object_name": "/login-page-candidate-screenshot/google.com/5a072b3e-dc09-4a50-9dc2-0d5abddc8170.png",
+            "extension": "png"
+          }
+        }
+      },
+      {
+        "login_page_candidate": "https://www.google.com/",
+        "login_page_strategy": "HOMEPAGE",
+        "login_page_priority": {
+          "regex": null,
+          "priority": 0
+        },
+        "resolved": {
+          "reachable": true,
+          "domain": "www.google.com",
+          "url": "https://www.google.com/",
+          "title": "Google"
+        },
+        "content_type": "text/html",
+        "content_analyzable": {
+          "valid": true,
+          "error": null
+        },
+        "login_page_candidate_screenshot": {
+          "type": "reference",
+          "data": {
+            "bucket_name": "landscape-analysis",
+            "object_name": "/login-page-candidate-screenshot/google.com/23b70184-675e-4912-afcb-b5c71f79afac.png",
+            "extension": "png"
+          }
+        }
+      }
+    ],
+    "recognized_idps": [],
+    "recognized_lastpass_icons": [],
+    "recognized_navcreds": [],
+    "metadata_available": {
+      "robots_txt": true,
+      "security_txt": true,
+      "webfinger": false,
+      "openid_configuration": false,
+      "oauth_authorization_server": false,
+      "oauth_client": false,
+      "web_identity": true,
+      "browserid": false,
+      "jwks": false,
+      "uma2_configuration": false,
+      "fido_configuration": false,
+      "fido_2fa_configuration": false,
+      "fido2_configuration": false,
+      "apple_app_site_association": false,
+      "assetlinks": false
+    },
+    "metadata_data": {
+      "type": "reference",
+      "data": {
+        "bucket_name": "landscape-analysis",
+        "object_name": "/metadata-data/google.com/036658f9-6fcb-4462-8973-cbd1a534aa2e.json",
+        "extension": "json"
+      }
+    }
+  }

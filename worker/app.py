@@ -4,6 +4,7 @@ import logging
 import gc
 import threading
 import psutil
+import re
 from modules.helper.rabbit import RabbitHelper
 
 
@@ -15,7 +16,19 @@ RABBITMQ_HOST = os.environ.get("RABBITMQ_HOST", "rabbitmq")
 RABBITMQ_PORT = os.environ.get("RABBITMQ_PORT", 5672)
 RABBITMQ_TLS = os.environ.get("RABBITMQ_TLS", "0")
 RABBITMQ_QUEUE = os.environ.get("RABBITMQ_QUEUE", "landscape_analysis_treq")
-BRAIN_URL = os.environ.get("BRAIN_URL", "http://flask:8080")
+
+# Get brain URL with validation
+raw_brain_url = os.environ.get("BRAIN_URL", "http://brain:8080")
+# Ensure the URL has a proper format
+if not raw_brain_url.startswith(('http://', 'https://')):
+    raw_brain_url = f"http://{raw_brain_url}"
+# Remove trailing slash if present to avoid double slashes in requests
+BRAIN_URL = raw_brain_url.rstrip('/')
+# Validate port if not specified
+if not re.search(r':\d+', BRAIN_URL):
+    # Add default port if not in URL
+    BRAIN_URL = f"{BRAIN_URL}:8080"
+
 SEARXNG_URL = os.environ.get("SEARXNG_URL", "http://searxng:8080")
 TMP_PATH = os.environ.get("TMP_PATH", "/tmpfs")
 
@@ -26,6 +39,14 @@ logging.basicConfig(
     level=getattr(logging, LOG_LEVEL.upper()),
     format="%(asctime)s:%(name)s:%(levelname)s:%(message)s"
 )
+
+# Log configuration details at startup
+logger.info("Worker starting with configuration:")
+logger.info(f"RABBITMQ_HOST: {RABBITMQ_HOST}")
+logger.info(f"RABBITMQ_PORT: {RABBITMQ_PORT}")
+logger.info(f"RABBITMQ_QUEUE: {RABBITMQ_QUEUE}")
+logger.info(f"BRAIN_URL: {BRAIN_URL}")
+logger.info(f"LOG_LEVEL: {LOG_LEVEL}")
 
 
 # Memory monitoring thread
@@ -64,6 +85,9 @@ def main():
     rabbit = None
     while True:
         try:
+            logger.info(f"Connecting to RabbitMQ at {RABBITMQ_HOST}:{RABBITMQ_PORT}")
+            logger.info(f"Using Brain service at {BRAIN_URL}")
+            
             rabbit = RabbitHelper(
                 ADMIN_USER, ADMIN_PASS,
                 RABBITMQ_HOST, RABBITMQ_PORT, RABBITMQ_TLS, RABBITMQ_QUEUE, BRAIN_URL

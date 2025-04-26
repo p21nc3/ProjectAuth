@@ -10,11 +10,11 @@ services:
     expose:
       - 80
       - 443
-      - 5672
+      - 35672
     ports:
       - 0.0.0.0:80:80
       - 0.0.0.0:443:443
-      - 0.0.0.0:5672:5672
+      - 0.0.0.0:55674:35672
     healthcheck:
       test: traefik healthcheck
       interval: 10s
@@ -65,7 +65,7 @@ services:
       - TRAEFIK_ENTRYPOINTS_WEBSECURE=true
       - TRAEFIK_ENTRYPOINTS_WEBSECURE_ADDRESS=:443
       - TRAEFIK_ENTRYPOINTS_AMQP=true
-      - TRAEFIK_ENTRYPOINTS_AMQP_ADDRESS=:5672
+      - TRAEFIK_ENTRYPOINTS_AMQP_ADDRESS=:35672
       # acme
       - TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_TLSCHALLENGE=true
       - TRAEFIK_CERTIFICATESRESOLVERS_LETSENCRYPT_ACME_EMAIL=${EMAIL:-john.doe@gmail.com}"
@@ -114,6 +114,11 @@ services:
       - GUEST_PASS=${GUEST_PASS:-changeme}
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASS=${ADMIN_PASS:-changeme}
+      # MongoDB authentication
+      - MONGODB_USERNAME=${ADMIN_USER:-admin}
+      - MONGODB_PASSWORD=${ADMIN_PASS:-changeme}
+      - MONGODB_DATABASE=sso-monitor
+      - MONGODB_AUTH_SOURCE=admin
       # external domains
       - BRAIN_EXTERNAL_DOMAIN=${BRAIN_EXTERNAL_DOMAIN:-brain.docker.localhost}
       - RABBITMQ_EXTERNAL_DOMAIN=${RABBITMQ_EXTERNAL_DOMAIN:-rabbitmq.docker.localhost}
@@ -143,8 +148,17 @@ services:
     init: true
     ipc: host
     shm_size: 8gb
+    volumes:
+      - type: tmpfs
+        target: /tmpfs
+        tmpfs:
+          size: 2g
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 8g
     security_opt:
-      - seccomp=./worker/seccomp_profile.json
+      - seccomp=unconfined
     depends_on:
       searxng:
         condition: service_healthy
@@ -155,21 +169,12 @@ services:
     dns:
       - 1.1.1.1
       - 1.0.0.1
-    volumes:
-      - type: tmpfs
-        target: /tmpfs
-        tmpfs:
-          size: 2g
-      - type: tmpfs
-        target: /dev/shm
-        tmpfs:
-          size: 8g
     ulimits:
       memlock: -1
       stack: 67108864
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 30
       resources:
         limits:
           memory: 12G
@@ -189,7 +194,7 @@ services:
       - RABBITMQ_TLS=${RABBITMQ_TLS:-0}
       - RABBITMQ_QUEUE=${RABBITMQ_QUEUE:-landscape_analysis_treq}
       # urls
-      - BRAIN_URL=${BRAIN_URL:-http://brain:8083}
+      - BRAIN_URL=${BRAIN_URL:-http://brain:8080}
       - SEARXNG_URL=${SEARXNG_URL:-http://searxng:8080}
       # playwright settings
       - PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
@@ -202,6 +207,9 @@ services:
     expose:
       - 5672
       - 15672
+    ports:
+      - 0.0.0.0:55675:5672
+      - 0.0.0.0:55673:15672
     labels:
       - "traefik.enable=true"
       # http router
@@ -215,21 +223,44 @@ services:
       - "traefik.tcp.routers.rabbitmq.tls.certresolver=letsencrypt"
       - "traefik.tcp.services.rabbitmq.loadbalancer.server.port=5672"
     healthcheck:
-      test: >
-        rabbitmq-diagnostics -q check_running
-        && rabbitmq-diagnostics -q check_local_alarms
-        && rabbitmq-diagnostics -q check_port_connectivity
-        && rabbitmq-diagnostics -q check_virtual_hosts
-      interval: 10s
-      timeout: 10s
-      retries: 15
+      test: rabbitmq-diagnostics -q check_running && rabbitmq-diagnostics -q check_virtual_hosts
+      interval: 30s
+      timeout: 20s
+      retries: 5
+      start_period: 40s
     volumes:
       - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
       - rabbitmq-mnesia:/var/lib/rabbitmq/mnesia
     environment:
       - RABBITMQ_DEFAULT_USER=${ADMIN_USER:-admin}
       - RABBITMQ_DEFAULT_PASS=${ADMIN_PASS:-changeme}
+      # Load definitions file
+      - RABBITMQ_LOAD_DEFINITIONS=/etc/rabbitmq/definitions.json
+      # Performance and stability settings
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log_levels [{connection,error},{default,error}] disk_free_limit 10737418240 vm_memory_high_watermark_paging_ratio 0.85 vm_memory_high_watermark 0.9
+      - RABBITMQ_MNESIA_DIR=/var/lib/rabbitmq/mnesia
+      - RABBITMQ_LOG_BASE=/var/log/rabbitmq
+      - RABBITMQ_NODENAME=rabbitmq@localhost
+    sysctls:
+      - net.core.somaxconn=8192
+      - net.ipv4.tcp_max_syn_backlog=8192
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+      nproc:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources:
+        limits:
+          memory: 64G
+          cpus: '16'
+        reservations:
+          memory: 18G
+          cpus: '10'
 
   mongodb:
     image: mongo:4.4.6
@@ -239,7 +270,7 @@ services:
     expose:
       - 27017
     ports:
-      - 127.0.0.1:27017:27017
+      - 127.0.0.1:27018:27017
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
       interval: 10s
@@ -247,6 +278,9 @@ services:
       retries: 15
     volumes:
       - db:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${ADMIN_USER:-admin}
+      - MONGO_INITDB_ROOT_PASSWORD=${ADMIN_PASS:-changeme}
 
   mongo-express:
     image: mongo-express:0.54.0
@@ -257,7 +291,7 @@ services:
     networks:
       - ProjectAuth-network
     expose:
-      - 8082
+      - 8081
     ports:
       - 127.0.0.1:8082:8081
     labels:
@@ -274,6 +308,11 @@ services:
       retries: 15
     environment:
       - ME_CONFIG_MONGODB_SERVER=${ME_CONFIG_MONGODB_SERVER:-mongodb}
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${ADMIN_USER:-admin}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${ADMIN_PASS:-changeme}
+      - ME_CONFIG_BASICAUTH_USERNAME=${ADMIN_USER:-admin}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${ADMIN_PASS:-changeme}
 
   minio:
     image: minio/minio:RELEASE.2023-12-14T18-51-57Z-cpuv1
@@ -286,7 +325,7 @@ services:
       - 9091
     ports:
       - 0.0.0.0:9000:9000
-      - 127.0.0.1:9091:9091
+      - 127.0.0.1:9092:9091
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.minio.entrypoints=web,websecure"
