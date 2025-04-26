@@ -65,6 +65,22 @@ class PasskeyDetector:
                 "passkey_type": passkey_text_type
             }
             return True, passkey_info
+        
+        # Look for hidden passkey elements
+        hidden_found, hidden_type = self._detect_hidden_passkey_elements()
+        if hidden_found:
+            logger.info(f"Hidden passkey element detected with type: {hidden_type}")
+            passkey_info = {
+                "idp_name": "PASSKEY BUTTON",
+                "idp_sdk": hidden_type,
+                "idp_integration": "CUSTOM",
+                "idp_frame": "SAME_WINDOW",
+                "login_page_url": self.url,
+                "element_validity": "MEDIUM",
+                "detection_method": "PASSKEY-HIDDEN",
+                "passkey_type": hidden_type
+            }
+            return True, passkey_info
             
         return False, None
 
@@ -247,3 +263,128 @@ class PasskeyDetector:
             logger.debug(f"Error detecting passkey text: {e}")
             
         return False, ""
+
+    def _detect_hidden_passkey_elements(self) -> Tuple[bool, str]:
+        """
+        Detect hidden elements related to passkeys that may not be visible on the page
+        """
+        try:
+            # Build selectors for hidden elements that might contain passkey-related content
+            hidden_selectors = []
+            
+            # Add selectors for elements with passkey-related attributes but might be hidden
+            for keyword in self.passkey_keywords:
+                hidden_selectors.extend([
+                    # Selectors for hidden but labeled elements
+                    f'[style*="display: none"]:has-text("{keyword}")',
+                    f'[style*="visibility: hidden"]:has-text("{keyword}")',
+                    f'[hidden]:has-text("{keyword}")',
+                    f'[aria-hidden="true"]:has-text("{keyword}")',
+                    f'.hidden:has-text("{keyword}")',
+                    f'.d-none:has-text("{keyword}")',
+                    f'.invisible:has-text("{keyword}")',
+                    # Data attributes often used for dynamic content
+                    f'[data-*="{keyword}" i]',
+                    # Elements with various class/ID naming patterns
+                    f'[class*="{keyword}" i]',
+                    f'[id*="{keyword}" i]',
+                    # Look in script tags for passkey references
+                    f'script:contains("{keyword}")'
+                ])
+            
+            # Add specific selectors for common hidden passkey element patterns
+            hidden_selectors.extend([
+                # Elements with WebAuthn/passkey related classes or IDs that might be hidden
+                '[id*="webauthn"][style*="display: none"]',
+                '[id*="passkey"][style*="display: none"]',
+                '[class*="webauthn"][style*="display: none"]',
+                '[class*="passkey"][style*="display: none"]',
+                '[id*="webauthn"][hidden]',
+                '[id*="passkey"][hidden]',
+                '[class*="webauthn"][hidden]',
+                '[class*="passkey"][hidden]',
+                '[id*="webauthn"][aria-hidden="true"]',
+                '[id*="passkey"][aria-hidden="true"]',
+                '[class*="webauthn"][aria-hidden="true"]',
+                '[class*="passkey"][aria-hidden="true"]',
+                # Hidden template elements that might contain passkey UI
+                'template:has-text("passkey")',
+                'template:has-text("webauthn")',
+                'template:has-text("fingerprint")',
+                'template:has-text("face id")',
+                'template:has-text("touch id")',
+                # WebAuthn API calls in script tags
+                'script:contains("navigator.credentials")',
+                'script:contains("PublicKeyCredential")',
+                'script:contains("authenticator")'
+            ])
+            
+            # Check for hidden passkey elements
+            for selector in hidden_selectors:
+                try:
+                    elements = self.page.query_selector_all(selector)
+                    if elements:
+                        logger.debug(f"Found {len(elements)} hidden passkey elements with selector: {selector}")
+                        
+                        # Check if this is a specific platform passkey
+                        if "face id" in selector.lower() or "touch id" in selector.lower():
+                            return True, "WEBAUTHN"
+                        elif "fingerprint" in selector.lower():
+                            return True, "WEBAUTHN"
+                        else:
+                            return True, "WEBAUTHN"
+                except Exception as e:
+                    logger.debug(f"Error finding hidden passkey element with selector {selector}: {e}")
+            
+            # Run a JavaScript evaluation to find hidden elements with passkey text
+            # This can find elements that might be dynamically inserted or styled to be invisible
+            try:
+                passkey_keywords_js = '|'.join(self.passkey_keywords).lower()
+                hidden_elements_check = self.page.evaluate(f'''() => {{
+                    // Get all elements in the DOM
+                    const allElements = document.querySelectorAll('*');
+                    
+                    // Keywords to look for
+                    const keywords = /{passkey_keywords_js}/i;
+                    
+                    // Check each element
+                    for (const elem of allElements) {{
+                        // Skip elements that are normally visible
+                        const style = window.getComputedStyle(elem);
+                        const isHidden = style.display === 'none' || 
+                                       style.visibility === 'hidden' || 
+                                       elem.hasAttribute('hidden') || 
+                                       elem.getAttribute('aria-hidden') === 'true';
+                        
+                        if (isHidden) {{
+                            // Check if it contains passkey-related text
+                            const text = elem.innerText || elem.textContent || '';
+                            if (keywords.test(text.toLowerCase())) {{
+                                return true;
+                            }}
+                            
+                            // Check attributes that might contain passkey keywords
+                            const attrs = ['id', 'class', 'name', 'data-testid', 'aria-label', 'title'];
+                            for (const attr of attrs) {{
+                                const value = elem.getAttribute(attr);
+                                if (value && keywords.test(value.toLowerCase())) {{
+                                    return true;
+                                }}
+                            }}
+                        }}
+                    }}
+                    
+                    return false;
+                }}''')
+                
+                if hidden_elements_check:
+                    logger.debug("Found hidden passkey elements via JavaScript evaluation")
+                    return True, "WEBAUTHN"
+                
+            except Exception as e:
+                logger.debug(f"Error in JavaScript evaluation for hidden passkey elements: {e}")
+                
+            return False, ""
+        except Exception as e:
+            logger.debug(f"Error detecting hidden passkey elements: {e}")
+            return False, ""
