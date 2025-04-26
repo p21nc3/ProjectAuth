@@ -149,11 +149,11 @@ class PasskeyDetector:
                     
                     # Check for Apple-specific indicators
                     if any(term in element_text or term in element_html for term in ["face id", "touch id", "apple"]):
-                        return True, "APPLE"
+                        return True, "WEBAUTHN"
                     
                     # Check for Android-specific indicators
                     if any(term in element_text or term in element_html for term in ["fingerprint", "android"]):
-                        return True, "ANDROID"
+                        return True, "WEBAUTHN	"
                     
                     # Otherwise consider it a generic WebAuthn passkey
                     return True, "WEBAUTHN"
@@ -220,9 +220,9 @@ class PasskeyDetector:
                         if button_text in button_inner_text:
                             logger.debug(f"Found PASSKEY BUTTON with text: {button_inner_text}")
                             if any(apple_term in button_inner_text for apple_term in ["face id", "touch id"]):
-                                return True, "APPLE"
+                                return True, "WEBAUTHN"
                             elif "fingerprint" in button_inner_text:
-                                return True, "ANDROID"
+                                return True, "WEBAUTHN"
                             else:
                                 return True, "WEBAUTHN"
                 except Exception as e:
@@ -231,12 +231,12 @@ class PasskeyDetector:
             # Check for Apple-specific indicators
             for indicator in apple_indicators:
                 if indicator in page_text:
-                    return True, "APPLE"
+                    return True, "WEBAUTHN"
                     
             # Check for Android-specific indicators
             for indicator in android_indicators:
                 if indicator in page_text:
-                    return True, "ANDROID"
+                    return True, "WEBAUTHN"
                     
             # Check for general passkey indicators
             for indicator in general_indicators:
