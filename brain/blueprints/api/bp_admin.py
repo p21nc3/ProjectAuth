@@ -79,7 +79,10 @@ def create_database_index():
     db = current_app.config["db"]
 
     db["top_sites_lists"].create_index([("id", 1)])
+    db["top_sites_lists"].create_index([("domain", 1)])
     db["top_sites_lists"].create_index([("id", 1), ("domain", 1)])
+    db["top_sites_lists"].create_index([("rank", 1)])
+    db["top_sites_lists"].create_index([("id", 1), ("rank", 1)])
 
     db["ground_truth"].create_index([("gt_id", 1)])
 
@@ -109,6 +112,15 @@ def create_database_index():
         ("landscape_analysis_result.recognized_idps.idp_integration", 1),
         ("landscape_analysis_result.recognized_idps.login_page_url", 1)
     ])
+
+    db["landscape_analysis_tres"].create_index([("landscape_analysis_result.recognized_idps.idp_name", 1)])
+    db["landscape_analysis_tres"].create_index([
+        ("landscape_analysis_result.recognized_navcreds", 1),
+        ("landscape_analysis_result.resolved.reachable", 1)
+    ])
+    db["landscape_analysis_tres"].create_index([("rank", 1)])
+
+    db["top_sites_lists"].create_index([("id", 1)])
 
     return {"success": True, "error": None, "data": None}
 

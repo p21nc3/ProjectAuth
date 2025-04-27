@@ -55,7 +55,7 @@ class PasskeyDetector:
         if passkey_text_found:
             logger.info(f"Passkey text detected with type: {passkey_text_type}")
             passkey_info = {
-                "idp_name": "PASSKEY BUTTON",
+                "idp_name": "PASSKEY KEYWORD",
                 "idp_sdk": passkey_text_type,
                 "idp_integration": "CUSTOM",
                 "idp_frame": "SAME_WINDOW",
@@ -169,7 +169,7 @@ class PasskeyDetector:
                     
                     # Check for Android-specific indicators
                     if any(term in element_text or term in element_html for term in ["fingerprint", "android"]):
-                        return True, "WEBAUTHN	"
+                        return True, "WEBAUTHN"
                     
                     # Otherwise consider it a generic WebAuthn passkey
                     return True, "WEBAUTHN"
@@ -193,8 +193,6 @@ class PasskeyDetector:
                 "publickey", 
                 "navigator.credentials.create", 
                 "navigator.credentials.get",
-                "credentials.create",
-                "credentials.get",
                 "PublicKeyCredential"
             ]
             
@@ -206,7 +204,7 @@ class PasskeyDetector:
             # Check for passkey-related text in the page content
             apple_indicators = ["face id", "touch id", "apple passkey"]
             android_indicators = ["fingerprint", "android passkey"]
-            general_indicators = ["passkey", "passwordless", "no password", "security key", "webauthn"]
+            general_indicators = ["passkey", "passwordless"]
             
             # Check for specific buttons or links that suggest passkey functionality
             passkey_buttons = [

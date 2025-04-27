@@ -380,15 +380,7 @@ IdpRules = {
         }
     },
     "PASSKEY BUTTON": {
-        "keywords": [
-            "passkey", "webauthn", "biometric sign in", "sign in with passkey", "sign in with a passkey", "log in with passkey",
-            "log in with a passkey", "use a passkey", "create a passkey", "register a passkey", "add a passkey", "face id", "touch id", 
-            "fingerprint", "security key", "no password", "passwordless", "sign in with your face", 
-            "sign in with face", "sign in with fingerprint", "biometric authentication", "biometric login",
-            "use your face", "use your fingerprint", "use biometrics", "continue with passkey",
-            "continue with face id", "continue with touch id", "continue with fingerprint",
-            "skip password", "use security key", "use biometric login", "continue without password"
-        ],
+        "keywords": ["passkey"],
         "logos": "passkey/",
         "login_request_rule": {
             "domain": ".*",
