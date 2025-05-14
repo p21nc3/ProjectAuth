@@ -455,6 +455,22 @@ def store_task_response(task_name):
     reqdata["task_config"]["task_state"] = "RESPONSE_RECEIVED"
     reqdata["task_config"]["task_timestamp_response_received"] = time()
 
+        # Add rank from top_sites_lists if it's a landscape analysis task
+    if task_name == "landscape_analysis" and "domain" in reqdata:
+        domain = reqdata["domain"]
+        # Get the list_id from the scan configuration
+        list_id = None
+        if "scan_config" in reqdata and "list_id" in reqdata["scan_config"]:
+            list_id = reqdata["scan_config"]["list_id"]
+        elif "scan_config" in reqdata and "scan_type" in reqdata["scan_config"] and reqdata["scan_config"]["scan_type"] == "range":
+            list_id = reqdata["scan_config"].get("list_id", "tranco_6Z2X")
+        
+        if list_id:
+            # Find the rank of the domain in the specified list
+            domain_entry = db["top_sites_lists"].find_one({"domain": domain, "id": list_id})
+            if domain_entry and "rank" in domain_entry:
+                reqdata["rank"] = domain_entry["rank"]
+
     # objstore
     cb = lambda bucket_name, data, ext: store_and_mutate_data(
         objstore, bucket_name, reqdata["domain"], data, ext

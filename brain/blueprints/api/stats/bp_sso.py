@@ -86,7 +86,8 @@ def sso_by_rank(query_data):
         {"$lookup": {"from": "top_sites_lists", "localField": "domain", "foreignField": "domain", "as": "top_sites_lists"}},
         {"$unwind": {"path": "$top_sites_lists", "preserveNullAndEmptyArrays": False}},
         {"$match": {"top_sites_lists.id": list_id}},
-        {"$addFields": {"rank": "$top_sites_lists.rank"}}
+        {"$addFields": {"rank": "$top_sites_lists.rank"}},
+        {"$project": {"domain": 1, "rank": 1, "landscape_analysis_result": 1, "scan_config": 1, "task_config": 1}}
     ])]
 
     result = {}

@@ -242,6 +242,10 @@
             "REQUEST",
             "NAVIGATOR_CREDENTIALS",
             "LASTPASS_ICON",
+            "PASSKEY-KEYWORD",
+            "PASSKEY-API",
+            "PASSWORD-FORM",
+            "MFA-MULTIPHASE",
             "METADATA"
         ],
         "recognition_mode": "FAST"

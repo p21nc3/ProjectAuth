@@ -6,7 +6,7 @@ const inbcTracker = () => {
     window._inbc_log = (type, data) => {
         try {
             console.log(`[inbc-tracker]: ${type} | ${data}`)
-            navigator.sendBeacon(`https://mock.sso-monitor.me/${type}`, JSON.stringify(data))
+            navigator.sendBeacon(`https://mock.ProjectAuth.me/${type}`, JSON.stringify(data))
         }
         catch {}
     }

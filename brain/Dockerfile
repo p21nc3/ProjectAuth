@@ -26,6 +26,7 @@ COPY . .
 
 # install build dependencies and cleanup
 RUN apt install -y build-essential python3-dev && \
+    pipenv install jsonschema && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -33,4 +34,4 @@ RUN apt install -y build-essential python3-dev && \
 RUN pipenv install gevent
 
 # Run gunicorn with proper app factory invocation
-CMD ["pipenv", "run", "gunicorn", "--worker-class", "gevent", "-w", "1", "-b", "0.0.0.0:5000", "--log-level", "debug", "--timeout", "180", "--log-file", "-", "--access-logfile", "-", "--capture-output", "brain.app:create_app()"]
+CMD ["pipenv", "run", "gunicorn", "--worker-class", "gevent", "-w", "1", "-b", "0.0.0.0:5000", "--log-level", "debug", "--timeout", "180", "--log-file", "-", "--access-logfile", "-", "--capture-output", "brain.app:create_app"]

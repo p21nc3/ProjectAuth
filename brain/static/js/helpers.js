@@ -25,8 +25,6 @@ const iconClassFromIdp = (idp) => {
             return "bi-twitter"
         case "TWITTER_1.0":
             return "bi-twitter"
-        case "TWITTER_2.0":
-            return "bi-twitter"
         case "LINKEDIN":
             return "bi-linkedin"
         case "QQ":

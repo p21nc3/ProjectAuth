@@ -109,7 +109,17 @@
                                 "required": true,
                                 "title": "IdP Name",
                                 "enum": [
-                                    "GOOGLE"
+                                    "APPLE",
+                                    "FACEBOOK",
+                                    "GOOGLE",
+                                    "TWITTER_1.0",
+                                    "LINKEDIN",
+                                    "MICROSOFT",
+                                    "BAIDU",
+                                    "GITHUB",
+                                    "QQ",
+                                    "SINA_WEIBO",
+                                    "WECHAT"
                                 ]
                             },
                             "idp_username": {

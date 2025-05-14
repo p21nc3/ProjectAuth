@@ -226,7 +226,7 @@
                         "locale": {
                             "type": "string",
                             "required": true,
-                            "default": "en-US",
+                            "default": "en-GB",
                             "title": "Locale"
                         },
                         "wait_for_networkidle": {
@@ -669,6 +669,9 @@
                             "uniqueItems": true,
                             "title": "In-Scope IdPs",
                             "default": [
+                                "PASSKEY BUTTON",
+                                "MFA_GENERIC",
+                                "PASSWORD_BASED",
                                 "APPLE",
                                 "FACEBOOK",
                                 "GOOGLE",
@@ -684,6 +687,9 @@
                             "items": {
                                 "type": "string",
                                 "enum": [
+                                    "PASSKEY BUTTON",
+                                    "MFA_GENERIC",
+                                    "PASSWORD_BASED",
                                     "APPLE",
                                     "FACEBOOK",
                                     "GOOGLE",
@@ -710,11 +716,18 @@
                             "required": true,
                             "default": [
                                 "KEYWORD-CSS",
+                                "KEYWORD-XPATH",
+                                "KEYWORD-ACCESSIBILITY",
+                                "KEYWORD-ACCESSIBILITYSAAT",
                                 "LOGO",
+                                "METADATA",
                                 "REQUEST",
                                 "NAVIGATOR_CREDENTIALS",
                                 "LASTPASS_ICON",
-                                "METADATA"
+                                "PASSKEY-KEYWORD",
+                                "PASSKEY-API",
+                                "PASSWORD-FORM",
+                                "MFA-MULTIPHASE"
                             ],
                             "title": "In-Scope Recognition Strategies",
                             "items": {
@@ -725,10 +738,14 @@
                                     "KEYWORD-ACCESSIBILITY",
                                     "KEYWORD-ACCESSIBILITYSAAT",
                                     "LOGO",
+                                    "METADATA",
                                     "REQUEST",
                                     "NAVIGATOR_CREDENTIALS",
                                     "LASTPASS_ICON",
-                                    "METADATA"
+                                    "PASSKEY-KEYWORD",
+                                    "PASSKEY-API",
+                                    "PASSWORD-FORM",
+                                    "MFA-MULTIPHASE"
                                 ]
                             }
                         },

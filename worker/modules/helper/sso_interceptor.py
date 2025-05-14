@@ -109,6 +109,8 @@ class SSOInterceptorHelper:
             self.idp_login_response is None
             and response
             and response.header_value("location")
+            and "login_response_rule" in IdpRules[self.idp_name]
+            and "login_response_originator_rule" in IdpRules[self.idp_name]
             and URLHelper.match_url(
                 response.header_value("location"),
                 IdpRules[self.idp_name]["login_response_rule"]["domain"],
@@ -132,6 +134,8 @@ class SSOInterceptorHelper:
             and request.is_navigation_request()
             and request.method == "POST"
             and request.post_data_json
+            and "login_response_rule" in IdpRules[self.idp_name]
+            and "login_response_originator_rule" in IdpRules[self.idp_name]
             and URLHelper.match_post_data(
                 request.url,
                 request.post_data_json,
@@ -157,6 +161,8 @@ class SSOInterceptorHelper:
         if (
             self.idp_login_response is None
             and pm
+            and "login_response_rule" in IdpRules[self.idp_name]
+            and "login_response_originator_rule" in IdpRules[self.idp_name]
             and URLHelper.match_inbc_data(
                 pm["data"],
                 IdpRules[self.idp_name]["login_response_rule"]["domain"],
@@ -181,6 +187,8 @@ class SSOInterceptorHelper:
         if (
             self.idp_login_response is None
             and cm
+            and "login_response_rule" in IdpRules[self.idp_name]
+            and "login_response_originator_rule" in IdpRules[self.idp_name]
             and URLHelper.match_inbc_data(
                 cm["data"],
                 IdpRules[self.idp_name]["login_response_rule"]["domain"],

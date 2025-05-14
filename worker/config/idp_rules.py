@@ -378,5 +378,87 @@ IdpRules = {
                 }
             }
         }
+    },
+    "PASSKEY BUTTON": {
+        "keywords": ["passkey"],
+        "logos": "passkey/",
+        "login_request_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "passive_login_request_rule": {},
+        "sdks": {
+            "CUSTOM": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            }
+        }
+    },
+    "MFA_GENERIC": {
+        "keywords": ["2fa", "mfa", "two-factor", "multi-factor", "verification code", "one-time code", "one time code", 
+                    "authenticator app", "authentication app", "otp", "totp", "hotp", "sms code", "text message code", 
+                    "email code", "backup code", "recovery code", "qr code", "scan qr", "second factor", 
+                    "additional verification", "security code", "2-step verification", "2 step verification"],
+        "logos": "mfa/",
+        "login_request_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "passive_login_request_rule": {},
+        "sdks": {
+            "TOTP": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            },
+            "SMS": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            },
+            "EMAIL": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            },
+            "CUSTOM": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            }
+        }
+    },
+    "PASSWORD_BASED": {
+        "keywords": ["sign in", "login", "log in", "username", "email", "password", "forgot password", "reset password", 
+                    "sign up", "register", "create account"],
+        "logos": "password/",
+        "login_request_rule": {
+            "domain": ".*",
+            "path": ".*",
+            "params": []
+        },
+        "passive_login_request_rule": {},
+        "sdks": {
+            "CUSTOM": {
+                "login_request_rule": {
+                    "domain": ".*",
+                    "path": ".*",
+                    "params": []
+                }
+            }
+        }
     }
 }

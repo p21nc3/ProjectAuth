@@ -40,8 +40,8 @@ class URLHelper:
     @staticmethod
     def parse_inbc(request: Request, inbc_type: str) -> dict:
         """ Parses in-browser communication from playwright request and returns in-browser message or None """
-        if inbc_type == "POSTMESSAGE" and request.url != "https://mock.sso-monitor.me/postmessage": return None
-        elif inbc_type == "CHANNELMESSAGE" and request.url != "https://mock.sso-monitor.me/channelmessage": return None
+        if inbc_type == "POSTMESSAGE" and request.url != "https://mock.ProjectAuth.me/postmessage": return None
+        elif inbc_type == "CHANNELMESSAGE" and request.url != "https://mock.ProjectAuth.me/channelmessage": return None
         if request.method != "POST": return None
         if type(request.post_data_json) is not dict: return None
 

@@ -331,7 +331,7 @@ class PlaywrightBrowser:
 
         # responsible web scanning
         # context.set_extra_http_headers({
-        #     "X-Web-Scanner-Info": "https://sso-monitor.me/info"
+        #     "X-Web-Scanner-Info": "https://ProjectAuth.me/info"
         # })
 
         # page

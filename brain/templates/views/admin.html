@@ -23,6 +23,67 @@
         </div>
     </div>
 
+    <!-- Authentication Detection Statistics -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 mb-4">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="badge bg-primary">PASSKEY</span>
+                            <h2 class="mb-0">{{ passkey_count|default('0') }}</h2>
+                        </div>
+                        <div class="avatar">
+                            <div class="avatar-initial bg-label-success rounded">
+                                <i class="bx bx-key bx-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="fw-semibold d-block mb-1">Passkey Auth</span>
+                    <small class="text-muted">WebAuthn-based detection</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="badge bg-primary">MFA</span>
+                            <h2 class="mb-0">{{ mfa_count|default('0') }}</h2>
+                        </div>
+                        <div class="avatar">
+                            <div class="avatar-initial bg-label-warning rounded">
+                                <i class="bx bx-lock-alt bx-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="fw-semibold d-block mb-1">MFA Required</span>
+                    <small class="text-muted">TOTP, SMS, Email, QR</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="badge bg-primary">PASSWORD</span>
+                            <h2 class="mb-0">{{ password_count|default('0') }}</h2>
+                        </div>
+                        <div class="avatar">
+                            <div class="avatar-initial bg-label-danger rounded">
+                                <i class="bx bx-shield bx-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="fw-semibold d-block mb-1">Password Auth</span>
+                    <small class="text-muted">Username/Email + Password</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- dashboard with cascading grid layout (masonry.desandro.com) -->
     <div class="row row-cols-1 row-cols-xl-2 row-cols-xxl-3 g-4" data-masonry='{"percentPosition": true}'>
 
@@ -45,7 +106,7 @@
                 <h4>External Docker Services</h4>
                 <div>
                     <a class="btn btn-primary mb-2" href="//{{ config['RABBITMQ_EXTERNAL_DOMAIN'] }}" target="_blank"><i class="bi bi-chat-left-dots"></i> RabbitMQ</a>
-                    <a class="btn btn-primary mb-2" href="//{{ config['MONGOEXPRESS_EXTERNAL_DOMAIN'] }}/db/sso-monitor" target="_blank"><i class="bi bi-database"></i> MongoDB</a>
+                    <a class="btn btn-primary mb-2" href="//{{ config['MONGOEXPRESS_EXTERNAL_DOMAIN'] }}/db/ProjectAuth" target="_blank"><i class="bi bi-database"></i> MongoDB</a>
                     <a class="btn btn-primary mb-2" href="//{{ config['MINIO_EXTERNAL_DOMAIN'] }}" target="_blank"><i class="bi bi-database-fill"></i> Minio</a>
                     <a class="btn btn-primary mb-2" href="//{{ config['JUPYTER_EXTERNAL_DOMAIN'] }}" target="_blank"><i class="bi bi-filetype-py"></i> Jupyter</a>
                 </div>
