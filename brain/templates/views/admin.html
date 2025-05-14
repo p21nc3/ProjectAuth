@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <span class="fw-semibold d-block mb-1">Passkey Auth</span>
-                    <small class="text-muted">WebAuthn-based detection</small>
+                    <small class="text-muted">UI: {{ passkey_ui_count|default('0') }} | JS: {{ passkey_js_count|default('0') }}</small>
                 </div>
             </div>
         </div>
@@ -68,17 +68,22 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center gap-3">
-                            <span class="badge bg-primary">PASSWORD</span>
-                            <h2 class="mb-0">{{ password_count|default('0') }}</h2>
+                            <span class="badge bg-primary">IDPs</span>
+                            <h2 class="mb-0">{{ idp_total_count|default('0') }}</h2>
                         </div>
                         <div class="avatar">
-                            <div class="avatar-initial bg-label-danger rounded">
-                                <i class="bx bx-shield bx-sm"></i>
+                            <div class="avatar-initial bg-label-info rounded">
+                                <i class="bx bx-user-circle bx-sm"></i>
                             </div>
                         </div>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Password Auth</span>
-                    <small class="text-muted">Username/Email + Password</small>
+                    <span class="fw-semibold d-block mb-1">Identity Providers</span>
+                    <small class="text-muted">
+                        <i class="bi bi-google"></i> {{ google_count|default('0') }} |
+                        <i class="bi bi-microsoft"></i> {{ microsoft_count|default('0') }} |
+                        <i class="bi bi-apple"></i> {{ apple_count|default('0') }} |
+                        <i class="bi bi-github"></i> {{ github_count|default('0') }}
+                    </small>
                 </div>
             </div>
         </div>

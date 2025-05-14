@@ -671,36 +671,20 @@
                             "default": [
                                 "PASSKEY BUTTON",
                                 "MFA_GENERIC",
-                                "PASSWORD_BASED",
                                 "APPLE",
-                                "FACEBOOK",
                                 "GOOGLE",
-                                "TWITTER_1.0",
-                                "LINKEDIN",
                                 "MICROSOFT",
-                                "BAIDU",
-                                "GITHUB",
-                                "QQ",
-                                "SINA_WEIBO",
-                                "WECHAT"
+                                "GITHUB"
                             ],
                             "items": {
                                 "type": "string",
                                 "enum": [
                                     "PASSKEY BUTTON",
                                     "MFA_GENERIC",
-                                    "PASSWORD_BASED",
                                     "APPLE",
-                                    "FACEBOOK",
                                     "GOOGLE",
-                                    "TWITTER_1.0",
-                                    "LINKEDIN",
                                     "MICROSOFT",
-                                    "BAIDU",
-                                    "GITHUB",
-                                    "QQ",
-                                    "SINA_WEIBO",
-                                    "WECHAT"
+                                    "GITHUB"
                                 ]
                             }
                         }
@@ -716,17 +700,12 @@
                             "required": true,
                             "default": [
                                 "KEYWORD-CSS",
-                                "KEYWORD-XPATH",
-                                "KEYWORD-ACCESSIBILITY",
-                                "KEYWORD-ACCESSIBILITYSAAT",
-                                "LOGO",
                                 "METADATA",
                                 "REQUEST",
                                 "NAVIGATOR_CREDENTIALS",
                                 "LASTPASS_ICON",
                                 "PASSKEY-KEYWORD",
                                 "PASSKEY-API",
-                                "PASSWORD-FORM",
                                 "MFA-MULTIPHASE"
                             ],
                             "title": "In-Scope Recognition Strategies",
@@ -734,17 +713,12 @@
                                 "type": "string",
                                 "enum": [
                                     "KEYWORD-CSS",
-                                    "KEYWORD-XPATH",
-                                    "KEYWORD-ACCESSIBILITY",
-                                    "KEYWORD-ACCESSIBILITYSAAT",
-                                    "LOGO",
                                     "METADATA",
                                     "REQUEST",
                                     "NAVIGATOR_CREDENTIALS",
                                     "LASTPASS_ICON",
                                     "PASSKEY-KEYWORD",
                                     "PASSKEY-API",
-                                    "PASSWORD-FORM",
                                     "MFA-MULTIPHASE"
                                 ]
                             }

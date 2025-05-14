@@ -223,19 +223,45 @@ def get_auth_stats():
     db = current_app.config["db"]
     
     try:
-        # Get counts for each authentication type
-        passkey_count = db["landscape_analysis_tres"].count_documents({
+        # Get passkey counts (both PASSKEY BUTTON and UI/JS implementations)
+        passkey_button_count = db["landscape_analysis_tres"].count_documents({
             "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY BUTTON"
         })
         
+        passkey_ui_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY UI"
+        })
+        
+        passkey_js_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY JS"
+        })
+        
+        # Combined passkey count
+        passkey_count = passkey_button_count + passkey_ui_count + passkey_js_count
+        
+        # Keep MFA count
         mfa_count = db["landscape_analysis_tres"].count_documents({
             "landscape_analysis_result.recognized_idps.idp_name": "MFA_GENERIC"
         })
         
-        password_count = db["landscape_analysis_tres"].count_documents({
-            "landscape_analysis_result.recognized_idps.idp_name": "PASSWORD_BASED"
+        # Get identity provider counts
+        google_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "GOOGLE"
         })
         
+        microsoft_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "MICROSOFT"
+        })
+        
+        apple_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "APPLE"
+        })
+        
+        github_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "GITHUB"
+        })
+        
+        # For reference, keep the WebAuthn API and LastPass counts
         webauthn_api_count = db["landscape_analysis_tres"].count_documents({
             "landscape_analysis_result.recognized_navcreds": {"$exists": True, "$ne": []}
         })
@@ -256,8 +282,14 @@ def get_auth_stats():
         "error": None, 
         "data": {
             "passkey_count": passkey_count,
+            "passkey_ui_count": passkey_ui_count,
+            "passkey_js_count": passkey_js_count,
             "mfa_count": mfa_count,
-            "password_count": password_count,
+            "google_count": google_count,
+            "microsoft_count": microsoft_count,
+            "apple_count": apple_count,
+            "github_count": github_count,
+            "idp_total_count": google_count + microsoft_count + apple_count + github_count,
             "webauthn_api_count": webauthn_api_count,
             "lastpass_count": lastpass_count
         }

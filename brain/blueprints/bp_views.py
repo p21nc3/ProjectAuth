@@ -42,29 +42,70 @@ def admin():
     
     # Get authentication stats with error handling
     try:
-        passkey_count = db["landscape_analysis_tres"].count_documents({
+        # Get passkey counts (both PASSKEY BUTTON and UI/JS implementations)
+        passkey_button_count = db["landscape_analysis_tres"].count_documents({
             "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY BUTTON"
         })
         
+        passkey_ui_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY UI"
+        })
+        
+        passkey_js_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "PASSKEY JS"
+        })
+        
+        # Combined passkey count
+        passkey_count = passkey_button_count + passkey_ui_count + passkey_js_count
+        
+        # Keep MFA count
         mfa_count = db["landscape_analysis_tres"].count_documents({
             "landscape_analysis_result.recognized_idps.idp_name": "MFA_GENERIC"
         })
         
-        password_count = db["landscape_analysis_tres"].count_documents({
-            "landscape_analysis_result.recognized_idps.idp_name": "PASSWORD_BASED"
+        # Get identity provider counts
+        google_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "GOOGLE"
         })
+        
+        microsoft_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "MICROSOFT"
+        })
+        
+        apple_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "APPLE"
+        })
+        
+        github_count = db["landscape_analysis_tres"].count_documents({
+            "landscape_analysis_result.recognized_idps.idp_name": "GITHUB"
+        })
+        
+        # Total identity provider count
+        idp_total_count = google_count + microsoft_count + apple_count + github_count
     except Exception as e:
         current_app.logger.error(f"Error fetching authentication stats: {e}")
         passkey_count = 0
+        passkey_ui_count = 0
+        passkey_js_count = 0
         mfa_count = 0
-        password_count = 0
+        google_count = 0
+        microsoft_count = 0
+        apple_count = 0
+        github_count = 0
+        idp_total_count = 0
     
     return render_template(
         "views/admin.html", 
         config=current_app.config,
         passkey_count=passkey_count,
+        passkey_ui_count=passkey_ui_count,
+        passkey_js_count=passkey_js_count,
         mfa_count=mfa_count,
-        password_count=password_count
+        google_count=google_count,
+        microsoft_count=microsoft_count,
+        apple_count=apple_count,
+        github_count=github_count,
+        idp_total_count=idp_total_count
     )
 
 
